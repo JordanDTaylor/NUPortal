@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUPortal.Model", "NUPortal.Model\NUPortal.Model.csproj", "{37C03CF0-248D-4358-80F5-B38E8060F5BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{CCC69258-723B-421D-933B-FEC119932BFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUPortal.DataAccess", "NUPortal.DataAccess\NUPortal.DataAccess.csproj", "{5F5015C6-9CAC-4B9C-9221-7EBF707372CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{37C03CF0-248D-4358-80F5-B38E8060F5BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37C03CF0-248D-4358-80F5-B38E8060F5BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37C03CF0-248D-4358-80F5-B38E8060F5BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CCC69258-723B-421D-933B-FEC119932BFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CCC69258-723B-421D-933B-FEC119932BFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CCC69258-723B-421D-933B-FEC119932BFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CCC69258-723B-421D-933B-FEC119932BFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F5015C6-9CAC-4B9C-9221-7EBF707372CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F5015C6-9CAC-4B9C-9221-7EBF707372CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F5015C6-9CAC-4B9C-9221-7EBF707372CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F5015C6-9CAC-4B9C-9221-7EBF707372CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
