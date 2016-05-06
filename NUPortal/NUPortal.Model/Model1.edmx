@@ -25,7 +25,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CourseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="StartTime" Type="DateTime" Nullable="false" DefaultValue="" />
           <Property Name="Monday" Type="Boolean" Nullable="false" />
           <Property Name="Tuesday" Type="Boolean" Nullable="false" />
@@ -33,7 +32,7 @@
           <Property Name="Thursday" Type="Boolean" Nullable="false" />
           <Property Name="Friday" Type="Boolean" Nullable="false" />
           <Property Name="Section" Type="String" Nullable="false" />
-          <NavigationProperty Name="Courses" Relationship="Model1.ScheduledCourseCourse" FromRole="ScheduledCourse" ToRole="Course" />
+          <NavigationProperty Name="Course" Relationship="Model1.ScheduledCourseCourse" FromRole="ScheduledCourse" ToRole="Course" />
         </EntityType>
         <EntityType Name="Course">
           <Key>
@@ -44,7 +43,15 @@
         </EntityType>
         <Association Name="ScheduledCourseCourse">
           <End Type="Model1.ScheduledCourse" Role="ScheduledCourse" Multiplicity="1" />
-          <End Type="Model1.Course" Role="Course" Multiplicity="*" />
+          <End Type="Model1.Course" Role="Course" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduledCourse">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
