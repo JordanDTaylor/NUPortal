@@ -13,14 +13,16 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ScheduledCourses" EntityType="Model1.ScheduledCourse" />
-          <EntitySet Name="Courses" EntityType="Model1.Course" />
+          <EntitySet Name="ScheduledCourses1" EntityType="Model1.ScheduledCourses" />
+          <EntitySet Name="Courses1" EntityType="Model1.Courses" />
           <AssociationSet Name="ScheduledCourseCourse" Association="Model1.ScheduledCourseCourse">
-            <End Role="ScheduledCourse" EntitySet="ScheduledCourses" />
-            <End Role="Course" EntitySet="Courses" />
+            <End Role="ScheduledCourse" EntitySet="ScheduledCourses1" />
+            <End Role="Course" EntitySet="Courses1" />
           </AssociationSet>
+          <EntitySet Name="Quarters" EntityType="Model1.Quarters" />
+          <EntitySet Name="Years" EntityType="Model1.Years" />
         </EntityContainer>
-        <EntityType Name="ScheduledCourse">
+        <EntityType Name="ScheduledCourses">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -34,7 +36,7 @@
           <Property Name="Section" Type="String" Nullable="false" />
           <NavigationProperty Name="Course" Relationship="Model1.ScheduledCourseCourse" FromRole="ScheduledCourse" ToRole="Course" />
         </EntityType>
-        <EntityType Name="Course">
+        <EntityType Name="Courses">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -42,8 +44,8 @@
           <NavigationProperty Name="ScheduledCourse" Relationship="Model1.ScheduledCourseCourse" FromRole="Course" ToRole="ScheduledCourse" />
         </EntityType>
         <Association Name="ScheduledCourseCourse">
-          <End Type="Model1.ScheduledCourse" Role="ScheduledCourse" Multiplicity="1" />
-          <End Type="Model1.Course" Role="Course" Multiplicity="1" />
+          <End Type="Model1.ScheduledCourses" Role="ScheduledCourse" Multiplicity="1" />
+          <End Type="Model1.Courses" Role="Course" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Course">
               <PropertyRef Name="Id" />
@@ -53,6 +55,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Quarters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Property1" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Years">
+          <Key>
+            <PropertyRef Name="Year" />
+          </Key>
+          <Property Name="Year" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
