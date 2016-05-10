@@ -27,7 +27,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StartTime" Type="DateTime" Nullable="false" DefaultValue="" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" />
           <Property Name="Monday" Type="Boolean" Nullable="false" />
           <Property Name="Tuesday" Type="Boolean" Nullable="false" />
           <Property Name="Wednesday" Type="Boolean" Nullable="false" />
@@ -44,7 +44,7 @@
           <NavigationProperty Name="ScheduledCourse" Relationship="Model1.ScheduledCourseCourse" FromRole="Course" ToRole="ScheduledCourse" />
         </EntityType>
         <Association Name="ScheduledCourseCourse">
-          <End Type="Model1.ScheduledCourses" Role="ScheduledCourse" Multiplicity="1" />
+          <End Type="Model1.ScheduledCourses" Role="ScheduledCourse" Multiplicity="0..1" />
           <End Type="Model1.Courses" Role="Course" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Course">
