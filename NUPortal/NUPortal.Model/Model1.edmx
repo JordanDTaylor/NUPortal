@@ -15,13 +15,44 @@
         <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ScheduledCourses1" EntityType="Model1.ScheduledCourses" />
           <EntitySet Name="Courses1" EntityType="Model1.Courses" />
-          <AssociationSet Name="ScheduledCourseCourse" Association="Model1.ScheduledCourseCourse">
-            <End Role="ScheduledCourse" EntitySet="ScheduledCourses1" />
-            <End Role="Course" EntitySet="Courses1" />
-          </AssociationSet>
           <EntitySet Name="Quarters" EntityType="Model1.Quarters" />
           <EntitySet Name="Years" EntityType="Model1.Years" />
           <EntitySet Name="Sprints" EntityType="Model1.Sprint" />
+          <AssociationSet Name="QuartersYears" Association="Model1.QuartersYears">
+            <End Role="Quarters" EntitySet="Quarters" />
+            <End Role="Years" EntitySet="Years" />
+          </AssociationSet>
+          <AssociationSet Name="SprintQuarters" Association="Model1.SprintQuarters">
+            <End Role="Sprint" EntitySet="Sprints" />
+            <End Role="Quarters" EntitySet="Quarters" />
+          </AssociationSet>
+          <AssociationSet Name="SprintQuarters1" Association="Model1.SprintQuarters1">
+            <End Role="Sprint" EntitySet="Sprints" />
+            <End Role="Quarters" EntitySet="Quarters" />
+          </AssociationSet>
+          <AssociationSet Name="ScheduledCoursesCourses" Association="Model1.ScheduledCoursesCourses">
+            <End Role="ScheduledCourses" EntitySet="ScheduledCourses1" />
+            <End Role="Courses" EntitySet="Courses1" />
+          </AssociationSet>
+          <EntitySet Name="Instructors" EntityType="Model1.Instructor" />
+          <EntitySet Name="InstructorScheduledCourses" EntityType="Model1.InstructorScheduledCourse" />
+          <AssociationSet Name="ScheduledCoursesInstructorScheduledCourse" Association="Model1.ScheduledCoursesInstructorScheduledCourse">
+            <End Role="ScheduledCourses" EntitySet="ScheduledCourses1" />
+            <End Role="InstructorScheduledCourse" EntitySet="InstructorScheduledCourses" />
+          </AssociationSet>
+          <AssociationSet Name="InstructorScheduledCourseInstructor" Association="Model1.InstructorScheduledCourseInstructor">
+            <End Role="InstructorScheduledCourse" EntitySet="InstructorScheduledCourses" />
+            <End Role="Instructor" EntitySet="Instructors" />
+          </AssociationSet>
+          <EntitySet Name="PreReqs" EntityType="Model1.PreReqs" />
+          <AssociationSet Name="PreReqsCourses" Association="Model1.PreReqsCourses">
+            <End Role="PreReqs" EntitySet="PreReqs" />
+            <End Role="Courses" EntitySet="Courses1" />
+          </AssociationSet>
+          <AssociationSet Name="CoursesPreReqs" Association="Model1.CoursesPreReqs">
+            <End Role="Courses" EntitySet="Courses1" />
+            <End Role="PreReqs" EntitySet="PreReqs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ScheduledCourses">
           <Key>
@@ -29,56 +60,167 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StartTime" Type="DateTime" Nullable="false" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" />
           <Property Name="Monday" Type="Boolean" Nullable="false" />
           <Property Name="Tuesday" Type="Boolean" Nullable="false" />
           <Property Name="Wednesday" Type="Boolean" Nullable="false" />
           <Property Name="Thursday" Type="Boolean" Nullable="false" />
           <Property Name="Friday" Type="Boolean" Nullable="false" />
           <Property Name="Section" Type="String" Nullable="false" />
-          <NavigationProperty Name="Course" Relationship="Model1.ScheduledCourseCourse" FromRole="ScheduledCourse" ToRole="Course" />
-        </EntityType>
+          <Property Name="Course" Type="Int32" Nullable="false" />
+          <Property Name="Quarter" Type="String" Nullable="false" />
+          </EntityType>
         <EntityType Name="Courses">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="ScheduledCourse" Relationship="Model1.ScheduledCourseCourse" FromRole="Course" ToRole="ScheduledCourse" />
+          <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Credits" Type="Int16" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
         </EntityType>
-        <Association Name="ScheduledCourseCourse">
-          <End Type="Model1.ScheduledCourses" Role="ScheduledCourse" Multiplicity="0..1" />
-          <End Type="Model1.Courses" Role="Course" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ScheduledCourse">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Quarters">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Label" Type="String" Nullable="false" />
-          <Property Name="Sprint1" Type="String" Nullable="false" />
-          <Property Name="Sprint2" Type="String" Nullable="false" />
+          <Property Name="YearsYear" Type="Int32" Nullable="false" DefaultValue="2016" />
+          <Property Name="Sprint1" Type="Int32" Nullable="false" DefaultValue="2016" />
+          <Property Name="Sprint2" Type="Int32" Nullable="false" DefaultValue="2016" />
         </EntityType>
         <EntityType Name="Years">
           <Key>
             <PropertyRef Name="Year" />
           </Key>
-          <Property Name="Year" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" DefaultValue="2016" />
+          <NavigationProperty Name="Quarters" Relationship="Model1.QuartersYears" FromRole="Years" ToRole="Quarters" />
         </EntityType>
         <EntityType Name="Sprint">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StartDate" Type="String" Nullable="false" />
-          <Property Name="EndDate" Type="String" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" />
         </EntityType>
+        <Association Name="QuartersYears">
+          <End Type="Model1.Quarters" Role="Quarters" Multiplicity="*" />
+          <End Type="Model1.Years" Role="Years" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Years">
+              <PropertyRef Name="Year" />
+            </Principal>
+            <Dependent Role="Quarters">
+              <PropertyRef Name="YearsYear" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SprintQuarters">
+          <End Type="Model1.Sprint" Role="Sprint" Multiplicity="1" />
+          <End Type="Model1.Quarters" Role="Quarters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quarters">
+              <PropertyRef Name="Sprint1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SprintQuarters1">
+          <End Type="Model1.Sprint" Role="Sprint" Multiplicity="1" />
+          <End Type="Model1.Quarters" Role="Quarters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quarters">
+              <PropertyRef Name="Sprint2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ScheduledCoursesCourses">
+          <End Type="Model1.ScheduledCourses" Role="ScheduledCourses" Multiplicity="*" />
+          <End Type="Model1.Courses" Role="Courses" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScheduledCourses">
+              <PropertyRef Name="Course" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Instructor">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="InstructorScheduledCourse">
+          <Key>
+            <PropertyRef Name="Instructor" />
+            <PropertyRef Name="ScheduledCourse" />
+          </Key>
+          <Property Name="Instructor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScheduledCourse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="ScheduledCoursesInstructorScheduledCourse">
+          <End Type="Model1.ScheduledCourses" Role="ScheduledCourses" Multiplicity="1" />
+          <End Type="Model1.InstructorScheduledCourse" Role="InstructorScheduledCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScheduledCourses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstructorScheduledCourse">
+              <PropertyRef Name="ScheduledCourse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InstructorScheduledCourseInstructor">
+          <End Type="Model1.InstructorScheduledCourse" Role="InstructorScheduledCourse" Multiplicity="1" />
+          <End Type="Model1.Instructor" Role="Instructor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+            </Principal>
+            <Dependent Role="InstructorScheduledCourse">
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PreReqs">
+          <Key>
+            <PropertyRef Name="Course" />
+            <PropertyRef Name="Requires" />
+          </Key>
+          <Property Name="Course" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Requires" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="PreReqsCourses">
+          <End Type="Model1.PreReqs" Role="PreReqs" Multiplicity="*" />
+          <End Type="Model1.Courses" Role="Courses" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PreReqs">
+              <PropertyRef Name="Course" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CoursesPreReqs">
+          <End Type="Model1.Courses" Role="Courses" Multiplicity="1" />
+          <End Type="Model1.PreReqs" Role="PreReqs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PreReqs">
+              <PropertyRef Name="Requires" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

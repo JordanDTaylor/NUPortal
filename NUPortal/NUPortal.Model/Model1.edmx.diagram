@@ -4,13 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="14370520b3bc48e08b4643485bbbc4bf" Name="Course" >
-        <EntityTypeShape EntityType="Model1.ScheduledCourses" Width="1.75" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model1.Courses" Width="1.75" PointX="6" PointY="0.75" />
-        <AssociationConnector Association="Model1.ScheduledCourseCourse" />
-        <EntityTypeShape EntityType="Model1.Quarters" Width="1.5" PointX="9.875" PointY="0.875" />
-        <EntityTypeShape EntityType="Model1.Years" Width="1.5" PointX="9.875" PointY="3.75" />
-        <EntityTypeShape EntityType="Model1.Sprint" Width="1.5" PointX="6.75" PointY="3.625" />
+      <Diagram DiagramId="14370520b3bc48e08b4643485bbbc4bf" Name="Course" ZoomLevel="97" >
+        <EntityTypeShape EntityType="Model1.ScheduledCourses" Width="1.75" PointX="2.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Courses" Width="1.75" PointX="0.5" PointY="3.125" />
+        <EntityTypeShape EntityType="Model1.Quarters" Width="1.5" PointX="8.125" PointY="2.75" FillColor="0, 122, 204" />
+        <EntityTypeShape EntityType="Model1.Years" Width="1.5" PointX="8.125" PointY="0.75" />
+        <EntityTypeShape EntityType="Model1.Sprint" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="Model1.QuartersYears" />
+        <AssociationConnector Association="Model1.SprintQuarters" />
+        <AssociationConnector Association="Model1.SprintQuarters1" />
+        <AssociationConnector Association="Model1.ScheduledCoursesCourses" />
+        <EntityTypeShape EntityType="Model1.Instructor" Width="1.25" PointX="5.875" PointY="4" />
+        <EntityTypeShape EntityType="Model1.InstructorScheduledCourse" Width="1.625" PointX="5.125" PointY="0.875" />
+        <AssociationConnector Association="Model1.ScheduledCoursesInstructorScheduledCourse" />
+        <AssociationConnector Association="Model1.InstructorScheduledCourseInstructor" />
+        <EntityTypeShape EntityType="Model1.PreReqs" Width="1.5" PointX="3.375" PointY="4.75" />
+        <AssociationConnector Association="Model1.PreReqsCourses" />
+        <AssociationConnector Association="Model1.CoursesPreReqs" />
       </Diagram>
       <Diagram DiagramId="efcea5f1eb0d4572ba01e6f9e21401c3" Name="Schedule" />
       <Diagram DiagramId="8b44eeac3c5349b19066793f008a0af0" Name="Contact" />
