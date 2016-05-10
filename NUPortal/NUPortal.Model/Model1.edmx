@@ -21,13 +21,14 @@
           </AssociationSet>
           <EntitySet Name="Quarters" EntityType="Model1.Quarters" />
           <EntitySet Name="Years" EntityType="Model1.Years" />
+          <EntitySet Name="Sprints" EntityType="Model1.Sprint" />
         </EntityContainer>
         <EntityType Name="ScheduledCourses">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StartTime" Type="DateTime" Nullable="false" DefaultValue="" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" />
           <Property Name="Monday" Type="Boolean" Nullable="false" />
           <Property Name="Tuesday" Type="Boolean" Nullable="false" />
           <Property Name="Wednesday" Type="Boolean" Nullable="false" />
@@ -44,7 +45,7 @@
           <NavigationProperty Name="ScheduledCourse" Relationship="Model1.ScheduledCourseCourse" FromRole="Course" ToRole="ScheduledCourse" />
         </EntityType>
         <Association Name="ScheduledCourseCourse">
-          <End Type="Model1.ScheduledCourses" Role="ScheduledCourse" Multiplicity="1" />
+          <End Type="Model1.ScheduledCourses" Role="ScheduledCourse" Multiplicity="0..1" />
           <End Type="Model1.Courses" Role="Course" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Course">
@@ -60,13 +61,23 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Property1" Type="String" Nullable="false" />
+          <Property Name="Label" Type="String" Nullable="false" />
+          <Property Name="Sprint1" Type="String" Nullable="false" />
+          <Property Name="Sprint2" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Years">
           <Key>
             <PropertyRef Name="Year" />
           </Key>
           <Property Name="Year" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Sprint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="String" Nullable="false" />
+          <Property Name="EndDate" Type="String" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
