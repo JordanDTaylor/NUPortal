@@ -17,7 +17,7 @@ namespace NUPortal.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Courses()
         {
-            this.PreReqs = new HashSet<Courses>();
+            this.PreReq = new HashSet<PreReqs>();
         }
     
         public int Id { get; set; }
@@ -27,6 +27,6 @@ namespace NUPortal.Model
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Courses> PreReqs { get; set; }
+        public virtual ICollection<PreReqs> PreReq { get; set; }
     }
 }

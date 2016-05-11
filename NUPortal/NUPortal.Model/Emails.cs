@@ -12,25 +12,17 @@ namespace NUPortal.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Person
+    public partial class Emails
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Person()
+        public Emails()
         {
-            this.PhoneNumbers = new HashSet<PhoneNumber>();
-            this.Emails = new HashSet<Emails>();
+            this.Person = new HashSet<Person>();
         }
     
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string MiddelName { get; set; }
-        public string LastName { get; set; }
-        public string PrimaryPhone { get; set; }
-        public string PrimaryEmail { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Emails> Emails { get; set; }
+        public virtual ICollection<Person> Person { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/10/2016 17:21:58
+-- Date Created: 05/11/2016 13:45:05
 -- Generated from EDMX file: D:\Classes\16_Q2_Spring\NUPortal\NUPortal\NUPortal.Model\Model1.edmx
 -- --------------------------------------------------
 
@@ -35,6 +35,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_CoursesScheduledCourses]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ScheduledCourses1] DROP CONSTRAINT [FK_CoursesScheduledCourses];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CoursesCourses]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Courses1] DROP CONSTRAINT [FK_CoursesCourses];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -66,18 +69,19 @@ GO
 -- Creating all tables
 -- --------------------------------------------------
 
--- Creating table 'ScheduledCourses1'
-CREATE TABLE [dbo].[ScheduledCourses1] (
+-- Creating table 'SheduledEvents'
+CREATE TABLE [dbo].[SheduledEvents] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [StartTime] datetime  NOT NULL,
-    [EndTime] datetime  NOT NULL,
+    [StartTime] time  NOT NULL,
+    [EndTime] time  NOT NULL,
     [Monday] bit  NOT NULL,
     [Tuesday] bit  NOT NULL,
     [Wednesday] bit  NOT NULL,
     [Thursday] bit  NOT NULL,
     [Friday] bit  NOT NULL,
     [Section] nvarchar(max)  NOT NULL,
-    [Quarter] nvarchar(max)  NOT NULL,
+    [Quarter] int  NOT NULL,
+    [Room] int  NOT NULL,
     [Course_Id] int  NOT NULL
 );
 GO
@@ -85,11 +89,10 @@ GO
 -- Creating table 'Courses1'
 CREATE TABLE [dbo].[Courses1] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Code] int IDENTITY(1,1) NOT NULL,
-    [Name] int IDENTITY(1,1) NOT NULL,
+    [Code] int  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
     [Credits] smallint  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
-    [CoursesCourses_Courses1_Id] int  NOT NULL
+    [Description] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -117,16 +120,57 @@ CREATE TABLE [dbo].[Sprints] (
 );
 GO
 
--- Creating table 'Instructors'
-CREATE TABLE [dbo].[Instructors] (
-    [PersonId] int IDENTITY(1,1) NOT NULL
+-- Creating table 'Rooms'
+CREATE TABLE [dbo].[Rooms] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Capacity] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'People'
+CREATE TABLE [dbo].[People] (
+    [Id] int IDENTITY(1,1) NOT NULL
+);
+GO
+
+-- Creating table 'PreReqs'
+CREATE TABLE [dbo].[PreReqs] (
+    [Id] int IDENTITY(1,1) NOT NULL
+);
+GO
+
+-- Creating table 'People_Instructor'
+CREATE TABLE [dbo].[People_Instructor] (
+    [PersonId] int IDENTITY(1,1) NOT NULL,
+    [Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'People_TeachingAssistant'
+CREATE TABLE [dbo].[People_TeachingAssistant] (
+    [PersonId] int IDENTITY(1,1) NOT NULL,
+    [Id] int  NOT NULL
 );
 GO
 
 -- Creating table 'ScheduledCoursesInstructor'
 CREATE TABLE [dbo].[ScheduledCoursesInstructor] (
     [ScheduledCourses_Id] int  NOT NULL,
-    [Instructors_PersonId] int  NOT NULL
+    [Instructors_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'TASheduledEvent'
+CREATE TABLE [dbo].[TASheduledEvent] (
+    [TeachingAssistants_Id] int  NOT NULL,
+    [SheduledEvents_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'PreReqsCourses'
+CREATE TABLE [dbo].[PreReqsCourses] (
+    [PreReqs_Id] int  NOT NULL,
+    [RequiredCourses_Id] int  NOT NULL
 );
 GO
 
@@ -134,9 +178,9 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
--- Creating primary key on [Id] in table 'ScheduledCourses1'
-ALTER TABLE [dbo].[ScheduledCourses1]
-ADD CONSTRAINT [PK_ScheduledCourses1]
+-- Creating primary key on [Id] in table 'SheduledEvents'
+ALTER TABLE [dbo].[SheduledEvents]
+ADD CONSTRAINT [PK_SheduledEvents]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -164,16 +208,52 @@ ADD CONSTRAINT [PK_Sprints]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [PersonId] in table 'Instructors'
-ALTER TABLE [dbo].[Instructors]
-ADD CONSTRAINT [PK_Instructors]
-    PRIMARY KEY CLUSTERED ([PersonId] ASC);
+-- Creating primary key on [Id] in table 'Rooms'
+ALTER TABLE [dbo].[Rooms]
+ADD CONSTRAINT [PK_Rooms]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [ScheduledCourses_Id], [Instructors_PersonId] in table 'ScheduledCoursesInstructor'
+-- Creating primary key on [Id] in table 'People'
+ALTER TABLE [dbo].[People]
+ADD CONSTRAINT [PK_People]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'PreReqs'
+ALTER TABLE [dbo].[PreReqs]
+ADD CONSTRAINT [PK_PreReqs]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'People_Instructor'
+ALTER TABLE [dbo].[People_Instructor]
+ADD CONSTRAINT [PK_People_Instructor]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'People_TeachingAssistant'
+ALTER TABLE [dbo].[People_TeachingAssistant]
+ADD CONSTRAINT [PK_People_TeachingAssistant]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [ScheduledCourses_Id], [Instructors_Id] in table 'ScheduledCoursesInstructor'
 ALTER TABLE [dbo].[ScheduledCoursesInstructor]
 ADD CONSTRAINT [PK_ScheduledCoursesInstructor]
-    PRIMARY KEY CLUSTERED ([ScheduledCourses_Id], [Instructors_PersonId] ASC);
+    PRIMARY KEY CLUSTERED ([ScheduledCourses_Id], [Instructors_Id] ASC);
+GO
+
+-- Creating primary key on [TeachingAssistants_Id], [SheduledEvents_Id] in table 'TASheduledEvent'
+ALTER TABLE [dbo].[TASheduledEvent]
+ADD CONSTRAINT [PK_TASheduledEvent]
+    PRIMARY KEY CLUSTERED ([TeachingAssistants_Id], [SheduledEvents_Id] ASC);
+GO
+
+-- Creating primary key on [PreReqs_Id], [RequiredCourses_Id] in table 'PreReqsCourses'
+ALTER TABLE [dbo].[PreReqsCourses]
+ADD CONSTRAINT [PK_PreReqsCourses]
+    PRIMARY KEY CLUSTERED ([PreReqs_Id], [RequiredCourses_Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -229,28 +309,28 @@ GO
 ALTER TABLE [dbo].[ScheduledCoursesInstructor]
 ADD CONSTRAINT [FK_ScheduledCoursesInstructor_ScheduledCourses]
     FOREIGN KEY ([ScheduledCourses_Id])
-    REFERENCES [dbo].[ScheduledCourses1]
+    REFERENCES [dbo].[SheduledEvents]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Instructors_PersonId] in table 'ScheduledCoursesInstructor'
+-- Creating foreign key on [Instructors_Id] in table 'ScheduledCoursesInstructor'
 ALTER TABLE [dbo].[ScheduledCoursesInstructor]
 ADD CONSTRAINT [FK_ScheduledCoursesInstructor_Instructor]
-    FOREIGN KEY ([Instructors_PersonId])
-    REFERENCES [dbo].[Instructors]
-        ([PersonId])
+    FOREIGN KEY ([Instructors_Id])
+    REFERENCES [dbo].[People_Instructor]
+        ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ScheduledCoursesInstructor_Instructor'
 CREATE INDEX [IX_FK_ScheduledCoursesInstructor_Instructor]
 ON [dbo].[ScheduledCoursesInstructor]
-    ([Instructors_PersonId]);
+    ([Instructors_Id]);
 GO
 
--- Creating foreign key on [Course_Id] in table 'ScheduledCourses1'
-ALTER TABLE [dbo].[ScheduledCourses1]
+-- Creating foreign key on [Course_Id] in table 'SheduledEvents'
+ALTER TABLE [dbo].[SheduledEvents]
 ADD CONSTRAINT [FK_CoursesScheduledCourses]
     FOREIGN KEY ([Course_Id])
     REFERENCES [dbo].[Courses1]
@@ -260,23 +340,104 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_CoursesScheduledCourses'
 CREATE INDEX [IX_FK_CoursesScheduledCourses]
-ON [dbo].[ScheduledCourses1]
+ON [dbo].[SheduledEvents]
     ([Course_Id]);
 GO
 
--- Creating foreign key on [CoursesCourses_Courses1_Id] in table 'Courses1'
-ALTER TABLE [dbo].[Courses1]
-ADD CONSTRAINT [FK_CoursesCourses]
-    FOREIGN KEY ([CoursesCourses_Courses1_Id])
+-- Creating foreign key on [Room] in table 'SheduledEvents'
+ALTER TABLE [dbo].[SheduledEvents]
+ADD CONSTRAINT [FK_SheduledEventRoom]
+    FOREIGN KEY ([Room])
+    REFERENCES [dbo].[Rooms]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SheduledEventRoom'
+CREATE INDEX [IX_FK_SheduledEventRoom]
+ON [dbo].[SheduledEvents]
+    ([Room]);
+GO
+
+-- Creating foreign key on [Quarter] in table 'SheduledEvents'
+ALTER TABLE [dbo].[SheduledEvents]
+ADD CONSTRAINT [FK_SheduledEventQuarters]
+    FOREIGN KEY ([Quarter])
+    REFERENCES [dbo].[Quarters]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SheduledEventQuarters'
+CREATE INDEX [IX_FK_SheduledEventQuarters]
+ON [dbo].[SheduledEvents]
+    ([Quarter]);
+GO
+
+-- Creating foreign key on [TeachingAssistants_Id] in table 'TASheduledEvent'
+ALTER TABLE [dbo].[TASheduledEvent]
+ADD CONSTRAINT [FK_TASheduledEvent_TA]
+    FOREIGN KEY ([TeachingAssistants_Id])
+    REFERENCES [dbo].[People_TeachingAssistant]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [SheduledEvents_Id] in table 'TASheduledEvent'
+ALTER TABLE [dbo].[TASheduledEvent]
+ADD CONSTRAINT [FK_TASheduledEvent_SheduledEvent]
+    FOREIGN KEY ([SheduledEvents_Id])
+    REFERENCES [dbo].[SheduledEvents]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_TASheduledEvent_SheduledEvent'
+CREATE INDEX [IX_FK_TASheduledEvent_SheduledEvent]
+ON [dbo].[TASheduledEvent]
+    ([SheduledEvents_Id]);
+GO
+
+-- Creating foreign key on [PreReqs_Id] in table 'PreReqsCourses'
+ALTER TABLE [dbo].[PreReqsCourses]
+ADD CONSTRAINT [FK_PreReqsCourses_PreReqs]
+    FOREIGN KEY ([PreReqs_Id])
+    REFERENCES [dbo].[PreReqs]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [RequiredCourses_Id] in table 'PreReqsCourses'
+ALTER TABLE [dbo].[PreReqsCourses]
+ADD CONSTRAINT [FK_PreReqsCourses_Courses]
+    FOREIGN KEY ([RequiredCourses_Id])
     REFERENCES [dbo].[Courses1]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_CoursesCourses'
-CREATE INDEX [IX_FK_CoursesCourses]
-ON [dbo].[Courses1]
-    ([CoursesCourses_Courses1_Id]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_PreReqsCourses_Courses'
+CREATE INDEX [IX_FK_PreReqsCourses_Courses]
+ON [dbo].[PreReqsCourses]
+    ([RequiredCourses_Id]);
+GO
+
+-- Creating foreign key on [Id] in table 'People_Instructor'
+ALTER TABLE [dbo].[People_Instructor]
+ADD CONSTRAINT [FK_Instructor_inherits_Person]
+    FOREIGN KEY ([Id])
+    REFERENCES [dbo].[People]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Id] in table 'People_TeachingAssistant'
+ALTER TABLE [dbo].[People_TeachingAssistant]
+ADD CONSTRAINT [FK_TeachingAssistant_inherits_Person]
+    FOREIGN KEY ([Id])
+    REFERENCES [dbo].[People]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- --------------------------------------------------

@@ -32,5 +32,9 @@ namespace NUPortal.Model
         public virtual DbSet<Sprint> Sprints { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<PreReqs> PreReqs { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<PhoneNumber> PhoneNumbers { get; set; }
+        public virtual DbSet<Emails> Emails { get; set; }
     }
 }

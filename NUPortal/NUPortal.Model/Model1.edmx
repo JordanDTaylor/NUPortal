@@ -6,13 +6,18 @@
     <edmx:StorageModels>
     <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="Model1StoreContainer">
-    <EntitySet Name="ScheduledCourses1" EntityType="Model1.Store.ScheduledCourses1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SheduledEvents" EntityType="Model1.Store.SheduledEvents" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Courses1" EntityType="Model1.Store.Courses1" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Quarters" EntityType="Model1.Store.Quarters" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Years" EntityType="Model1.Store.Years" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Sprints" EntityType="Model1.Store.Sprints" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Instructors" EntityType="Model1.Store.Instructors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Rooms" EntityType="Model1.Store.Rooms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="People" EntityType="Model1.Store.People" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PreReqs" EntityType="Model1.Store.PreReqs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="People_Instructor" EntityType="Model1.Store.People_Instructor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="People_TeachingAssistant" EntityType="Model1.Store.People_TeachingAssistant" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ScheduledCoursesInstructor" EntityType="Model1.Store.ScheduledCoursesInstructor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TASheduledEvent" EntityType="Model1.Store.TASheduledEvent" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="QuartersYears" Association="Model1.Store.QuartersYears">
       <End Role="Quarters" EntitySet="Quarters" />
       <End Role="Years" EntitySet="Years" />
@@ -26,36 +31,57 @@
       <End Role="Quarters" EntitySet="Quarters" />
     </AssociationSet>
     <AssociationSet Name="FK_ScheduledCoursesInstructor_ScheduledCourses" Association="Model1.Store.FK_ScheduledCoursesInstructor_ScheduledCourses">
-      <End Role="ScheduledCourses" EntitySet="ScheduledCourses1" />
+      <End Role="ScheduledCourses" EntitySet="SheduledEvents" />
       <End Role="ScheduledCoursesInstructor" EntitySet="ScheduledCoursesInstructor" />
     </AssociationSet>
     <AssociationSet Name="FK_ScheduledCoursesInstructor_Instructor" Association="Model1.Store.FK_ScheduledCoursesInstructor_Instructor">
-      <End Role="Instructor" EntitySet="Instructors" />
+      <End Role="Instructor" EntitySet="People_Instructor" />
       <End Role="ScheduledCoursesInstructor" EntitySet="ScheduledCoursesInstructor" />
     </AssociationSet>
     <AssociationSet Name="CoursesScheduledCourses" Association="Model1.Store.CoursesScheduledCourses">
       <End Role="Courses" EntitySet="Courses1" />
-      <End Role="ScheduledCourses" EntitySet="ScheduledCourses1" />
+      <End Role="ScheduledCourses" EntitySet="SheduledEvents" />
     </AssociationSet>
-    <AssociationSet Name="CoursesCourses" Association="Model1.Store.CoursesCourses">
-      <End Role="Courses" EntitySet="Courses1" />
-      <End Role="Courses1" EntitySet="Courses1" />
+    <AssociationSet Name="SheduledEventRoom" Association="Model1.Store.SheduledEventRoom">
+      <End Role="SheduledEvent" EntitySet="SheduledEvents" />
+      <End Role="Room" EntitySet="Rooms" />
+    </AssociationSet>
+    <AssociationSet Name="SheduledEventQuarters" Association="Model1.Store.SheduledEventQuarters">
+      <End Role="SheduledEvent" EntitySet="SheduledEvents" />
+      <End Role="Quarters" EntitySet="Quarters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TASheduledEvent_TA" Association="Model1.Store.FK_TASheduledEvent_TA">
+      <End Role="TA" EntitySet="People_TeachingAssistant" />
+      <End Role="TASheduledEvent" EntitySet="TASheduledEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TASheduledEvent_SheduledEvent" Association="Model1.Store.FK_TASheduledEvent_SheduledEvent">
+      <End Role="SheduledEvent" EntitySet="SheduledEvents" />
+      <End Role="TASheduledEvent" EntitySet="TASheduledEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Instructor_inherits_Person" Association="Model1.Store.FK_Instructor_inherits_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Instructor" EntitySet="People_Instructor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeachingAssistant_inherits_Person" Association="Model1.Store.FK_TeachingAssistant_inherits_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="TeachingAssistant" EntitySet="People_TeachingAssistant" />
     </AssociationSet>
   </EntityContainer>
-  <EntityType Name="ScheduledCourses1">
+  <EntityType Name="SheduledEvents">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="StartTime" Type="datetime" Nullable="false" />
-    <Property Name="EndTime" Type="datetime" Nullable="false" />
+    <Property Name="StartTime" Type="time" Nullable="false" />
+    <Property Name="EndTime" Type="time" Nullable="false" />
     <Property Name="Monday" Type="bit" Nullable="false" />
     <Property Name="Tuesday" Type="bit" Nullable="false" />
     <Property Name="Wednesday" Type="bit" Nullable="false" />
     <Property Name="Thursday" Type="bit" Nullable="false" />
     <Property Name="Friday" Type="bit" Nullable="false" />
     <Property Name="Section" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Quarter" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Quarter" Type="int" Nullable="false" />
+    <Property Name="Room" Type="int" Nullable="false" />
     <Property Name="Course_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Courses1">
@@ -63,11 +89,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Code" Type="int" StoreGeneratedPattern="None" Nullable="false" />
-    <Property Name="Name" Type="int" StoreGeneratedPattern="None" Nullable="false" />
+    <Property Name="Code" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Credits" Type="smallint" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CoursesCourses_Courses1_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Quarters">
     <Key>
@@ -76,8 +101,8 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Label" Type="nvarchar(max)" Nullable="false" />
     <Property Name="YearsYear" Type="int" Nullable="false" DefaultValue="2016" />
-    <Property Name="Sprint1" Type="int" Nullable="false" DefaultValue="2016" />
-    <Property Name="Sprint2" Type="int" Nullable="false" DefaultValue="2016" />
+    <Property Name="Sprint1" Type="int" Nullable="false" />
+    <Property Name="Sprint2" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Years">
     <Key>
@@ -93,19 +118,54 @@
     <Property Name="StartDate" Type="datetime" Nullable="false" />
     <Property Name="EndDate" Type="datetime" Nullable="false" />
   </EntityType>
-  <EntityType Name="Instructors">
+  <EntityType Name="Rooms">
     <Key>
-      <PropertyRef Name="PersonId" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Capacity" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="People">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PreReqs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="People_Instructor">
+    <Key>
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="People_TeachingAssistant">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ScheduledCoursesInstructor">
     <Key>
       <PropertyRef Name="ScheduledCourses_Id" />
-      <PropertyRef Name="Instructors_PersonId" />
+      <PropertyRef Name="Instructors_Id" />
     </Key>
     <Property Name="ScheduledCourses_Id" Type="int" Nullable="false" />
-    <Property Name="Instructors_PersonId" Type="int" Nullable="false" />
+    <Property Name="Instructors_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TASheduledEvent">
+    <Key>
+      <PropertyRef Name="TeachingAssistants_Id" />
+      <PropertyRef Name="SheduledEvents_Id" />
+    </Key>
+    <Property Name="TeachingAssistants_Id" Type="int" Nullable="false" />
+    <Property Name="SheduledEvents_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="QuartersYears">
     <End Role="Quarters" Type="Model1.Store.Quarters" Multiplicity="*" />
@@ -145,7 +205,7 @@
   </Association>
   <Association Name="CoursesScheduledCourses">
     <End Role="Courses" Type="Model1.Store.Courses1" Multiplicity="1" />
-    <End Role="ScheduledCourses" Type="Model1.Store.ScheduledCourses1" Multiplicity="*" />
+    <End Role="ScheduledCourses" Type="Model1.Store.SheduledEvents" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Courses">
         <PropertyRef Name="Id" />
@@ -155,20 +215,32 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="CoursesCourses">
-    <End Role="Courses" Type="Model1.Store.Courses1" Multiplicity="1" />
-    <End Role="Courses1" Type="Model1.Store.Courses1" Multiplicity="*" />
+  <Association Name="SheduledEventRoom">
+    <End Role="SheduledEvent" Type="Model1.Store.SheduledEvents" Multiplicity="*" />
+    <End Role="Room" Type="Model1.Store.Rooms" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="Courses">
+      <Principal Role="Room">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Courses1">
-        <PropertyRef Name="CoursesCourses_Courses1_Id" />
+      <Dependent Role="SheduledEvent">
+        <PropertyRef Name="Room" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SheduledEventQuarters">
+    <End Role="SheduledEvent" Type="Model1.Store.SheduledEvents" Multiplicity="*" />
+    <End Role="Quarters" Type="Model1.Store.Quarters" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Quarters">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SheduledEvent">
+        <PropertyRef Name="Quarter" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ScheduledCoursesInstructor_ScheduledCourses">
-    <End Role="ScheduledCourses" Type="Model1.Store.ScheduledCourses1" Multiplicity="1" />
+    <End Role="ScheduledCourses" Type="Model1.Store.SheduledEvents" Multiplicity="1" />
     <End Role="ScheduledCoursesInstructor" Type="Model1.Store.ScheduledCoursesInstructor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ScheduledCourses">
@@ -181,13 +253,65 @@
   </Association>
   <Association Name="FK_ScheduledCoursesInstructor_Instructor">
     <End Role="ScheduledCoursesInstructor" Type="Model1.Store.ScheduledCoursesInstructor" Multiplicity="*" />
-    <End Role="Instructor" Type="Model1.Store.Instructors" Multiplicity="1" />
+    <End Role="Instructor" Type="Model1.Store.People_Instructor" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Instructor">
-        <PropertyRef Name="PersonId" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ScheduledCoursesInstructor">
-        <PropertyRef Name="Instructors_PersonId" />
+        <PropertyRef Name="Instructors_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TASheduledEvent_TA">
+    <End Role="TA" Type="Model1.Store.People_TeachingAssistant" Multiplicity="1" />
+    <End Role="TASheduledEvent" Type="Model1.Store.TASheduledEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TASheduledEvent">
+        <PropertyRef Name="TeachingAssistants_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TASheduledEvent_SheduledEvent">
+    <End Role="TASheduledEvent" Type="Model1.Store.TASheduledEvent" Multiplicity="*" />
+    <End Role="SheduledEvent" Type="Model1.Store.SheduledEvents" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="SheduledEvent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TASheduledEvent">
+        <PropertyRef Name="SheduledEvents_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Instructor_inherits_Person">
+    <End Role="Person" Type="Model1.Store.People" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Instructor" Type="Model1.Store.People_Instructor" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Instructor">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeachingAssistant_inherits_Person">
+    <End Role="Person" Type="Model1.Store.People" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TeachingAssistant" Type="Model1.Store.People_TeachingAssistant" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeachingAssistant">
+        <PropertyRef Name="Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -221,10 +345,6 @@
             <End Role="Courses" EntitySet="Courses1" />
             <End Role="ScheduledCourses" EntitySet="SheduledEvents" />
           </AssociationSet>
-          <AssociationSet Name="CoursesCourses" Association="Model1.CoursesCourses">
-            <End Role="Courses" EntitySet="Courses1" />
-            <End Role="Courses1" EntitySet="Courses1" />
-          </AssociationSet>
           <EntitySet Name="Rooms" EntityType="Model1.Room" />
           <AssociationSet Name="SheduledEventRoom" Association="Model1.SheduledEventRoom">
             <End Role="SheduledEvent" EntitySet="SheduledEvents" />
@@ -238,6 +358,30 @@
           <AssociationSet Name="TASheduledEvent" Association="Model1.TASheduledEvent">
             <End Role="TA" EntitySet="People" />
             <End Role="SheduledEvent" EntitySet="SheduledEvents" />
+          </AssociationSet>
+          <EntitySet Name="PreReqs" EntityType="Model1.PreReqs" />
+          <AssociationSet Name="PreReqsCourses" Association="Model1.PreReqsCourses">
+            <End Role="PreReqs" EntitySet="PreReqs" />
+            <End Role="Courses" EntitySet="Courses1" />
+          </AssociationSet>
+          <EntitySet Name="Addresses" EntityType="Model1.Address" />
+          <EntitySet Name="PhoneNumbers" EntityType="Model1.PhoneNumber" />
+          <AssociationSet Name="PersonPhoneNumber" Association="Model1.PersonPhoneNumber">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PhoneNumber" EntitySet="PhoneNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="PersonPhoneNumber1" Association="Model1.PersonPhoneNumber1">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PhoneNumber" EntitySet="PhoneNumbers" />
+          </AssociationSet>
+          <EntitySet Name="Emails" EntityType="Model1.Emails" />
+          <AssociationSet Name="PersonEntity1" Association="Model1.PersonEntity1">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Entity1" EntitySet="Emails" />
+          </AssociationSet>
+          <AssociationSet Name="PersonEmails" Association="Model1.PersonEmails">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Emails" EntitySet="Emails" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="SheduledEvent">
@@ -268,7 +412,7 @@
           <Property Name="Name" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Credits" Type="Int16" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" />
-          <NavigationProperty Name="PreReqs" Relationship="Model1.CoursesCourses" FromRole="Courses" ToRole="Courses1" />
+          <NavigationProperty Name="PreReq" Relationship="Model1.PreReqsCourses" FromRole="Courses" ToRole="PreReqs" />
         </EntityType>
         <EntityType Name="Quarters">
           <Key>
@@ -344,10 +488,6 @@
           <End Type="Model1.Courses" Role="Courses" Multiplicity="1" />
           <End Type="Model1.SheduledEvent" Role="ScheduledCourses" Multiplicity="*" />
         </Association>
-        <Association Name="CoursesCourses">
-          <End Type="Model1.Courses" Role="Courses" Multiplicity="1" />
-          <End Type="Model1.Courses" Role="Courses1" Multiplicity="*" />
-        </Association>
         <EntityType Name="Room">
           <Key>
             <PropertyRef Name="Id" />
@@ -389,10 +529,88 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="MiddelName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
+          <Property Name="PrimaryPhone" Type="String" Nullable="false" />
+          <NavigationProperty Name="PhoneNumbers" Relationship="Model1.PersonPhoneNumber" FromRole="Person" ToRole="PhoneNumber" />
+          <NavigationProperty Name="Emails" Relationship="Model1.PersonEntity1" FromRole="Person" ToRole="Entity1" />
+          <Property Name="PrimaryEmail" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="TASheduledEvent">
           <End Type="Model1.TeachingAssistant" Role="TA" Multiplicity="*" />
           <End Type="Model1.SheduledEvent" Role="SheduledEvent" Multiplicity="*" />
+        </Association>
+        <EntityType Name="PreReqs">
+          <Key>
+            <PropertyRef Name="Course" />
+            <PropertyRef Name="RequiredCourse" />
+          </Key>
+          <Property Name="Course" Type="String" Nullable="false" />
+          <Property Name="RequiredCourse" Type="String" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Model1.PreReqsCourses" FromRole="PreReqs" ToRole="Courses" />
+        </EntityType>
+        <Association Name="PreReqsCourses">
+          <End Type="Model1.PreReqs" Role="PreReqs" Multiplicity="*" />
+          <End Type="Model1.Courses" Role="Courses" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Street1" Type="String" Nullable="false" />
+          <Property Name="Street2" Type="String" Nullable="false" />
+          <Property Name="City" Type="String" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" />
+          <Property Name="PostalCode" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhoneNumber">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="People" Relationship="Model1.PersonPhoneNumber" FromRole="PhoneNumber" ToRole="Person" />
+          <Property Name="SupportsSMS" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="PersonPhoneNumber">
+          <End Type="Model1.Person" Role="Person" Multiplicity="*" />
+          <End Type="Model1.PhoneNumber" Role="PhoneNumber" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonPhoneNumber1">
+          <End Type="Model1.Person" Role="Person" Multiplicity="*" />
+          <End Type="Model1.PhoneNumber" Role="PhoneNumber" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneNumber">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="PrimaryPhone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Emails">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Email" Type="String" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Person" Relationship="Model1.PersonEntity1" FromRole="Entity1" ToRole="Person" />
+        </EntityType>
+        <Association Name="PersonEntity1">
+          <End Type="Model1.Person" Role="Person" Multiplicity="*" />
+          <End Type="Model1.Emails" Role="Entity1" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonEmails">
+          <End Type="Model1.Person" Role="Person" Multiplicity="*" />
+          <End Type="Model1.Emails" Role="Emails" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Emails">
+              <PropertyRef Name="Email" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="PrimaryEmail" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -402,7 +620,7 @@
   <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
     <EntitySetMapping Name="SheduledEvents">
       <EntityTypeMapping TypeName="IsTypeOf(Model1.SheduledEvent)">
-        <MappingFragment StoreEntitySet="ScheduledCourses1">
+        <MappingFragment StoreEntitySet="SheduledEvents">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="StartTime" ColumnName="StartTime" />
           <ScalarProperty Name="EndTime" ColumnName="EndTime" />
@@ -413,6 +631,7 @@
           <ScalarProperty Name="Friday" ColumnName="Friday" />
           <ScalarProperty Name="Section" ColumnName="Section" />
           <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+          <ScalarProperty Name="Room" ColumnName="Room" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -454,7 +673,48 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="CoursesScheduledCourses" TypeName="Model1.CoursesScheduledCourses" StoreEntitySet="ScheduledCourses1">
+    <EntitySetMapping Name="Rooms">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Room)">
+        <MappingFragment StoreEntitySet="Rooms">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Person)">
+        <MappingFragment StoreEntitySet="People">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Instructor)">
+        <MappingFragment StoreEntitySet="People_Instructor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.TeachingAssistant)">
+        <MappingFragment StoreEntitySet="People_TeachingAssistant">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PreReqs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.PreReqs)">
+        <MappingFragment StoreEntitySet="PreReqs">
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ScheduledCoursesInstructor" TypeName="Model1.ScheduledCoursesInstructor" StoreEntitySet="ScheduledCoursesInstructor">
+      <EndProperty Name="ScheduledCourses">
+        <ScalarProperty Name="Id" ColumnName="ScheduledCourses_Id" />
+      </EndProperty>
+      <EndProperty Name="Instructor">
+        <ScalarProperty Name="Id" ColumnName="Instructors_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CoursesScheduledCourses" TypeName="Model1.CoursesScheduledCourses" StoreEntitySet="SheduledEvents">
       <EndProperty Name="Courses">
         <ScalarProperty Name="Id" ColumnName="Course_Id" />
       </EndProperty>
@@ -462,22 +722,14 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CoursesCourses" TypeName="Model1.CoursesCourses" StoreEntitySet="Courses1">
-      <EndProperty Name="Courses">
-        <ScalarProperty Name="Id" ColumnName="CoursesCourses_Courses1_Id" />
+    <AssociationSetMapping Name="TASheduledEvent" TypeName="Model1.TASheduledEvent" StoreEntitySet="TASheduledEvent">
+      <EndProperty Name="TA">
+        <ScalarProperty Name="Id" ColumnName="TeachingAssistants_Id" />
       </EndProperty>
-      <EndProperty Name="Courses1">
-        <ScalarProperty Name="Id" ColumnName="Id" />
+      <EndProperty Name="SheduledEvent">
+        <ScalarProperty Name="Id" ColumnName="SheduledEvents_Id" />
       </EndProperty>
     </AssociationSetMapping>
-          <AssociationSetMapping Name="ScheduledCoursesInstructor" TypeName="Model1.ScheduledCoursesInstructor" StoreEntitySet="ScheduledCoursesInstructor" />
-          <EntitySetMapping Name="People">
-            <EntityTypeMapping TypeName="IsTypeOf(Model1.Instructor)" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-              <MappingFragment StoreEntitySet="Instructors">
-                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
