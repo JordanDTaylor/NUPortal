@@ -22,6 +22,7 @@ namespace NUPortal.Model
     
         public string Number { get; set; }
         public bool SupportsSMS { get; set; }
+        public string IsFax { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Person> People { get; set; }

@@ -14,11 +14,20 @@ namespace NUPortal.Model
     
     public partial class Address
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Address()
+        {
+            this.People = new HashSet<Person>();
+        }
+    
         public int Id { get; set; }
         public string Street1 { get; set; }
         public string Street2 { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string PostalCode { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Person> People { get; set; }
     }
 }

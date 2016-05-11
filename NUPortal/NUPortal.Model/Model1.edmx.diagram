@@ -4,28 +4,32 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="14370520b3bc48e08b4643485bbbc4bf" Name="Course" ZoomLevel="86" >
-        <EntityTypeShape EntityType="Model1.Courses" Width="1.75" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="Model1.Quarters" Width="1.5" PointX="3" PointY="0.875" FillColor="0, 122, 204" />
-        <EntityTypeShape EntityType="Model1.Years" Width="1.5" PointX="5.25" PointY="1.375" />
+      <Diagram DiagramId="14370520b3bc48e08b4643485bbbc4bf" Name="Course" ZoomLevel="118" >
+        <EntityTypeShape EntityType="Model1.Courses" Width="1.75" PointX="0.875" PointY="3.375" />
+        <EntityTypeShape EntityType="Model1.Quarters" Width="1.5" PointX="3" PointY="0.875" FillColor="0, 122, 204" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Years" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model1.Sprint" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="Model1.QuartersYears" />
         <AssociationConnector Association="Model1.SprintQuarters" />
         <AssociationConnector Association="Model1.SprintQuarters1" />
-        <EntityTypeShape EntityType="Model1.Instructor" Width="1.75" PointX="4" PointY="6.375" />
-        <EntityTypeShape EntityType="Model1.TeachingAssistant" Width="1.5" PointX="6.5" PointY="6.375" />
-        <EntityTypeShape EntityType="Model1.Person" Width="1.5" PointX="5.25" PointY="4.375" />
+        <EntityTypeShape EntityType="Model1.Instructor" Width="1.75" PointX="4" PointY="5.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.TeachingAssistant" Width="1.5" PointX="6.5" PointY="5.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.Person" PointX="5.25" PointY="4.375" Width="1.5" IsExpanded="false" />
         <InheritanceConnector EntityType="Model1.Instructor" />
         <InheritanceConnector EntityType="Model1.TeachingAssistant" />
+        <AssociationConnector Association="Model1.PreReqsCourses1" />
+        <EntityTypeShape EntityType="Model1.PhoneNumber" Width="1.5" PointX="7.5" PointY="2.625" />
+        <AssociationConnector Association="Model1.PersonPhoneNumber" />
+        <AssociationConnector Association="Model1.PersonPhoneNumber1" />
       </Diagram>
-      <Diagram DiagramId="efcea5f1eb0d4572ba01e6f9e21401c3" Name="Schedule" ZoomLevel="70" >
+      <Diagram DiagramId="efcea5f1eb0d4572ba01e6f9e21401c3" Name="Schedule" ZoomLevel="105" >
         <EntityTypeShape EntityType="Model1.SheduledEvent" Width="1.5" PointX="5" PointY="2.625" />
         <EntityTypeShape EntityType="Model1.Room" Width="1.5" PointX="7.25" PointY="7.75" IsExpanded="true" />
         <AssociationConnector Association="Model1.SheduledEventRoom" />
         <EntityTypeShape EntityType="Model1.Years" Width="1.5" PointX="9.5" PointY="4.25" IsExpanded="false" />
         <EntityTypeShape EntityType="Model1.Quarters" Width="1.5" PointX="7.25" PointY="3.375" />
         <AssociationConnector Association="Model1.QuartersYears" />
-        <EntityTypeShape EntityType="Model1.Sprint" Width="1.5" PointX="5" PointY="1.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.Sprint" Width="1.5" PointX="5" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="Model1.SprintQuarters" />
         <AssociationConnector Association="Model1.SprintQuarters1" />
         <AssociationConnector Association="Model1.SheduledEventQuarters" />
@@ -37,20 +41,24 @@
         <AssociationConnector Association="Model1.CoursesScheduledCourses" />
         <EntityTypeShape EntityType="Model1.PreReqs" Width="1.5" PointX="0.625" PointY="1.875" />
         <AssociationConnector Association="Model1.PreReqsCourses" />
+        <AssociationConnector Association="Model1.PreReqsCourses1" />
       </Diagram>
-      <Diagram DiagramId="8b44eeac3c5349b19066793f008a0af0" Name="Contact" ZoomLevel="131" >
-        <EntityTypeShape EntityType="Model1.Person" Width="1.5" PointX="3" PointY="0.875" />
-        <EntityTypeShape EntityType="Model1.TeachingAssistant" Width="1.5" PointX="1" PointY="1.875" IsExpanded="false" />
+      <Diagram DiagramId="8b44eeac3c5349b19066793f008a0af0" Name="Contact" ZoomLevel="103" >
+        <EntityTypeShape EntityType="Model1.Person" PointX="10.875" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="Model1.TeachingAssistant" Width="1.5" PointX="11" PointY="4.875" IsExpanded="false" />
         <InheritanceConnector EntityType="Model1.TeachingAssistant" />
-        <EntityTypeShape EntityType="Model1.Instructor" Width="1.5" PointX="1" PointY="2.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.Instructor" Width="1.5" PointX="12.75" PointY="4.875" IsExpanded="false" />
         <InheritanceConnector EntityType="Model1.Instructor" />
-        <EntityTypeShape EntityType="Model1.Address" Width="1.5" PointX="3" PointY="3.75" />
-        <EntityTypeShape EntityType="Model1.PhoneNumber" Width="1.5" PointX="5.375" PointY="0.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.Address" Width="1.5" PointX="13.125" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.PhoneNumber" Width="1.5" PointX="8.375" PointY="2.25" IsExpanded="true" />
         <AssociationConnector Association="Model1.PersonPhoneNumber" />
         <AssociationConnector Association="Model1.PersonPhoneNumber1" />
-        <EntityTypeShape EntityType="Model1.Emails" Width="1.5" PointX="5.375" PointY="1.75" />
+        <EntityTypeShape EntityType="Model1.Emails" Width="1.5" PointX="8.375" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="Model1.PersonEntity1" />
         <AssociationConnector Association="Model1.PersonEmails" />
+        <EntityTypeShape EntityType="Model1.EmergencyContact" Width="1.375" PointX="9.375" PointY="4.875" IsExpanded="true" />
+        <InheritanceConnector EntityType="Model1.EmergencyContact" />
+        <AssociationConnector Association="Model1.PersonAddress" />
       </Diagram>
       <Diagram DiagramId="66a0b0ba72dc4a328825570dda157835" Name="Financial" />
       <Diagram DiagramId="85fb31ed143b44a3b41723c165ec4aa3" Name="Degree" />

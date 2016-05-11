@@ -19,6 +19,7 @@ namespace NUPortal.Model
         {
             this.PhoneNumbers = new HashSet<PhoneNumber>();
             this.Emails = new HashSet<Emails>();
+            this.Addresses = new HashSet<Address>();
         }
     
         public int Id { get; set; }
@@ -27,10 +28,13 @@ namespace NUPortal.Model
         public string LastName { get; set; }
         public string PrimaryPhone { get; set; }
         public string PrimaryEmail { get; set; }
+        public System.DateTime DateOfBirth { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhoneNumber> PhoneNumbers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Emails> Emails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Address> Addresses { get; set; }
     }
 }

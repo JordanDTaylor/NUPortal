@@ -18,6 +18,8 @@ namespace NUPortal.Model
         public Courses()
         {
             this.PreReq = new HashSet<PreReqs>();
+            this.Courses1 = new HashSet<Courses>();
+            this.Courses2 = new HashSet<Courses>();
         }
     
         public int Id { get; set; }
@@ -28,5 +30,9 @@ namespace NUPortal.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PreReqs> PreReq { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Courses> Courses1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Courses> Courses2 { get; set; }
     }
 }

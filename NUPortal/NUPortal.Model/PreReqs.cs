@@ -20,8 +20,8 @@ namespace NUPortal.Model
             this.Courses = new HashSet<Courses>();
         }
     
-        public string Course { get; set; }
-        public string RequiredCourse { get; set; }
+        public int Course { get; set; }
+        public int RequiredCourse { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Courses> Courses { get; set; }
