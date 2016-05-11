@@ -4,576 +4,622 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Addresses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Street1" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Street2" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="State" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PostalCode" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Courses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Code" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Credits" Type="smallint" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Test.dbo.Emails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Emails">
-          <Key>
-            <PropertyRef Name="Email" />
-          </Key>
-          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="People">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MiddelName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PrimaryPhone" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PrimaryEmail" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="People_EmergencyContact">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="ContactFor" Type="int" Nullable="false" />
-          <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="People_Instructor">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="People_TeachingAssistant">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PersonAddress">
-          <Key>
-            <PropertyRef Name="People_Id" />
-            <PropertyRef Name="Addresses_Id" />
-          </Key>
-          <Property Name="People_Id" Type="int" Nullable="false" />
-          <Property Name="Addresses_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Test.dbo.PersonEntity1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="PersonEntity1">
-          <Key>
-            <PropertyRef Name="Person_Id" />
-            <PropertyRef Name="Emails_Email" />
-          </Key>
-          <Property Name="Person_Id" Type="int" Nullable="false" />
-          <Property Name="Emails_Email" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Test.dbo.PersonPhoneNumber' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="PersonPhoneNumber">
-          <Key>
-            <PropertyRef Name="People_Id" />
-            <PropertyRef Name="PhoneNumbers_Number" />
-          </Key>
-          <Property Name="People_Id" Type="int" Nullable="false" />
-          <Property Name="PhoneNumbers_Number" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Test.dbo.PhoneNumbers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="PhoneNumbers">
-          <Key>
-            <PropertyRef Name="Number" />
-            
-            
-          </Key>
-          <Property Name="Number" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="SupportsSMS" Type="bit" Nullable="false" />
-          <Property Name="IsFax" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PreReqsCourses">
-          <Key>
-            <PropertyRef Name="Course_Id" />
-            <PropertyRef Name="RequiredCourses_Id" />
-          </Key>
-          <Property Name="Course_Id" Type="int" Nullable="false" />
-          <Property Name="RequiredCourses_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Quarters">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Label" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="YearsYear" Type="int" Nullable="false" />
-          <Property Name="Sprint1" Type="int" Nullable="false" />
-          <Property Name="Sprint2" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Rooms">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Capacity" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ScheduledCoursesInstructor">
-          <Key>
-            <PropertyRef Name="ScheduledCourses_Id" />
-            <PropertyRef Name="Instructors_Id" />
-          </Key>
-          <Property Name="ScheduledCourses_Id" Type="int" Nullable="false" />
-          <Property Name="Instructors_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="SheduledEvents">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
-          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
-          <Property Name="Monday" Type="bit" Nullable="false" />
-          <Property Name="Tuesday" Type="bit" Nullable="false" />
-          <Property Name="Wednesday" Type="bit" Nullable="false" />
-          <Property Name="Thursday" Type="bit" Nullable="false" />
-          <Property Name="Friday" Type="bit" Nullable="false" />
-          <Property Name="Section" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Quarter" Type="int" Nullable="false" />
-          <Property Name="Room" Type="int" Nullable="false" />
-          <Property Name="Course_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Sprints">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StartDate" Type="datetime" Nullable="false" />
-          <Property Name="EndDate" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <EntityType Name="TASheduledEvent">
-          <Key>
-            <PropertyRef Name="TeachingAssistants_Id" />
-            <PropertyRef Name="SheduledEvents_Id" />
-          </Key>
-          <Property Name="TeachingAssistants_Id" Type="int" Nullable="false" />
-          <Property Name="SheduledEvents_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Years">
-          <Key>
-            <PropertyRef Name="Year" />
-          </Key>
-          <Property Name="Year" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_CoursesScheduledCourses">
-          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
-          <End Role="SheduledEvents" Type="Self.SheduledEvents" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Courses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SheduledEvents">
-              <PropertyRef Name="Course_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmergencyContact_inherits_Person">
-          <End Role="People" Type="Self.People" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="People_EmergencyContact" Type="Self.People_EmergencyContact" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="People">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="People_EmergencyContact">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Instructor_inherits_Person">
-          <End Role="People" Type="Self.People" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="People_Instructor" Type="Self.People_Instructor" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="People">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="People_Instructor">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonAddress_Address">
-          <End Role="Addresses" Type="Self.Addresses" Multiplicity="1" />
-          <End Role="PersonAddress" Type="Self.PersonAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Addresses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PersonAddress">
-              <PropertyRef Name="Addresses_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonAddress_Person">
-          <End Role="People" Type="Self.People" Multiplicity="1" />
-          <End Role="PersonAddress" Type="Self.PersonAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="People">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PersonAddress">
-              <PropertyRef Name="People_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonEntity1_Person">
-          <End Role="People" Type="Self.People" Multiplicity="1" />
-          <End Role="PersonEntity1" Type="Self.PersonEntity1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="People">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PersonEntity1">
-              <PropertyRef Name="Person_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PersonPhoneNumber_Person">
-          <End Role="People" Type="Self.People" Multiplicity="1" />
-          <End Role="PersonPhoneNumber" Type="Self.PersonPhoneNumber" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="People">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PersonPhoneNumber">
-              <PropertyRef Name="People_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PreReqsCourses_Courses1">
-          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
-          <End Role="PreReqsCourses" Type="Self.PreReqsCourses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Courses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PreReqsCourses">
-              <PropertyRef Name="Course_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PreReqsCourses_Courses2">
-          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
-          <End Role="PreReqsCourses" Type="Self.PreReqsCourses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Courses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PreReqsCourses">
-              <PropertyRef Name="RequiredCourses_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_QuartersYears">
-          <End Role="Years" Type="Self.Years" Multiplicity="1" />
-          <End Role="Quarters" Type="Self.Quarters" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Years">
-              <PropertyRef Name="Year" />
-            </Principal>
-            <Dependent Role="Quarters">
-              <PropertyRef Name="YearsYear" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ScheduledCoursesInstructor_Instructor">
-          <End Role="People_Instructor" Type="Self.People_Instructor" Multiplicity="1" />
-          <End Role="ScheduledCoursesInstructor" Type="Self.ScheduledCoursesInstructor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="People_Instructor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ScheduledCoursesInstructor">
-              <PropertyRef Name="Instructors_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ScheduledCoursesInstructor_ScheduledCourses">
-          <End Role="SheduledEvents" Type="Self.SheduledEvents" Multiplicity="1" />
-          <End Role="ScheduledCoursesInstructor" Type="Self.ScheduledCoursesInstructor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SheduledEvents">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ScheduledCoursesInstructor">
-              <PropertyRef Name="ScheduledCourses_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SheduledEventQuarters">
-          <End Role="Quarters" Type="Self.Quarters" Multiplicity="1" />
-          <End Role="SheduledEvents" Type="Self.SheduledEvents" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Quarters">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SheduledEvents">
-              <PropertyRef Name="Quarter" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SheduledEventRoom">
-          <End Role="Rooms" Type="Self.Rooms" Multiplicity="1" />
-          <End Role="SheduledEvents" Type="Self.SheduledEvents" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rooms">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SheduledEvents">
-              <PropertyRef Name="Room" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SprintQuarters">
-          <End Role="Sprints" Type="Self.Sprints" Multiplicity="1" />
-          <End Role="Quarters" Type="Self.Quarters" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sprints">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Quarters">
-              <PropertyRef Name="Sprint1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SprintQuarters1">
-          <End Role="Sprints" Type="Self.Sprints" Multiplicity="1" />
-          <End Role="Quarters" Type="Self.Quarters" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sprints">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Quarters">
-              <PropertyRef Name="Sprint2" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TASheduledEvent_SheduledEvent">
-          <End Role="SheduledEvents" Type="Self.SheduledEvents" Multiplicity="1" />
-          <End Role="TASheduledEvent" Type="Self.TASheduledEvent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SheduledEvents">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TASheduledEvent">
-              <PropertyRef Name="SheduledEvents_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TASheduledEvent_TA">
-          <End Role="People_TeachingAssistant" Type="Self.People_TeachingAssistant" Multiplicity="1" />
-          <End Role="TASheduledEvent" Type="Self.TASheduledEvent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="People_TeachingAssistant">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TASheduledEvent">
-              <PropertyRef Name="TeachingAssistants_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TeachingAssistant_inherits_Person">
-          <End Role="People" Type="Self.People" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="People_TeachingAssistant" Type="Self.People_TeachingAssistant" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="People">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="People_TeachingAssistant">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="Model1StoreContainer">
-          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="People_EmergencyContact" EntityType="Self.People_EmergencyContact" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="People_Instructor" EntityType="Self.People_Instructor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="People_TeachingAssistant" EntityType="Self.People_TeachingAssistant" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PersonAddress" EntityType="Self.PersonAddress" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PreReqsCourses" EntityType="Self.PreReqsCourses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Quarters" EntityType="Self.Quarters" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ScheduledCoursesInstructor" EntityType="Self.ScheduledCoursesInstructor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SheduledEvents" EntityType="Self.SheduledEvents" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sprints" EntityType="Self.Sprints" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TASheduledEvent" EntityType="Self.TASheduledEvent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Years" EntityType="Self.Years" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Emails" EntityType="Self.Emails" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Emails].[Email] AS [Email]
-    FROM [dbo].[Emails] AS [Emails]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="PersonEntity1" EntityType="Self.PersonEntity1" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PersonEntity1].[Person_Id] AS [Person_Id], 
-    [PersonEntity1].[Emails_Email] AS [Emails_Email]
-    FROM [dbo].[PersonEntity1] AS [PersonEntity1]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="PersonPhoneNumber" EntityType="Self.PersonPhoneNumber" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PersonPhoneNumber].[People_Id] AS [People_Id], 
-    [PersonPhoneNumber].[PhoneNumbers_Number] AS [PhoneNumbers_Number]
-    FROM [dbo].[PersonPhoneNumber] AS [PersonPhoneNumber]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="PhoneNumbers" EntityType="Self.PhoneNumbers" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PhoneNumbers].[Number] AS [Number], 
-    [PhoneNumbers].[SupportsSMS] AS [SupportsSMS], 
-    [PhoneNumbers].[IsFax] AS [IsFax]
-    FROM [dbo].[PhoneNumbers] AS [PhoneNumbers]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_CoursesScheduledCourses" Association="Self.FK_CoursesScheduledCourses">
-            <End Role="Courses" EntitySet="Courses" />
-            <End Role="SheduledEvents" EntitySet="SheduledEvents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmergencyContact_inherits_Person" Association="Self.FK_EmergencyContact_inherits_Person">
-            <End Role="People" EntitySet="People" />
-            <End Role="People_EmergencyContact" EntitySet="People_EmergencyContact" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Instructor_inherits_Person" Association="Self.FK_Instructor_inherits_Person">
-            <End Role="People" EntitySet="People" />
-            <End Role="People_Instructor" EntitySet="People_Instructor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonAddress_Address" Association="Self.FK_PersonAddress_Address">
-            <End Role="Addresses" EntitySet="Addresses" />
-            <End Role="PersonAddress" EntitySet="PersonAddress" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonAddress_Person" Association="Self.FK_PersonAddress_Person">
-            <End Role="People" EntitySet="People" />
-            <End Role="PersonAddress" EntitySet="PersonAddress" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonEntity1_Person" Association="Self.FK_PersonEntity1_Person">
-            <End Role="People" EntitySet="People" />
-            <End Role="PersonEntity1" EntitySet="PersonEntity1" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PersonPhoneNumber_Person" Association="Self.FK_PersonPhoneNumber_Person">
-            <End Role="People" EntitySet="People" />
-            <End Role="PersonPhoneNumber" EntitySet="PersonPhoneNumber" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PreReqsCourses_Courses1" Association="Self.FK_PreReqsCourses_Courses1">
-            <End Role="Courses" EntitySet="Courses" />
-            <End Role="PreReqsCourses" EntitySet="PreReqsCourses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PreReqsCourses_Courses2" Association="Self.FK_PreReqsCourses_Courses2">
-            <End Role="Courses" EntitySet="Courses" />
-            <End Role="PreReqsCourses" EntitySet="PreReqsCourses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_QuartersYears" Association="Self.FK_QuartersYears">
-            <End Role="Years" EntitySet="Years" />
-            <End Role="Quarters" EntitySet="Quarters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ScheduledCoursesInstructor_Instructor" Association="Self.FK_ScheduledCoursesInstructor_Instructor">
-            <End Role="People_Instructor" EntitySet="People_Instructor" />
-            <End Role="ScheduledCoursesInstructor" EntitySet="ScheduledCoursesInstructor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ScheduledCoursesInstructor_ScheduledCourses" Association="Self.FK_ScheduledCoursesInstructor_ScheduledCourses">
-            <End Role="SheduledEvents" EntitySet="SheduledEvents" />
-            <End Role="ScheduledCoursesInstructor" EntitySet="ScheduledCoursesInstructor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SheduledEventQuarters" Association="Self.FK_SheduledEventQuarters">
-            <End Role="Quarters" EntitySet="Quarters" />
-            <End Role="SheduledEvents" EntitySet="SheduledEvents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SheduledEventRoom" Association="Self.FK_SheduledEventRoom">
-            <End Role="Rooms" EntitySet="Rooms" />
-            <End Role="SheduledEvents" EntitySet="SheduledEvents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SprintQuarters" Association="Self.FK_SprintQuarters">
-            <End Role="Sprints" EntitySet="Sprints" />
-            <End Role="Quarters" EntitySet="Quarters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SprintQuarters1" Association="Self.FK_SprintQuarters1">
-            <End Role="Sprints" EntitySet="Sprints" />
-            <End Role="Quarters" EntitySet="Quarters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TASheduledEvent_SheduledEvent" Association="Self.FK_TASheduledEvent_SheduledEvent">
-            <End Role="SheduledEvents" EntitySet="SheduledEvents" />
-            <End Role="TASheduledEvent" EntitySet="TASheduledEvent" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TASheduledEvent_TA" Association="Self.FK_TASheduledEvent_TA">
-            <End Role="People_TeachingAssistant" EntitySet="People_TeachingAssistant" />
-            <End Role="TASheduledEvent" EntitySet="TASheduledEvent" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TeachingAssistant_inherits_Person" Association="Self.FK_TeachingAssistant_inherits_Person">
-            <End Role="People" EntitySet="People" />
-            <End Role="People_TeachingAssistant" EntitySet="People_TeachingAssistant" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="SheduledEvents" EntityType="Model1.Store.SheduledEvents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Courses" EntityType="Model1.Store.Courses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Quarters" EntityType="Model1.Store.Quarters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Years" EntityType="Model1.Store.Years" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sprints" EntityType="Model1.Store.Sprints" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Rooms" EntityType="Model1.Store.Rooms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="People" EntityType="Model1.Store.People" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PreReqs" EntityType="Model1.Store.PreReqs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Addresses" EntityType="Model1.Store.Addresses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhoneNumbers" EntityType="Model1.Store.PhoneNumbers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Emails" EntityType="Model1.Store.Emails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="People_Instructor" EntityType="Model1.Store.People_Instructor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="People_TeachingAssistant" EntityType="Model1.Store.People_TeachingAssistant" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="People_EmergencyContact" EntityType="Model1.Store.People_EmergencyContact" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ScheduledCoursesInstructor" EntityType="Model1.Store.ScheduledCoursesInstructor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TASheduledEvent" EntityType="Model1.Store.TASheduledEvent" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PreReqsCourses" EntityType="Model1.Store.PreReqsCourses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonPhoneNumber" EntityType="Model1.Store.PersonPhoneNumber" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonEntity1" EntityType="Model1.Store.PersonEntity1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PersonAddress" EntityType="Model1.Store.PersonAddress" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PreReqsCourses1" EntityType="Model1.Store.PreReqsCourses1" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="QuartersYears" Association="Model1.Store.QuartersYears">
+      <End Role="Quarters" EntitySet="Quarters" />
+      <End Role="Years" EntitySet="Years" />
+    </AssociationSet>
+    <AssociationSet Name="SprintQuarters" Association="Model1.Store.SprintQuarters">
+      <End Role="Sprint" EntitySet="Sprints" />
+      <End Role="Quarters" EntitySet="Quarters" />
+    </AssociationSet>
+    <AssociationSet Name="SprintQuarters1" Association="Model1.Store.SprintQuarters1">
+      <End Role="Sprint" EntitySet="Sprints" />
+      <End Role="Quarters" EntitySet="Quarters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScheduledCoursesInstructor_ScheduledCourses" Association="Model1.Store.FK_ScheduledCoursesInstructor_ScheduledCourses">
+      <End Role="ScheduledCourses" EntitySet="SheduledEvents" />
+      <End Role="ScheduledCoursesInstructor" EntitySet="ScheduledCoursesInstructor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScheduledCoursesInstructor_Instructor" Association="Model1.Store.FK_ScheduledCoursesInstructor_Instructor">
+      <End Role="Instructor" EntitySet="People_Instructor" />
+      <End Role="ScheduledCoursesInstructor" EntitySet="ScheduledCoursesInstructor" />
+    </AssociationSet>
+    <AssociationSet Name="CoursesScheduledCourses" Association="Model1.Store.CoursesScheduledCourses">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="ScheduledCourses" EntitySet="SheduledEvents" />
+    </AssociationSet>
+    <AssociationSet Name="SheduledEventRoom" Association="Model1.Store.SheduledEventRoom">
+      <End Role="SheduledEvent" EntitySet="SheduledEvents" />
+      <End Role="Room" EntitySet="Rooms" />
+    </AssociationSet>
+    <AssociationSet Name="SheduledEventQuarters" Association="Model1.Store.SheduledEventQuarters">
+      <End Role="SheduledEvent" EntitySet="SheduledEvents" />
+      <End Role="Quarters" EntitySet="Quarters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TASheduledEvent_TA" Association="Model1.Store.FK_TASheduledEvent_TA">
+      <End Role="TA" EntitySet="People_TeachingAssistant" />
+      <End Role="TASheduledEvent" EntitySet="TASheduledEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TASheduledEvent_SheduledEvent" Association="Model1.Store.FK_TASheduledEvent_SheduledEvent">
+      <End Role="SheduledEvent" EntitySet="SheduledEvents" />
+      <End Role="TASheduledEvent" EntitySet="TASheduledEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PreReqsCourses_PreReqs" Association="Model1.Store.FK_PreReqsCourses_PreReqs">
+      <End Role="PreReqs" EntitySet="PreReqs" />
+      <End Role="PreReqsCourses" EntitySet="PreReqsCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PreReqsCourses_Courses" Association="Model1.Store.FK_PreReqsCourses_Courses">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="PreReqsCourses" EntitySet="PreReqsCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonPhoneNumber_Person" Association="Model1.Store.FK_PersonPhoneNumber_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PersonPhoneNumber" EntitySet="PersonPhoneNumber" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonPhoneNumber_PhoneNumber" Association="Model1.Store.FK_PersonPhoneNumber_PhoneNumber">
+      <End Role="PhoneNumber" EntitySet="PhoneNumbers" />
+      <End Role="PersonPhoneNumber" EntitySet="PersonPhoneNumber" />
+    </AssociationSet>
+    <AssociationSet Name="PersonPhoneNumber1" Association="Model1.Store.PersonPhoneNumber1">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PhoneNumber" EntitySet="PhoneNumbers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonEntity1_Person" Association="Model1.Store.FK_PersonEntity1_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PersonEntity1" EntitySet="PersonEntity1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonEntity1_Entity1" Association="Model1.Store.FK_PersonEntity1_Entity1">
+      <End Role="Entity1" EntitySet="Emails" />
+      <End Role="PersonEntity1" EntitySet="PersonEntity1" />
+    </AssociationSet>
+    <AssociationSet Name="PersonEmails" Association="Model1.Store.PersonEmails">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Emails" EntitySet="Emails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonAddress_Person" Association="Model1.Store.FK_PersonAddress_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="PersonAddress" EntitySet="PersonAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonAddress_Address" Association="Model1.Store.FK_PersonAddress_Address">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="PersonAddress" EntitySet="PersonAddress" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PreReqsCourses1_Courses" Association="Model1.Store.FK_PreReqsCourses1_Courses">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="PreReqsCourses1" EntitySet="PreReqsCourses1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PreReqsCourses1_Courses1" Association="Model1.Store.FK_PreReqsCourses1_Courses1">
+      <End Role="Courses1" EntitySet="Courses" />
+      <End Role="PreReqsCourses1" EntitySet="PreReqsCourses1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Instructor_inherits_Person" Association="Model1.Store.FK_Instructor_inherits_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Instructor" EntitySet="People_Instructor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeachingAssistant_inherits_Person" Association="Model1.Store.FK_TeachingAssistant_inherits_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="TeachingAssistant" EntitySet="People_TeachingAssistant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmergencyContact_inherits_Person" Association="Model1.Store.FK_EmergencyContact_inherits_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="EmergencyContact" EntitySet="People_EmergencyContact" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="SheduledEvents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartTime" Type="time" Nullable="false" Precision="7" />
+    <Property Name="EndTime" Type="time" Nullable="false" Precision="7" />
+    <Property Name="Monday" Type="bit" Nullable="false" />
+    <Property Name="Tuesday" Type="bit" Nullable="false" />
+    <Property Name="Wednesday" Type="bit" Nullable="false" />
+    <Property Name="Thursday" Type="bit" Nullable="false" />
+    <Property Name="Friday" Type="bit" Nullable="false" />
+    <Property Name="Section" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Quarter" Type="int" Nullable="false" />
+    <Property Name="Room" Type="int" Nullable="false" />
+    <Property Name="Course_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Credits" Type="smallint" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Quarters">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Label" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="YearsYear" Type="int" Nullable="false" DefaultValue="2016" />
+    <Property Name="Sprint1" Type="int" Nullable="false" />
+    <Property Name="Sprint2" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Years">
+    <Key>
+      <PropertyRef Name="Year" />
+    </Key>
+    <Property Name="Year" Type="int" Nullable="false" DefaultValue="2016" />
+  </EntityType>
+  <EntityType Name="Sprints">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rooms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Capacity" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="People">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MiddelName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PrimaryPhone" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="PrimaryEmail" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PreReqs">
+    <Key>
+      <PropertyRef Name="Course" />
+      <PropertyRef Name="RequiredCourse" />
+    </Key>
+    <Property Name="Course" Type="int" Nullable="false" />
+    <Property Name="RequiredCourse" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Addresses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Street1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Street2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="State" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PostalCode" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhoneNumbers">
+    <Key>
+      <PropertyRef Name="Number" />
+    </Key>
+    <Property Name="Number" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="SupportsSMS" Type="bit" Nullable="false" />
+    <Property Name="IsFax" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Emails">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="People_Instructor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="People_TeachingAssistant">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="People_EmergencyContact">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="ContactFor" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScheduledCoursesInstructor">
+    <Key>
+      <PropertyRef Name="ScheduledCourses_Id" />
+      <PropertyRef Name="Instructors_Id" />
+    </Key>
+    <Property Name="ScheduledCourses_Id" Type="int" Nullable="false" />
+    <Property Name="Instructors_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TASheduledEvent">
+    <Key>
+      <PropertyRef Name="TeachingAssistants_Id" />
+      <PropertyRef Name="SheduledEvents_Id" />
+    </Key>
+    <Property Name="TeachingAssistants_Id" Type="int" Nullable="false" />
+    <Property Name="SheduledEvents_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PreReqsCourses">
+    <Key>
+      <PropertyRef Name="PreReq_Course" />
+      <PropertyRef Name="PreReq_RequiredCourse" />
+      <PropertyRef Name="Courses_Id" />
+    </Key>
+    <Property Name="PreReq_Course" Type="int" Nullable="false" />
+    <Property Name="PreReq_RequiredCourse" Type="int" Nullable="false" />
+    <Property Name="Courses_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PersonPhoneNumber">
+    <Key>
+      <PropertyRef Name="People_Id" />
+      <PropertyRef Name="PhoneNumbers_Number" />
+    </Key>
+    <Property Name="People_Id" Type="int" Nullable="false" />
+    <Property Name="PhoneNumbers_Number" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="PersonEntity1">
+    <Key>
+      <PropertyRef Name="Person_Id" />
+      <PropertyRef Name="Emails_Email" />
+    </Key>
+    <Property Name="Person_Id" Type="int" Nullable="false" />
+    <Property Name="Emails_Email" Type="nvarchar" Nullable="false" MaxLength="60" />
+  </EntityType>
+  <EntityType Name="PersonAddress">
+    <Key>
+      <PropertyRef Name="People_Id" />
+      <PropertyRef Name="Addresses_Id" />
+    </Key>
+    <Property Name="People_Id" Type="int" Nullable="false" />
+    <Property Name="Addresses_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PreReqsCourses1">
+    <Key>
+      <PropertyRef Name="Courses2_Id" />
+      <PropertyRef Name="Courses1_Id" />
+    </Key>
+    <Property Name="Courses2_Id" Type="int" Nullable="false" />
+    <Property Name="Courses1_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="QuartersYears">
+    <End Role="Quarters" Type="Model1.Store.Quarters" Multiplicity="*" />
+    <End Role="Years" Type="Model1.Store.Years" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Years">
+        <PropertyRef Name="Year" />
+      </Principal>
+      <Dependent Role="Quarters">
+        <PropertyRef Name="YearsYear" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SprintQuarters">
+    <End Role="Sprint" Type="Model1.Store.Sprints" Multiplicity="1" />
+    <End Role="Quarters" Type="Model1.Store.Quarters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sprint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quarters">
+        <PropertyRef Name="Sprint1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SprintQuarters1">
+    <End Role="Sprint" Type="Model1.Store.Sprints" Multiplicity="1" />
+    <End Role="Quarters" Type="Model1.Store.Quarters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sprint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quarters">
+        <PropertyRef Name="Sprint2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CoursesScheduledCourses">
+    <End Role="Courses" Type="Model1.Store.Courses" Multiplicity="1" />
+    <End Role="ScheduledCourses" Type="Model1.Store.SheduledEvents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScheduledCourses">
+        <PropertyRef Name="Course_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SheduledEventRoom">
+    <End Role="SheduledEvent" Type="Model1.Store.SheduledEvents" Multiplicity="*" />
+    <End Role="Room" Type="Model1.Store.Rooms" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SheduledEvent">
+        <PropertyRef Name="Room" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SheduledEventQuarters">
+    <End Role="SheduledEvent" Type="Model1.Store.SheduledEvents" Multiplicity="*" />
+    <End Role="Quarters" Type="Model1.Store.Quarters" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Quarters">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SheduledEvent">
+        <PropertyRef Name="Quarter" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonPhoneNumber1">
+    <End Role="Person" Type="Model1.Store.People" Multiplicity="*" />
+    <End Role="PhoneNumber" Type="Model1.Store.PhoneNumbers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="PhoneNumber">
+        <PropertyRef Name="Number" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PrimaryPhone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonEmails">
+    <End Role="Person" Type="Model1.Store.People" Multiplicity="*" />
+    <End Role="Emails" Type="Model1.Store.Emails" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Emails">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="PrimaryEmail" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScheduledCoursesInstructor_ScheduledCourses">
+    <End Role="ScheduledCourses" Type="Model1.Store.SheduledEvents" Multiplicity="1" />
+    <End Role="ScheduledCoursesInstructor" Type="Model1.Store.ScheduledCoursesInstructor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ScheduledCourses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScheduledCoursesInstructor">
+        <PropertyRef Name="ScheduledCourses_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScheduledCoursesInstructor_Instructor">
+    <End Role="ScheduledCoursesInstructor" Type="Model1.Store.ScheduledCoursesInstructor" Multiplicity="*" />
+    <End Role="Instructor" Type="Model1.Store.People_Instructor" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Instructor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ScheduledCoursesInstructor">
+        <PropertyRef Name="Instructors_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TASheduledEvent_TA">
+    <End Role="TA" Type="Model1.Store.People_TeachingAssistant" Multiplicity="1" />
+    <End Role="TASheduledEvent" Type="Model1.Store.TASheduledEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TA">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TASheduledEvent">
+        <PropertyRef Name="TeachingAssistants_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TASheduledEvent_SheduledEvent">
+    <End Role="TASheduledEvent" Type="Model1.Store.TASheduledEvent" Multiplicity="*" />
+    <End Role="SheduledEvent" Type="Model1.Store.SheduledEvents" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="SheduledEvent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TASheduledEvent">
+        <PropertyRef Name="SheduledEvents_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PreReqsCourses_PreReqs">
+    <End Role="PreReqs" Type="Model1.Store.PreReqs" Multiplicity="1" />
+    <End Role="PreReqsCourses" Type="Model1.Store.PreReqsCourses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PreReqs">
+        <PropertyRef Name="Course" />
+        <PropertyRef Name="RequiredCourse" />
+      </Principal>
+      <Dependent Role="PreReqsCourses">
+        <PropertyRef Name="PreReq_Course" />
+        <PropertyRef Name="PreReq_RequiredCourse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PreReqsCourses_Courses">
+    <End Role="PreReqsCourses" Type="Model1.Store.PreReqsCourses" Multiplicity="*" />
+    <End Role="Courses" Type="Model1.Store.Courses" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PreReqsCourses">
+        <PropertyRef Name="Courses_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonPhoneNumber_Person">
+    <End Role="Person" Type="Model1.Store.People" Multiplicity="1" />
+    <End Role="PersonPhoneNumber" Type="Model1.Store.PersonPhoneNumber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonPhoneNumber">
+        <PropertyRef Name="People_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonPhoneNumber_PhoneNumber">
+    <End Role="PersonPhoneNumber" Type="Model1.Store.PersonPhoneNumber" Multiplicity="*" />
+    <End Role="PhoneNumber" Type="Model1.Store.PhoneNumbers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="PhoneNumber">
+        <PropertyRef Name="Number" />
+      </Principal>
+      <Dependent Role="PersonPhoneNumber">
+        <PropertyRef Name="PhoneNumbers_Number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonEntity1_Person">
+    <End Role="Person" Type="Model1.Store.People" Multiplicity="1" />
+    <End Role="PersonEntity1" Type="Model1.Store.PersonEntity1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonEntity1">
+        <PropertyRef Name="Person_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonEntity1_Entity1">
+    <End Role="PersonEntity1" Type="Model1.Store.PersonEntity1" Multiplicity="*" />
+    <End Role="Entity1" Type="Model1.Store.Emails" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Entity1">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="PersonEntity1">
+        <PropertyRef Name="Emails_Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonAddress_Person">
+    <End Role="Person" Type="Model1.Store.People" Multiplicity="1" />
+    <End Role="PersonAddress" Type="Model1.Store.PersonAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonAddress">
+        <PropertyRef Name="People_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonAddress_Address">
+    <End Role="PersonAddress" Type="Model1.Store.PersonAddress" Multiplicity="*" />
+    <End Role="Address" Type="Model1.Store.Addresses" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PersonAddress">
+        <PropertyRef Name="Addresses_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PreReqsCourses1_Courses">
+    <End Role="Courses" Type="Model1.Store.Courses" Multiplicity="1" />
+    <End Role="PreReqsCourses1" Type="Model1.Store.PreReqsCourses1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PreReqsCourses1">
+        <PropertyRef Name="Courses2_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PreReqsCourses1_Courses1">
+    <End Role="PreReqsCourses1" Type="Model1.Store.PreReqsCourses1" Multiplicity="*" />
+    <End Role="Courses1" Type="Model1.Store.Courses" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Courses1">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PreReqsCourses1">
+        <PropertyRef Name="Courses1_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Instructor_inherits_Person">
+    <End Role="Person" Type="Model1.Store.People" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Instructor" Type="Model1.Store.People_Instructor" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Instructor">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeachingAssistant_inherits_Person">
+    <End Role="Person" Type="Model1.Store.People" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TeachingAssistant" Type="Model1.Store.People_TeachingAssistant" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeachingAssistant">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmergencyContact_inherits_Person">
+    <End Role="Person" Type="Model1.Store.People" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="EmergencyContact" Type="Model1.Store.People_EmergencyContact" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmergencyContact">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -830,10 +876,10 @@ warning 6002: The table/view 'Test.dbo.PhoneNumbers' does not have a primary key
           <Property Name="FirstName" Nullable="false" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="MiddelName" Nullable="false" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="LastName" Nullable="false" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="PrimaryPhone" Nullable="false" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PrimaryPhone" Nullable="false" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="PhoneNumbers" Relationship="Model1.PersonPhoneNumber" FromRole="Person" ToRole="PhoneNumber" />
           <NavigationProperty Name="Emails" Relationship="Model1.PersonEntity1" FromRole="Person" ToRole="Entity1" />
-          <Property Name="PrimaryEmail" Nullable="false" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PrimaryEmail" Nullable="false" Type="String" MaxLength="60" Unicode="true" FixedLength="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Addresses" Relationship="Model1.PersonAddress" FromRole="Person" ToRole="Address" />
         </EntityType>
@@ -1038,6 +1084,14 @@ warning 6002: The table/view 'Test.dbo.PhoneNumbers' does not have a primary key
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PreReqs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.PreReqs)">
+        <MappingFragment StoreEntitySet="PreReqs">
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="RequiredCourse" ColumnName="RequiredCourse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="IsTypeOf(Model1.Address)">
         <MappingFragment StoreEntitySet="Addresses">
@@ -1091,7 +1145,14 @@ warning 6002: The table/view 'Test.dbo.PhoneNumbers' does not have a primary key
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="PreReqsCourses" TypeName="Model1.PreReqsCourses" StoreEntitySet="PreReqsCourses">
-      </AssociationSetMapping>
+      <EndProperty Name="PreReqs">
+        <ScalarProperty Name="Course" ColumnName="PreReq_Course" />
+        <ScalarProperty Name="RequiredCourse" ColumnName="PreReq_RequiredCourse" />
+      </EndProperty>
+      <EndProperty Name="Courses">
+        <ScalarProperty Name="Id" ColumnName="Courses_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
     <AssociationSetMapping Name="PersonPhoneNumber" TypeName="Model1.PersonPhoneNumber" StoreEntitySet="PersonPhoneNumber">
       <EndProperty Name="Person">
         <ScalarProperty Name="Id" ColumnName="People_Id" />
@@ -1116,38 +1177,14 @@ warning 6002: The table/view 'Test.dbo.PhoneNumbers' does not have a primary key
         <ScalarProperty Name="Id" ColumnName="Addresses_Id" />
       </EndProperty>
     </AssociationSetMapping>
-          <AssociationSetMapping Name="PreReqsCourses1" TypeName="Model1.PreReqsCourses1" StoreEntitySet="PreReqsCourses">
-            <EndProperty Name="Courses1">
-              <ScalarProperty Name="Id" ColumnName="RequiredCourses_Id" />
-            </EndProperty>
-            <EndProperty Name="Courses">
-              <ScalarProperty Name="Id" ColumnName="Course_Id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Model1.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Model1.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Model1.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Model1.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model1.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Model1.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model1.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Model1.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Model1.Store.sp_upgraddiagrams" />
+    <AssociationSetMapping Name="PreReqsCourses1" TypeName="Model1.PreReqsCourses1" StoreEntitySet="PreReqsCourses1">
+      <EndProperty Name="Courses">
+        <ScalarProperty Name="Id" ColumnName="Courses2_Id" />
+      </EndProperty>
+      <EndProperty Name="Courses1">
+        <ScalarProperty Name="Id" ColumnName="Courses1_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
