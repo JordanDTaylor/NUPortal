@@ -21,6 +21,7 @@
         <EntityTypeShape EntityType="Model1.PhoneNumber" Width="1.5" PointX="7.5" PointY="2.625" />
         <AssociationConnector Association="Model1.PersonPhoneNumber" />
         <AssociationConnector Association="Model1.PersonPhoneNumber1" />
+        <AssociationConnector Association="Model1.FK_QuartersYears" />
       </Diagram>
       <Diagram DiagramId="efcea5f1eb0d4572ba01e6f9e21401c3" Name="Schedule" ZoomLevel="105" >
         <EntityTypeShape EntityType="Model1.SheduledEvent" Width="1.5" PointX="5" PointY="2.625" />
@@ -42,23 +43,55 @@
         <EntityTypeShape EntityType="Model1.PreReqs" Width="1.5" PointX="0.625" PointY="1.875" />
         <AssociationConnector Association="Model1.PreReqsCourses" />
         <AssociationConnector Association="Model1.PreReqsCourses1" />
+        <AssociationConnector Association="Model1.FK_QuartersYears" />
       </Diagram>
-      <Diagram DiagramId="8b44eeac3c5349b19066793f008a0af0" Name="Contact" ZoomLevel="103" >
-        <EntityTypeShape EntityType="Model1.Person" PointX="10.875" PointY="0.75" Width="1.5" />
-        <EntityTypeShape EntityType="Model1.TeachingAssistant" Width="1.5" PointX="11" PointY="4.875" IsExpanded="false" />
+      <Diagram DiagramId="8b44eeac3c5349b19066793f008a0af0" Name="Contact" ZoomLevel="187" >
+        <EntityTypeShape EntityType="Model1.Person" PointX="13.5" PointY="1.875" Width="1.5" />
+        <EntityTypeShape EntityType="Model1.TeachingAssistant" Width="1.5" PointX="20.5" PointY="6.125" IsExpanded="false" />
         <InheritanceConnector EntityType="Model1.TeachingAssistant" />
-        <EntityTypeShape EntityType="Model1.Instructor" Width="1.5" PointX="12.75" PointY="4.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="Model1.Instructor" Width="1.5" PointX="22.75" PointY="6.125" IsExpanded="false" />
         <InheritanceConnector EntityType="Model1.Instructor" />
-        <EntityTypeShape EntityType="Model1.Address" Width="1.5" PointX="13.125" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model1.PhoneNumber" Width="1.5" PointX="8.375" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Address" Width="1.5" PointX="13.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.PhoneNumber" Width="1.5" PointX="13.5" PointY="12" IsExpanded="true" />
         <AssociationConnector Association="Model1.PersonPhoneNumber" />
         <AssociationConnector Association="Model1.PersonPhoneNumber1" />
-        <EntityTypeShape EntityType="Model1.Emails" Width="1.5" PointX="8.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.Emails" Width="1.5" PointX="13.5" PointY="6.125" IsExpanded="true" />
         <AssociationConnector Association="Model1.PersonEntity1" />
         <AssociationConnector Association="Model1.PersonEmails" />
-        <EntityTypeShape EntityType="Model1.EmergencyContact" Width="1.375" PointX="9.375" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model1.EmergencyContact" Width="1.375" PointX="11.375" PointY="6.125" IsExpanded="true" />
         <InheritanceConnector EntityType="Model1.EmergencyContact" />
         <AssociationConnector Association="Model1.PersonAddress" />
+        <EntityTypeShape EntityType="Model1.AttemptedCours" Width="1.5" PointX="15.75" PointY="15.5" />
+        <EntityTypeShape EntityType="Model1.Building" Width="1.5" PointX="18" PointY="10.125" />
+        <EntityTypeShape EntityType="Model1.Campu" Width="1.5" PointX="15.75" PointY="11.875" />
+        <EntityTypeShape EntityType="Model1.Cohort" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="Model1.CourseCategory" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="Model1.CourseCode" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="Model1.Degree" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="Model1.DegreeTrack" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="Model1.EnrolledStudent" Width="1.5" PointX="18" PointY="7" />
+        <EntityTypeShape EntityType="Model1.Instructor1" Width="1.5" PointX="13.5" PointY="18.5" />
+        <EntityTypeShape EntityType="Model1.PlannedCours" Width="1.5" PointX="5.25" PointY="6.75" />
+        <EntityTypeShape EntityType="Model1.RegisteredCours" Width="1.5" PointX="7.75" PointY="2" />
+        <EntityTypeShape EntityType="Model1.Student" Width="1.5" PointX="13.5" PointY="15.75" />
+        <EntityTypeShape EntityType="Model1.sysdiagram" Width="1.5" PointX="7.75" PointY="5" />
+        <AssociationConnector Association="Model1.FK_Building_Addresses" />
+        <AssociationConnector Association="Model1.FK_Campus_Addresses" />
+        <AssociationConnector Association="Model1.FK_AttemptedCourses_Students" />
+        <AssociationConnector Association="Model1.FK_Building_Campus" />
+        <AssociationConnector Association="Model1.FK_EnrolledStudents_Campus" />
+        <AssociationConnector Association="Model1.FK_DegreeTrack_Cohort" />
+        <AssociationConnector Association="Model1.FK_EnrolledStudents_Cohort" />
+        <AssociationConnector Association="Model1.FK_PlannedCourses_CourseCode" />
+        <AssociationConnector Association="Model1.FK_DegreeTrack_Degree" />
+        <AssociationConnector Association="Model1.FK_EnrolledStudents_Students" />
+        <AssociationConnector Association="Model1.FK_Instructor_inherits_Person" />
+        <AssociationConnector Association="Model1.FK_Students_People" />
+        <AssociationConnector Association="Model1.CategoryCodes" />
+        <AssociationConnector Association="Model1.ElectiveCategories" />
+        <AssociationConnector Association="Model1.PeoplesEmails" />
+        <AssociationConnector Association="Model1.PreReqs1" />
+        <AssociationConnector Association="Model1.DegreeTrackCourses" />
       </Diagram>
       <Diagram DiagramId="66a0b0ba72dc4a328825570dda157835" Name="Financial" />
       <Diagram DiagramId="85fb31ed143b44a3b41723c165ec4aa3" Name="Degree" />
