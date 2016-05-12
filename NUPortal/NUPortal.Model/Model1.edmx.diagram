@@ -45,7 +45,7 @@
         <AssociationConnector Association="Model1.PreReqsCourses1" />
         <AssociationConnector Association="Model1.FK_QuartersYears" />
       </Diagram>
-      <Diagram DiagramId="8b44eeac3c5349b19066793f008a0af0" Name="Contact" ZoomLevel="187" >
+      <Diagram DiagramId="8b44eeac3c5349b19066793f008a0af0" Name="Contact" ZoomLevel="68" >
         <EntityTypeShape EntityType="Model1.Person" PointX="13.5" PointY="1.875" Width="1.5" />
         <EntityTypeShape EntityType="Model1.TeachingAssistant" Width="1.5" PointX="20.5" PointY="6.125" IsExpanded="false" />
         <InheritanceConnector EntityType="Model1.TeachingAssistant" />
@@ -92,6 +92,8 @@
         <AssociationConnector Association="Model1.PeoplesEmails" />
         <AssociationConnector Association="Model1.PreReqs1" />
         <AssociationConnector Association="Model1.DegreeTrackCourses" />
+        <EntityTypeShape EntityType="Model1.Transaction" Width="1.5" PointX="15.75" PointY="18.625" />
+        <AssociationConnector Association="Model1.FK_Transactions_Students" />
       </Diagram>
       <Diagram DiagramId="66a0b0ba72dc4a328825570dda157835" Name="Financial" />
       <Diagram DiagramId="85fb31ed143b44a3b41723c165ec4aa3" Name="Degree" />

@@ -296,6 +296,16 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           <Property Name="TeachingAssistants_Id" Type="int" Nullable="false" />
           <Property Name="SheduledEvents_Id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
         <EntityType Name="Years">
           <Key>
             <PropertyRef Name="Year" />
@@ -848,6 +858,18 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Transactions_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -913,6 +935,7 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TASheduledEvent" EntityType="Self.TASheduledEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Years" EntityType="Self.Years" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DegreeTrackCourses" EntityType="Self.DegreeTrackCourses" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1099,6 +1122,10 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           <AssociationSet Name="FK_TeachingAssistant_inherits_Person" Association="Self.FK_TeachingAssistant_inherits_Person">
             <End Role="People" EntitySet="People" />
             <End Role="People_TeachingAssistant" EntitySet="People_TeachingAssistant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Students" Association="Self.FK_Transactions_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Transactions" EntitySet="Transactions" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1347,6 +1374,11 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams1" />
+          <EntitySet Name="Transactions" EntityType="Model1.Transaction" />
+          <AssociationSet Name="FK_Transactions_Students" Association="Model1.FK_Transactions_Students">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="SheduledEvent">
           <Key>
@@ -1757,6 +1789,7 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           <NavigationProperty Name="AttemptedCourses" Relationship="Model1.FK_AttemptedCourses_Students" FromRole="Student" ToRole="AttemptedCours" />
           <NavigationProperty Name="EnrolledStudents" Relationship="Model1.FK_EnrolledStudents_Students" FromRole="Student" ToRole="EnrolledStudent" />
           <NavigationProperty Name="Person" Relationship="Model1.FK_Students_People" FromRole="Student" ToRole="Person" />
+          <NavigationProperty Name="Transactions" Relationship="Model1.FK_Transactions_Students" FromRole="Student" ToRole="Transaction" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -2021,6 +2054,29 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Student" Relationship="Model1.FK_Transactions_Students" FromRole="Transaction" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_Transactions_Students">
+          <End Type="Model1.Student" Role="Student" Multiplicity="1" />
+          <End Type="Model1.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2379,6 +2435,17 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram1" FunctionName="Model1.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="Model1.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="Model1.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
