@@ -52,48 +52,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="AcademicYear.cs" />
+    <Compile Include="Addresses.cs" />
+    <Compile Include="AttemptedCourses.cs" />
+    <Compile Include="AwardLetter.cs" />
+    <Compile Include="Building.cs" />
+    <Compile Include="Campus.cs" />
+    <Compile Include="Cohort.cs" />
+    <Compile Include="CourseCategory.cs" />
+    <Compile Include="CourseCode.cs" />
+    <Compile Include="Courses.cs" />
+    <Compile Include="Degree.cs" />
+    <Compile Include="DegreeTrack.cs" />
+    <Compile Include="Emails.cs" />
+    <Compile Include="EnrolledStudents.cs" />
+    <Compile Include="Instructors.cs" />
+    <Compile Include="NuPortalModel.cs" />
+    <Compile Include="OtherLoanType.cs" />
+    <Compile Include="People.cs" />
+    <Compile Include="PhoneNumbers.cs" />
+    <Compile Include="PlannedCourses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Compile Include="Quarters.cs" />
+    <Compile Include="RegisteredCourses.cs" />
+    <Compile Include="Rooms.cs" />
+    <Compile Include="SheduledEvents.cs" />
+    <Compile Include="Sprints.cs" />
+    <Compile Include="Staff.cs" />
+    <Compile Include="Students.cs" />
+    <Compile Include="sysdiagrams.cs" />
+    <Compile Include="TeachingAssistant.cs" />
+    <Compile Include="Transactions.cs" />
+    <Compile Include="Years.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model1.edmx.sql" />
-    <Content Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
