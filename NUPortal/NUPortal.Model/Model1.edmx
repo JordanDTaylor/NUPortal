@@ -16,16 +16,6 @@
           <Property Name="State" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PostalCode" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <EntityType Name="AttemptedCourses">
-          <Key>
-            <PropertyRef Name="StudentId" />
-            <PropertyRef Name="ScheduledEventId" />
-          </Key>
-          <Property Name="StudentId" Type="int" Nullable="false" />
-          <Property Name="ScheduledEventId" Type="int" Nullable="false" />
-          <Property Name="Passed" Type="bit" />
-          <Property Name="GradePercent" Type="float" Nullable="false" />
-        </EntityType>
         <EntityType Name="Building">
           <Key>
             <PropertyRef Name="Id" />
@@ -42,6 +32,217 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Address" Type="int" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Emails">
+          <Key>
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Email" Type="nvarchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Test.Contact.EmergencyContact' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EmergencyContact">
+          <Key>
+            <PropertyRef Name="ContactFor" />
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="ContactFor" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EnrolledStudents">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="EnrolledCampus" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="EnrolledCampus" Type="int" Nullable="false" />
+          <Property Name="CohortId" Type="int" />
+          <Property Name="CurrentlyEnrolled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Instructors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MiddelName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PrimaryPhone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PrimaryEmail" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="SocialSecurity" Type="nvarchar" MaxLength="9" />
+        </EntityType>
+        <EntityType Name="PeoplesEmails">
+          <Key>
+            <PropertyRef Name="Person_Id" />
+            <PropertyRef Name="Emails_Email" />
+          </Key>
+          <Property Name="Person_Id" Type="int" Nullable="false" />
+          <Property Name="Emails_Email" Type="nvarchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonAddress">
+          <Key>
+            <PropertyRef Name="People_Id" />
+            <PropertyRef Name="Addresses_Id" />
+          </Key>
+          <Property Name="People_Id" Type="int" Nullable="false" />
+          <Property Name="Addresses_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonPhoneNumber">
+          <Key>
+            <PropertyRef Name="People_Id" />
+            <PropertyRef Name="PhoneNumbers_Number" />
+          </Key>
+          <Property Name="People_Id" Type="int" Nullable="false" />
+          <Property Name="PhoneNumbers_Number" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhoneNumbers">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="SupportsSMS" Type="bit" Nullable="false" />
+          <Property Name="IsFax" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rooms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nchar" MaxLength="10" />
+          <Property Name="BuildingId" Type="int" />
+          <Property Name="Capacity" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Office" Type="int" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="FinancialAdvisor" Type="int" />
+          <Property Name="Advocate" Type="int" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeachingAssistant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Degree">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DegreeTrack">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DegreeId" Type="nvarchar" MaxLength="6" />
+          <Property Name="CohortId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Test.Degree.DegreeTrackCourses' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DegreeTrackCourses">
+          <Key>
+            <PropertyRef Name="DegreeTackId" />
+            <PropertyRef Name="CourseCode" />
+          </Key>
+          <Property Name="DegreeTackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AcademicYear">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="StartQuarter" Type="int" Nullable="false" />
+          <Property Name="EndQuarter" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AwardLetter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="AcademicYearId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="DateIssued" Type="datetime" Nullable="false" />
+          <Property Name="Tuition_Fees" Type="money" Nullable="false" />
+          <Property Name="Books_Supplies" Type="money" Nullable="false" />
+          <Property Name="Housing" Type="money" Nullable="false" />
+          <Property Name="LivingExpensesQ1" Type="money" Nullable="false" />
+          <Property Name="LivingExpensesQ2" Type="money" Nullable="false" />
+          <Property Name="LivingExpensesQ3" Type="money" Nullable="false" />
+          <Property Name="PreviousBalance" Type="money" Nullable="false" />
+          <Property Name="PellGrant" Type="money" Nullable="false" />
+          <Property Name="SEO_Grant" Type="money" Nullable="false" />
+          <Property Name="VA_Benefits" Type="money" Nullable="false" />
+          <Property Name="VA_YellowRibonMatch" Type="money" Nullable="false" />
+          <Property Name="PresidentialScholarship" Type="money" Nullable="false" />
+          <Property Name="AccessGrant" Type="money" Nullable="false" />
+          <Property Name="TransferScholarship" Type="money" Nullable="false" />
+          <Property Name="ResidentGrant" Type="money" Nullable="false" />
+          <Property Name="OutsideScholarship" Type="money" Nullable="false" />
+          <Property Name="PersonalFamilyContributions" Type="money" Nullable="false" />
+          <Property Name="FederalSubsidizedLoan" Type="money" Nullable="false" />
+          <Property Name="FederalUnsubsidizedLoan" Type="money" Nullable="false" />
+          <Property Name="Federal_PLUS_Loan" Type="money" Nullable="false" />
+          <Property Name="OtherLoan" Type="money" Nullable="false" />
+          <Property Name="OtherLoanType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PreviousOtherLoanBalance" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OtherLoanType">
+          <Key>
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Qualifies1098" Type="bit" Nullable="false" />
+          <Property Name="Scholarship_Grant" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AttemptedCourses">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="ScheduledEventId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="ScheduledEventId" Type="int" Nullable="false" />
+          <Property Name="Passed" Type="bit" />
+          <Property Name="GradePercent" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="CategoryCodes">
           <Key>
@@ -81,31 +282,6 @@
           <Property Name="Credits" Type="smallint" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <EntityType Name="Degree">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="6" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="DegreeTrack">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="DegreeId" Type="nvarchar" MaxLength="6" />
-          <Property Name="CohortId" Type="int" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="DegreeTrackCourses">
-          <Key>
-            <PropertyRef Name="DegreeTackId" />
-            <PropertyRef Name="CourseCode" />
-          </Key>
-          <Property Name="DegreeTackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CourseCode" Type="nvarchar" MaxLength="8" Nullable="false" />
-        </EntityType>
         <EntityType Name="ElectiveCategories">
           <Key>
             <PropertyRef Name="ElectiveCourseId" />
@@ -113,86 +289,6 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           </Key>
           <Property Name="ElectiveCourseId" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="CourseId" Type="nvarchar" MaxLength="8" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Emails">
-          <Key>
-            <PropertyRef Name="Email" />
-          </Key>
-          <Property Name="Email" Type="nvarchar" MaxLength="60" Nullable="false" />
-        </EntityType>
-        <EntityType Name="EnrolledStudents">
-          <Key>
-            <PropertyRef Name="StudentId" />
-            <PropertyRef Name="EnrolledCampus" />
-          </Key>
-          <Property Name="StudentId" Type="int" Nullable="false" />
-          <Property Name="EnrolledCampus" Type="int" Nullable="false" />
-          <Property Name="CohortId" Type="int" />
-          <Property Name="CurrentlyEnrolled" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Instructors">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="People">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MiddelName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PrimaryPhone" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="PrimaryEmail" Type="nvarchar" MaxLength="60" Nullable="false" />
-          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="People_EmergencyContact">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="ContactFor" Type="int" Nullable="false" />
-          <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="People_TeachingAssistant">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PeoplesEmails">
-          <Key>
-            <PropertyRef Name="Person_Id" />
-            <PropertyRef Name="Emails_Email" />
-          </Key>
-          <Property Name="Person_Id" Type="int" Nullable="false" />
-          <Property Name="Emails_Email" Type="nvarchar" MaxLength="60" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PersonAddress">
-          <Key>
-            <PropertyRef Name="People_Id" />
-            <PropertyRef Name="Addresses_Id" />
-          </Key>
-          <Property Name="People_Id" Type="int" Nullable="false" />
-          <Property Name="Addresses_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PersonPhoneNumber">
-          <Key>
-            <PropertyRef Name="People_Id" />
-            <PropertyRef Name="PhoneNumbers_Number" />
-          </Key>
-          <Property Name="People_Id" Type="int" Nullable="false" />
-          <Property Name="PhoneNumbers_Number" Type="nvarchar" MaxLength="20" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PhoneNumbers">
-          <Key>
-            <PropertyRef Name="Number" />
-          </Key>
-          <Property Name="Number" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="SupportsSMS" Type="bit" Nullable="false" />
-          <Property Name="IsFax" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="PlannedCourses">
           <Key>
@@ -216,7 +312,7 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Label" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Year" Type="int" Nullable="false" />
           <Property Name="Sprint1" Type="int" Nullable="false" />
           <Property Name="Sprint2" Type="int" Nullable="false" />
@@ -228,15 +324,6 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           </Key>
           <Property Name="StudentId" Type="int" Nullable="false" />
           <Property Name="ScheduledCourse" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Rooms">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Number" Type="nchar" MaxLength="10" />
-          <Property Name="BuildingId" Type="int" />
-          <Property Name="Capacity" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="ScheduledInstructor">
           <Key>
@@ -264,6 +351,14 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           <Property Name="IsRegisterable" Type="bit" Nullable="false" />
           <Property Name="Course_Id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="SheduledTA">
+          <Key>
+            <PropertyRef Name="TeachingAssistants_Id" />
+            <PropertyRef Name="SheduledEvents_Id" />
+          </Key>
+          <Property Name="TeachingAssistants_Id" Type="int" Nullable="false" />
+          <Property Name="SheduledEvents_Id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Sprints">
           <Key>
             <PropertyRef Name="Id" />
@@ -272,46 +367,36 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           <Property Name="StartDate" Type="datetime" Nullable="false" />
           <Property Name="EndDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="Students">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <EntityType Name="TASheduledEvent">
-          <Key>
-            <PropertyRef Name="TeachingAssistants_Id" />
-            <PropertyRef Name="SheduledEvents_Id" />
-          </Key>
-          <Property Name="TeachingAssistants_Id" Type="int" Nullable="false" />
-          <Property Name="SheduledEvents_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Transactions">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Amount" Type="money" Nullable="false" />
-          <Property Name="StudentId" Type="int" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-        </EntityType>
         <EntityType Name="Years">
           <Key>
             <PropertyRef Name="Year" />
           </Key>
           <Property Name="Year" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AcademicYear_Quarters">
+          <End Role="Quarters" Type="Self.Quarters" Multiplicity="1" />
+          <End Role="AcademicYear" Type="Self.AcademicYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quarters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicYear">
+              <PropertyRef Name="StartQuarter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicYear_Quarters1">
+          <End Role="Quarters" Type="Self.Quarters" Multiplicity="1" />
+          <End Role="AcademicYear" Type="Self.AcademicYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quarters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicYear">
+              <PropertyRef Name="EndQuarter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AttemptedCourses_SheduledEvents">
           <End Role="SheduledEvents" Type="Self.SheduledEvents" Multiplicity="1" />
           <End Role="AttemptedCourses" Type="Self.AttemptedCourses" Multiplicity="*" />
@@ -333,6 +418,30 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
             </Principal>
             <Dependent Role="AttemptedCourses">
               <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AwardLetter_AcademicYear">
+          <End Role="AcademicYear" Type="Self.AcademicYear" Multiplicity="1" />
+          <End Role="AwardLetter" Type="Self.AwardLetter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicYear">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AwardLetter">
+              <PropertyRef Name="AcademicYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AwardLetter_OtherLoanType">
+          <End Role="OtherLoanType" Type="Self.OtherLoanType" Multiplicity="1" />
+          <End Role="AwardLetter" Type="Self.AwardLetter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OtherLoanType">
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="AwardLetter">
+              <PropertyRef Name="OtherLoanType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -492,17 +601,27 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EmergencyContact_inherits_Person">
-          <End Role="People" Type="Self.People" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="People_EmergencyContact" Type="Self.People_EmergencyContact" Multiplicity="0..1" />
+        <Association Name="FK_EmergencyContact_People">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="EmergencyContact" Type="Self.EmergencyContact" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="People">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="People_EmergencyContact">
+            <Dependent Role="EmergencyContact">
+              <PropertyRef Name="ContactFor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmergencyContact_People1">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="EmergencyContact" Type="Self.EmergencyContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
               <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmergencyContact">
+              <PropertyRef Name="PersonId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -808,6 +927,30 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Staff_People">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Rooms">
+          <End Role="Rooms" Type="Self.Rooms" Multiplicity="0..1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rooms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Office" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Students_People">
           <End Role="People" Type="Self.People" Multiplicity="1" />
           <End Role="Students" Type="Self.Students" Multiplicity="0..1" />
@@ -820,40 +963,62 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Students_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="FinancialAdvisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Staff1">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="Advocate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TASheduledEvent_SheduledEvent">
           <End Role="SheduledEvents" Type="Self.SheduledEvents" Multiplicity="1" />
-          <End Role="TASheduledEvent" Type="Self.TASheduledEvent" Multiplicity="*" />
+          <End Role="SheduledTA" Type="Self.SheduledTA" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SheduledEvents">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="TASheduledEvent">
+            <Dependent Role="SheduledTA">
               <PropertyRef Name="SheduledEvents_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TASheduledEvent_TA">
-          <End Role="People_TeachingAssistant" Type="Self.People_TeachingAssistant" Multiplicity="1" />
-          <End Role="TASheduledEvent" Type="Self.TASheduledEvent" Multiplicity="*" />
+          <End Role="TeachingAssistant" Type="Self.TeachingAssistant" Multiplicity="1" />
+          <End Role="SheduledTA" Type="Self.SheduledTA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="People_TeachingAssistant">
+            <Principal Role="TeachingAssistant">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="TASheduledEvent">
+            <Dependent Role="SheduledTA">
               <PropertyRef Name="TeachingAssistants_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TeachingAssistant_inherits_Person">
-          <End Role="People" Type="Self.People" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="People_TeachingAssistant" Type="Self.People_TeachingAssistant" Multiplicity="0..1" />
+        <Association Name="FK_TeachingAssistant_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="TeachingAssistant" Type="Self.TeachingAssistant" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="People">
+            <Principal Role="Staff">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="People_TeachingAssistant">
+            <Dependent Role="TeachingAssistant">
               <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -902,47 +1067,64 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Model1StoreContainer">
-          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AttemptedCourses" EntityType="Self.AttemptedCourses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Building" EntityType="Self.Building" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Campus" EntityType="Self.Campus" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CategoryCodes" EntityType="Self.CategoryCodes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Cohort" EntityType="Self.Cohort" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CourseCategory" EntityType="Self.CourseCategory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CourseCode" EntityType="Self.CourseCode" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Degree" EntityType="Self.Degree" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DegreeTrack" EntityType="Self.DegreeTrack" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ElectiveCategories" EntityType="Self.ElectiveCategories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Emails" EntityType="Self.Emails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EnrolledStudents" EntityType="Self.EnrolledStudents" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Instructors" EntityType="Self.Instructors" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="People_EmergencyContact" EntityType="Self.People_EmergencyContact" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="People_TeachingAssistant" EntityType="Self.People_TeachingAssistant" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PeoplesEmails" EntityType="Self.PeoplesEmails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PersonAddress" EntityType="Self.PersonAddress" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PersonPhoneNumber" EntityType="Self.PersonPhoneNumber" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PhoneNumbers" EntityType="Self.PhoneNumbers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PlannedCourses" EntityType="Self.PlannedCourses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PreReqs" EntityType="Self.PreReqs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Quarters" EntityType="Self.Quarters" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RegisteredCourses" EntityType="Self.RegisteredCourses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ScheduledInstructor" EntityType="Self.ScheduledInstructor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SheduledEvents" EntityType="Self.SheduledEvents" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sprints" EntityType="Self.Sprints" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="Building" EntityType="Self.Building" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="Campus" EntityType="Self.Campus" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="Emails" EntityType="Self.Emails" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="EnrolledStudents" EntityType="Self.EnrolledStudents" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="Instructors" EntityType="Self.Instructors" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="People" EntityType="Self.People" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="PeoplesEmails" EntityType="Self.PeoplesEmails" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="PersonAddress" EntityType="Self.PersonAddress" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="PersonPhoneNumber" EntityType="Self.PersonPhoneNumber" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="PhoneNumbers" EntityType="Self.PhoneNumbers" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="Rooms" EntityType="Self.Rooms" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="Contact" store:Type="Tables" />
+          <EntitySet Name="TeachingAssistant" EntityType="Self.TeachingAssistant" Schema="Contact" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TASheduledEvent" EntityType="Self.TASheduledEvent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Years" EntityType="Self.Years" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DegreeTrackCourses" EntityType="Self.DegreeTrackCourses" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="Degree" EntityType="Self.Degree" Schema="Degree" store:Type="Tables" />
+          <EntitySet Name="DegreeTrack" EntityType="Self.DegreeTrack" Schema="Degree" store:Type="Tables" />
+          <EntitySet Name="AcademicYear" EntityType="Self.AcademicYear" Schema="Financial" store:Type="Tables" />
+          <EntitySet Name="AwardLetter" EntityType="Self.AwardLetter" Schema="Financial" store:Type="Tables" />
+          <EntitySet Name="OtherLoanType" EntityType="Self.OtherLoanType" Schema="Financial" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="Financial" store:Type="Tables" />
+          <EntitySet Name="AttemptedCourses" EntityType="Self.AttemptedCourses" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="CategoryCodes" EntityType="Self.CategoryCodes" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="Cohort" EntityType="Self.Cohort" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="CourseCategory" EntityType="Self.CourseCategory" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="CourseCode" EntityType="Self.CourseCode" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="ElectiveCategories" EntityType="Self.ElectiveCategories" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="PlannedCourses" EntityType="Self.PlannedCourses" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="PreReqs" EntityType="Self.PreReqs" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="Quarters" EntityType="Self.Quarters" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="RegisteredCourses" EntityType="Self.RegisteredCourses" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="ScheduledInstructor" EntityType="Self.ScheduledInstructor" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="SheduledEvents" EntityType="Self.SheduledEvents" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="SheduledTA" EntityType="Self.SheduledTA" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="Sprints" EntityType="Self.Sprints" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="Years" EntityType="Self.Years" Schema="Schedule" store:Type="Tables" />
+          <EntitySet Name="EmergencyContact" EntityType="Self.EmergencyContact" store:Type="Tables" store:Schema="Contact">
+            <DefiningQuery>SELECT 
+    [EmergencyContact].[ContactFor] AS [ContactFor], 
+    [EmergencyContact].[PersonId] AS [PersonId]
+    FROM [Contact].[EmergencyContact] AS [EmergencyContact]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DegreeTrackCourses" EntityType="Self.DegreeTrackCourses" store:Type="Tables" store:Schema="Degree">
             <DefiningQuery>SELECT 
     [DegreeTrackCourses].[DegreeTackId] AS [DegreeTackId], 
     [DegreeTrackCourses].[CourseCode] AS [CourseCode]
-    FROM [dbo].[DegreeTrackCourses] AS [DegreeTrackCourses]</DefiningQuery>
+    FROM [Degree].[DegreeTrackCourses] AS [DegreeTrackCourses]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_AcademicYear_Quarters" Association="Self.FK_AcademicYear_Quarters">
+            <End Role="Quarters" EntitySet="Quarters" />
+            <End Role="AcademicYear" EntitySet="AcademicYear" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicYear_Quarters1" Association="Self.FK_AcademicYear_Quarters1">
+            <End Role="Quarters" EntitySet="Quarters" />
+            <End Role="AcademicYear" EntitySet="AcademicYear" />
+          </AssociationSet>
           <AssociationSet Name="FK_AttemptedCourses_SheduledEvents" Association="Self.FK_AttemptedCourses_SheduledEvents">
             <End Role="SheduledEvents" EntitySet="SheduledEvents" />
             <End Role="AttemptedCourses" EntitySet="AttemptedCourses" />
@@ -950,6 +1132,14 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           <AssociationSet Name="FK_AttemptedCourses_Students" Association="Self.FK_AttemptedCourses_Students">
             <End Role="Students" EntitySet="Students" />
             <End Role="AttemptedCourses" EntitySet="AttemptedCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AwardLetter_AcademicYear" Association="Self.FK_AwardLetter_AcademicYear">
+            <End Role="AcademicYear" EntitySet="AcademicYear" />
+            <End Role="AwardLetter" EntitySet="AwardLetter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AwardLetter_OtherLoanType" Association="Self.FK_AwardLetter_OtherLoanType">
+            <End Role="OtherLoanType" EntitySet="OtherLoanType" />
+            <End Role="AwardLetter" EntitySet="AwardLetter" />
           </AssociationSet>
           <AssociationSet Name="FK_Building_Addresses" Association="Self.FK_Building_Addresses">
             <End Role="Addresses" EntitySet="Addresses" />
@@ -1003,9 +1193,13 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
             <End Role="CourseCode" EntitySet="CourseCode" />
             <End Role="ElectiveCategories" EntitySet="ElectiveCategories" />
           </AssociationSet>
-          <AssociationSet Name="FK_EmergencyContact_inherits_Person" Association="Self.FK_EmergencyContact_inherits_Person">
+          <AssociationSet Name="FK_EmergencyContact_People" Association="Self.FK_EmergencyContact_People">
             <End Role="People" EntitySet="People" />
-            <End Role="People_EmergencyContact" EntitySet="People_EmergencyContact" />
+            <End Role="EmergencyContact" EntitySet="EmergencyContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmergencyContact_People1" Association="Self.FK_EmergencyContact_People1">
+            <End Role="People" EntitySet="People" />
+            <End Role="EmergencyContact" EntitySet="EmergencyContact" />
           </AssociationSet>
           <AssociationSet Name="FK_EnrolledStudents_Campus" Association="Self.FK_EnrolledStudents_Campus">
             <End Role="Campus" EntitySet="Campus" />
@@ -1107,21 +1301,37 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
             <End Role="Sprints" EntitySet="Sprints" />
             <End Role="Quarters" EntitySet="Quarters" />
           </AssociationSet>
+          <AssociationSet Name="FK_Staff_People" Association="Self.FK_Staff_People">
+            <End Role="People" EntitySet="People" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Rooms" Association="Self.FK_Staff_Rooms">
+            <End Role="Rooms" EntitySet="Rooms" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
           <AssociationSet Name="FK_Students_People" Association="Self.FK_Students_People">
             <End Role="People" EntitySet="People" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
+          <AssociationSet Name="FK_Students_Staff" Association="Self.FK_Students_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Staff1" Association="Self.FK_Students_Staff1">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
           <AssociationSet Name="FK_TASheduledEvent_SheduledEvent" Association="Self.FK_TASheduledEvent_SheduledEvent">
             <End Role="SheduledEvents" EntitySet="SheduledEvents" />
-            <End Role="TASheduledEvent" EntitySet="TASheduledEvent" />
+            <End Role="SheduledTA" EntitySet="SheduledTA" />
           </AssociationSet>
           <AssociationSet Name="FK_TASheduledEvent_TA" Association="Self.FK_TASheduledEvent_TA">
-            <End Role="People_TeachingAssistant" EntitySet="People_TeachingAssistant" />
-            <End Role="TASheduledEvent" EntitySet="TASheduledEvent" />
+            <End Role="TeachingAssistant" EntitySet="TeachingAssistant" />
+            <End Role="SheduledTA" EntitySet="SheduledTA" />
           </AssociationSet>
-          <AssociationSet Name="FK_TeachingAssistant_inherits_Person" Association="Self.FK_TeachingAssistant_inherits_Person">
-            <End Role="People" EntitySet="People" />
-            <End Role="People_TeachingAssistant" EntitySet="People_TeachingAssistant" />
+          <AssociationSet Name="FK_TeachingAssistant_Staff" Association="Self.FK_TeachingAssistant_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="TeachingAssistant" EntitySet="TeachingAssistant" />
           </AssociationSet>
           <AssociationSet Name="FK_Transactions_Students" Association="Self.FK_Transactions_Students">
             <End Role="Students" EntitySet="Students" />
@@ -1378,6 +1588,215 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           <AssociationSet Name="FK_Transactions_Students" Association="Model1.FK_Transactions_Students">
             <End Role="Student" EntitySet="Students" />
             <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <EntitySet Name="Address1" EntityType="Model1.Address1" />
+          <EntitySet Name="Building1" EntityType="Model1.Building1" />
+          <EntitySet Name="Campu1" EntityType="Model1.Campu1" />
+          <EntitySet Name="Emails1" EntityType="Model1.Email" />
+          <EntitySet Name="EnrolledStudent1" EntityType="Model1.EnrolledStudent1" />
+          <EntitySet Name="Instructor2" EntityType="Model1.Instructor2" />
+          <EntitySet Name="Person1" EntityType="Model1.Person1" />
+          <EntitySet Name="PhoneNumber1" EntityType="Model1.PhoneNumber1" />
+          <EntitySet Name="Room1" EntityType="Model1.Room1" />
+          <EntitySet Name="Staffs" EntityType="Model1.Staff" />
+          <EntitySet Name="Student1" EntityType="Model1.Student1" />
+          <EntitySet Name="TeachingAssistant1" EntityType="Model1.TeachingAssistant1" />
+          <EntitySet Name="Degree1" EntityType="Model1.Degree1" />
+          <EntitySet Name="DegreeTrack1" EntityType="Model1.DegreeTrack1" />
+          <EntitySet Name="AcademicYears" EntityType="Model1.AcademicYear" />
+          <EntitySet Name="AwardLetters" EntityType="Model1.AwardLetter" />
+          <EntitySet Name="OtherLoanTypes" EntityType="Model1.OtherLoanType" />
+          <EntitySet Name="Transaction1" EntityType="Model1.Transaction1" />
+          <EntitySet Name="AttemptedCours1" EntityType="Model1.AttemptedCours1" />
+          <EntitySet Name="Cohort1" EntityType="Model1.Cohort1" />
+          <EntitySet Name="CourseCategory1" EntityType="Model1.CourseCategory1" />
+          <EntitySet Name="CourseCode1" EntityType="Model1.CourseCode1" />
+          <EntitySet Name="Courses1" EntityType="Model1.Cours" />
+          <EntitySet Name="PlannedCours1" EntityType="Model1.PlannedCours1" />
+          <EntitySet Name="Quarters1" EntityType="Model1.Quarter" />
+          <EntitySet Name="RegisteredCours1" EntityType="Model1.RegisteredCours1" />
+          <EntitySet Name="SheduledEvent1" EntityType="Model1.SheduledEvent1" />
+          <EntitySet Name="Sprint1" EntityType="Model1.Sprint1" />
+          <EntitySet Name="Years1" EntityType="Model1.Year" />
+          <AssociationSet Name="FK_Building_Addresses1" Association="Model1.FK_Building_Addresses1">
+            <End Role="Address1" EntitySet="Address1" />
+            <End Role="Building1" EntitySet="Building1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Campus_Addresses1" Association="Model1.FK_Campus_Addresses1">
+            <End Role="Address1" EntitySet="Address1" />
+            <End Role="Campu1" EntitySet="Campu1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Building_Campus1" Association="Model1.FK_Building_Campus1">
+            <End Role="Campu1" EntitySet="Campu1" />
+            <End Role="Building1" EntitySet="Building1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rooms_Building1" Association="Model1.FK_Rooms_Building1">
+            <End Role="Building1" EntitySet="Building1" />
+            <End Role="Room1" EntitySet="Room1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnrolledStudents_Campus1" Association="Model1.FK_EnrolledStudents_Campus1">
+            <End Role="Campu1" EntitySet="Campu1" />
+            <End Role="EnrolledStudent1" EntitySet="EnrolledStudent1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonEmails" Association="Model1.FK_PersonEmails">
+            <End Role="Email" EntitySet="Emails1" />
+            <End Role="Person1" EntitySet="Person1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnrolledStudents_Cohort1" Association="Model1.FK_EnrolledStudents_Cohort1">
+            <End Role="Cohort1" EntitySet="Cohort1" />
+            <End Role="EnrolledStudent1" EntitySet="EnrolledStudent1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnrolledStudents_Students1" Association="Model1.FK_EnrolledStudents_Students1">
+            <End Role="Student1" EntitySet="Student1" />
+            <End Role="EnrolledStudent1" EntitySet="EnrolledStudent1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Instructor_inherits_Person1" Association="Model1.FK_Instructor_inherits_Person1">
+            <End Role="Person1" EntitySet="Person1" />
+            <End Role="Instructor2" EntitySet="Instructor2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonPhoneNumber1" Association="Model1.FK_PersonPhoneNumber1">
+            <End Role="PhoneNumber1" EntitySet="PhoneNumber1" />
+            <End Role="Person1" EntitySet="Person1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_People" Association="Model1.FK_Staff_People">
+            <End Role="Person1" EntitySet="Person1" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_People1" Association="Model1.FK_Students_People1">
+            <End Role="Person1" EntitySet="Person1" />
+            <End Role="Student1" EntitySet="Student1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SheduledEventRoom" Association="Model1.FK_SheduledEventRoom">
+            <End Role="Room1" EntitySet="Room1" />
+            <End Role="SheduledEvent1" EntitySet="SheduledEvent1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Rooms" Association="Model1.FK_Staff_Rooms">
+            <End Role="Room1" EntitySet="Room1" />
+            <End Role="Staff" EntitySet="Staffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Staff" Association="Model1.FK_Students_Staff">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Student1" EntitySet="Student1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Staff1" Association="Model1.FK_Students_Staff1">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Student1" EntitySet="Student1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeachingAssistant_Staff" Association="Model1.FK_TeachingAssistant_Staff">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="TeachingAssistant1" EntitySet="TeachingAssistant1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttemptedCourses_Students1" Association="Model1.FK_AttemptedCourses_Students1">
+            <End Role="Student1" EntitySet="Student1" />
+            <End Role="AttemptedCours1" EntitySet="AttemptedCours1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Students1" Association="Model1.FK_Transactions_Students1">
+            <End Role="Student1" EntitySet="Student1" />
+            <End Role="Transaction1" EntitySet="Transaction1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DegreeTrack_Degree1" Association="Model1.FK_DegreeTrack_Degree1">
+            <End Role="Degree1" EntitySet="Degree1" />
+            <End Role="DegreeTrack1" EntitySet="DegreeTrack1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DegreeTrack_Cohort1" Association="Model1.FK_DegreeTrack_Cohort1">
+            <End Role="Cohort1" EntitySet="Cohort1" />
+            <End Role="DegreeTrack1" EntitySet="DegreeTrack1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicYear_Quarters" Association="Model1.FK_AcademicYear_Quarters">
+            <End Role="Quarter" EntitySet="Quarters1" />
+            <End Role="AcademicYear" EntitySet="AcademicYears" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AcademicYear_Quarters1" Association="Model1.FK_AcademicYear_Quarters1">
+            <End Role="Quarter" EntitySet="Quarters1" />
+            <End Role="AcademicYear" EntitySet="AcademicYears" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AwardLetter_AcademicYear" Association="Model1.FK_AwardLetter_AcademicYear">
+            <End Role="AcademicYear" EntitySet="AcademicYears" />
+            <End Role="AwardLetter" EntitySet="AwardLetters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AwardLetter_OtherLoanType" Association="Model1.FK_AwardLetter_OtherLoanType">
+            <End Role="OtherLoanType" EntitySet="OtherLoanTypes" />
+            <End Role="AwardLetter" EntitySet="AwardLetters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttemptedCourses_SheduledEvents1" Association="Model1.FK_AttemptedCourses_SheduledEvents1">
+            <End Role="SheduledEvent1" EntitySet="SheduledEvent1" />
+            <End Role="AttemptedCours1" EntitySet="AttemptedCours1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_CourseCode1" Association="Model1.FK_Courses_CourseCode1">
+            <End Role="CourseCode1" EntitySet="CourseCode1" />
+            <End Role="Cours" EntitySet="Courses1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlannedCourses_CourseCode1" Association="Model1.FK_PlannedCourses_CourseCode1">
+            <End Role="CourseCode1" EntitySet="CourseCode1" />
+            <End Role="PlannedCours1" EntitySet="PlannedCours1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoursesScheduledCourses" Association="Model1.FK_CoursesScheduledCourses">
+            <End Role="Cours" EntitySet="Courses1" />
+            <End Role="SheduledEvent1" EntitySet="SheduledEvent1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlannedCourses_Quarters1" Association="Model1.FK_PlannedCourses_Quarters1">
+            <End Role="Quarter" EntitySet="Quarters1" />
+            <End Role="PlannedCours1" EntitySet="PlannedCours1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuartersYears1" Association="Model1.FK_QuartersYears1">
+            <End Role="Year" EntitySet="Years1" />
+            <End Role="Quarter" EntitySet="Quarters1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SheduledEventQuarters" Association="Model1.FK_SheduledEventQuarters">
+            <End Role="Quarter" EntitySet="Quarters1" />
+            <End Role="SheduledEvent1" EntitySet="SheduledEvent1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SprintQuarters" Association="Model1.FK_SprintQuarters">
+            <End Role="Sprint1" EntitySet="Sprint1" />
+            <End Role="Quarter" EntitySet="Quarters1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SprintQuarters1" Association="Model1.FK_SprintQuarters1">
+            <End Role="Sprint1" EntitySet="Sprint1" />
+            <End Role="Quarter" EntitySet="Quarters1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegisteredCourses_SheduledEvents1" Association="Model1.FK_RegisteredCourses_SheduledEvents1">
+            <End Role="SheduledEvent1" EntitySet="SheduledEvent1" />
+            <End Role="RegisteredCours1" EntitySet="RegisteredCours1" />
+          </AssociationSet>
+          <AssociationSet Name="PeoplesEmails1" Association="Model1.PeoplesEmails1">
+            <End Role="Email" EntitySet="Emails1" />
+            <End Role="Person1" EntitySet="Person1" />
+          </AssociationSet>
+          <AssociationSet Name="PersonAddress1" Association="Model1.PersonAddress1">
+            <End Role="Address1" EntitySet="Address1" />
+            <End Role="Person1" EntitySet="Person1" />
+          </AssociationSet>
+          <AssociationSet Name="PersonPhoneNumber2" Association="Model1.PersonPhoneNumber2">
+            <End Role="Person1" EntitySet="Person1" />
+            <End Role="PhoneNumber1" EntitySet="PhoneNumber1" />
+          </AssociationSet>
+          <AssociationSet Name="CategoryCodes1" Association="Model1.CategoryCodes1">
+            <End Role="CourseCategory1" EntitySet="CourseCategory1" />
+            <End Role="CourseCode1" EntitySet="CourseCode1" />
+          </AssociationSet>
+          <AssociationSet Name="ElectiveCategories1" Association="Model1.ElectiveCategories1">
+            <End Role="CourseCode1" EntitySet="CourseCode1" />
+            <End Role="CourseCode11" EntitySet="CourseCode1" />
+          </AssociationSet>
+          <AssociationSet Name="PreReqs2" Association="Model1.PreReqs2">
+            <End Role="CourseCode1" EntitySet="CourseCode1" />
+            <End Role="CourseCode11" EntitySet="CourseCode1" />
+          </AssociationSet>
+          <AssociationSet Name="ScheduledInstructor1" Association="Model1.ScheduledInstructor1">
+            <End Role="Instructor2" EntitySet="Instructor2" />
+            <End Role="SheduledEvent1" EntitySet="SheduledEvent1" />
+          </AssociationSet>
+          <AssociationSet Name="SheduledTA" Association="Model1.SheduledTA">
+            <End Role="SheduledEvent1" EntitySet="SheduledEvent1" />
+            <End Role="TeachingAssistant1" EntitySet="TeachingAssistant1" />
+          </AssociationSet>
+          <AssociationSet Name="EmergencyContact1" Association="Model1.EmergencyContact1">
+            <End Role="Person1" EntitySet="Person1" />
+            <End Role="Person11" EntitySet="Person1" />
+          </AssociationSet>
+          <AssociationSet Name="DegreeTrackCourses1" Association="Model1.DegreeTrackCourses1">
+            <End Role="CourseCode1" EntitySet="CourseCode1" />
+            <End Role="DegreeTrack1" EntitySet="DegreeTrack1" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="SheduledEvent">
@@ -2077,282 +2496,839 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Address1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Street1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Street2" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Buildings" Relationship="Model1.FK_Building_Addresses1" FromRole="Address1" ToRole="Building1" />
+          <NavigationProperty Name="Campus" Relationship="Model1.FK_Campus_Addresses1" FromRole="Address1" ToRole="Campu1" />
+          <NavigationProperty Name="People" Relationship="Model1.PersonAddress1" FromRole="Address1" ToRole="Person1" />
+        </EntityType>
+        <EntityType Name="Building1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CampusId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Address1" Relationship="Model1.FK_Building_Addresses1" FromRole="Building1" ToRole="Address1" />
+          <NavigationProperty Name="Campu" Relationship="Model1.FK_Building_Campus1" FromRole="Building1" ToRole="Campu1" />
+          <NavigationProperty Name="Rooms" Relationship="Model1.FK_Rooms_Building1" FromRole="Building1" ToRole="Room1" />
+        </EntityType>
+        <EntityType Name="Campu1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Address1" Relationship="Model1.FK_Campus_Addresses1" FromRole="Campu1" ToRole="Address1" />
+          <NavigationProperty Name="Buildings" Relationship="Model1.FK_Building_Campus1" FromRole="Campu1" ToRole="Building1" />
+          <NavigationProperty Name="EnrolledStudents" Relationship="Model1.FK_EnrolledStudents_Campus1" FromRole="Campu1" ToRole="EnrolledStudent1" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="Email1" />
+          </Key>
+          <Property Name="Email1" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="People" Relationship="Model1.FK_PersonEmails" FromRole="Email" ToRole="Person1" />
+          <NavigationProperty Name="People1" Relationship="Model1.PeoplesEmails1" FromRole="Email" ToRole="Person1" />
+        </EntityType>
+        <EntityType Name="EnrolledStudent1">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="EnrolledCampus" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="EnrolledCampus" Type="Int32" Nullable="false" />
+          <Property Name="CohortId" Type="Int32" />
+          <Property Name="CurrentlyEnrolled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Campu" Relationship="Model1.FK_EnrolledStudents_Campus1" FromRole="EnrolledStudent1" ToRole="Campu1" />
+          <NavigationProperty Name="Cohort" Relationship="Model1.FK_EnrolledStudents_Cohort1" FromRole="EnrolledStudent1" ToRole="Cohort1" />
+          <NavigationProperty Name="Student" Relationship="Model1.FK_EnrolledStudents_Students1" FromRole="EnrolledStudent1" ToRole="Student1" />
+        </EntityType>
+        <EntityType Name="Instructor2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Model1.FK_Instructor_inherits_Person1" FromRole="Instructor2" ToRole="Person1" />
+          <NavigationProperty Name="SheduledEvents" Relationship="Model1.ScheduledInstructor1" FromRole="Instructor2" ToRole="SheduledEvent1" />
+        </EntityType>
+        <EntityType Name="Person1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddelName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrimaryPhone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PrimaryEmail" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SocialSecurity" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Email" Relationship="Model1.FK_PersonEmails" FromRole="Person1" ToRole="Email" />
+          <NavigationProperty Name="Instructor" Relationship="Model1.FK_Instructor_inherits_Person1" FromRole="Person1" ToRole="Instructor2" />
+          <NavigationProperty Name="PhoneNumber" Relationship="Model1.FK_PersonPhoneNumber1" FromRole="Person1" ToRole="PhoneNumber1" />
+          <NavigationProperty Name="Staff" Relationship="Model1.FK_Staff_People" FromRole="Person1" ToRole="Staff" />
+          <NavigationProperty Name="Student" Relationship="Model1.FK_Students_People1" FromRole="Person1" ToRole="Student1" />
+          <NavigationProperty Name="Emails" Relationship="Model1.PeoplesEmails1" FromRole="Person1" ToRole="Email" />
+          <NavigationProperty Name="Addresses" Relationship="Model1.PersonAddress1" FromRole="Person1" ToRole="Address1" />
+          <NavigationProperty Name="PhoneNumbers" Relationship="Model1.PersonPhoneNumber2" FromRole="Person1" ToRole="PhoneNumber1" />
+          <NavigationProperty Name="People1" Relationship="Model1.EmergencyContact1" FromRole="Person1" ToRole="Person11" />
+          <NavigationProperty Name="People" Relationship="Model1.EmergencyContact1" FromRole="Person11" ToRole="Person1" />
+        </EntityType>
+        <EntityType Name="PhoneNumber1">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SupportsSMS" Type="Boolean" Nullable="false" />
+          <Property Name="IsFax" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="People" Relationship="Model1.FK_PersonPhoneNumber1" FromRole="PhoneNumber1" ToRole="Person1" />
+          <NavigationProperty Name="People1" Relationship="Model1.PersonPhoneNumber2" FromRole="PhoneNumber1" ToRole="Person1" />
+        </EntityType>
+        <EntityType Name="Room1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BuildingId" Type="Int32" />
+          <Property Name="Capacity" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Building" Relationship="Model1.FK_Rooms_Building1" FromRole="Room1" ToRole="Building1" />
+          <NavigationProperty Name="SheduledEvents" Relationship="Model1.FK_SheduledEventRoom" FromRole="Room1" ToRole="SheduledEvent1" />
+          <NavigationProperty Name="Staffs" Relationship="Model1.FK_Staff_Rooms" FromRole="Room1" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Office" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Person" Relationship="Model1.FK_Staff_People" FromRole="Staff" ToRole="Person1" />
+          <NavigationProperty Name="Room" Relationship="Model1.FK_Staff_Rooms" FromRole="Staff" ToRole="Room1" />
+          <NavigationProperty Name="Students" Relationship="Model1.FK_Students_Staff" FromRole="Staff" ToRole="Student1" />
+          <NavigationProperty Name="Students1" Relationship="Model1.FK_Students_Staff1" FromRole="Staff" ToRole="Student1" />
+          <NavigationProperty Name="TeachingAssistant" Relationship="Model1.FK_TeachingAssistant_Staff" FromRole="Staff" ToRole="TeachingAssistant1" />
+        </EntityType>
+        <EntityType Name="Student1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="FinancialAdvisor" Type="Int32" />
+          <Property Name="Advocate" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EnrolledStudents" Relationship="Model1.FK_EnrolledStudents_Students1" FromRole="Student1" ToRole="EnrolledStudent1" />
+          <NavigationProperty Name="Person" Relationship="Model1.FK_Students_People1" FromRole="Student1" ToRole="Person1" />
+          <NavigationProperty Name="Staff" Relationship="Model1.FK_Students_Staff" FromRole="Student1" ToRole="Staff" />
+          <NavigationProperty Name="Staff1" Relationship="Model1.FK_Students_Staff1" FromRole="Student1" ToRole="Staff" />
+          <NavigationProperty Name="AttemptedCourses" Relationship="Model1.FK_AttemptedCourses_Students1" FromRole="Student1" ToRole="AttemptedCours1" />
+          <NavigationProperty Name="Transactions" Relationship="Model1.FK_Transactions_Students1" FromRole="Student1" ToRole="Transaction1" />
+        </EntityType>
+        <EntityType Name="TeachingAssistant1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Staff" Relationship="Model1.FK_TeachingAssistant_Staff" FromRole="TeachingAssistant1" ToRole="Staff" />
+          <NavigationProperty Name="SheduledEvents" Relationship="Model1.SheduledTA" FromRole="TeachingAssistant1" ToRole="SheduledEvent1" />
+        </EntityType>
+        <EntityType Name="Degree1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DegreeTracks" Relationship="Model1.FK_DegreeTrack_Degree1" FromRole="Degree1" ToRole="DegreeTrack1" />
+        </EntityType>
+        <EntityType Name="DegreeTrack1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DegreeId" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="CohortId" Type="Int32" />
+          <NavigationProperty Name="Degree" Relationship="Model1.FK_DegreeTrack_Degree1" FromRole="DegreeTrack1" ToRole="Degree1" />
+          <NavigationProperty Name="Cohort" Relationship="Model1.FK_DegreeTrack_Cohort1" FromRole="DegreeTrack1" ToRole="Cohort1" />
+          <NavigationProperty Name="CourseCodes" Relationship="Model1.DegreeTrackCourses1" FromRole="DegreeTrack1" ToRole="CourseCode1" />
+        </EntityType>
+        <EntityType Name="AcademicYear">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="StartQuarter" Type="Int32" Nullable="false" />
+          <Property Name="EndQuarter" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Quarter" Relationship="Model1.FK_AcademicYear_Quarters" FromRole="AcademicYear" ToRole="Quarter" />
+          <NavigationProperty Name="Quarter1" Relationship="Model1.FK_AcademicYear_Quarters1" FromRole="AcademicYear" ToRole="Quarter" />
+          <NavigationProperty Name="AwardLetters" Relationship="Model1.FK_AwardLetter_AcademicYear" FromRole="AcademicYear" ToRole="AwardLetter" />
+        </EntityType>
+        <EntityType Name="AwardLetter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="AcademicYearId" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="DateIssued" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Tuition_Fees" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Books_Supplies" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Housing" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="LivingExpensesQ1" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="LivingExpensesQ2" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="LivingExpensesQ3" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="PreviousBalance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="PellGrant" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="SEO_Grant" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="VA_Benefits" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="VA_YellowRibonMatch" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="PresidentialScholarship" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="AccessGrant" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="TransferScholarship" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ResidentGrant" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="OutsideScholarship" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="PersonalFamilyContributions" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="FederalSubsidizedLoan" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="FederalUnsubsidizedLoan" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Federal_PLUS_Loan" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="OtherLoan" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="OtherLoanType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PreviousOtherLoanBalance" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="AcademicYear" Relationship="Model1.FK_AwardLetter_AcademicYear" FromRole="AwardLetter" ToRole="AcademicYear" />
+          <NavigationProperty Name="OtherLoanType1" Relationship="Model1.FK_AwardLetter_OtherLoanType" FromRole="AwardLetter" ToRole="OtherLoanType" />
+        </EntityType>
+        <EntityType Name="OtherLoanType">
+          <Key>
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AwardLetters" Relationship="Model1.FK_AwardLetter_OtherLoanType" FromRole="OtherLoanType" ToRole="AwardLetter" />
+        </EntityType>
+        <EntityType Name="Transaction1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Reference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Qualifies1098" Type="Boolean" Nullable="false" />
+          <Property Name="Scholarship_Grant" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Model1.FK_Transactions_Students1" FromRole="Transaction1" ToRole="Student1" />
+        </EntityType>
+        <EntityType Name="AttemptedCours1">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="ScheduledEventId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="ScheduledEventId" Type="Int32" Nullable="false" />
+          <Property Name="Passed" Type="Boolean" />
+          <Property Name="GradePercent" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Model1.FK_AttemptedCourses_Students1" FromRole="AttemptedCours1" ToRole="Student1" />
+          <NavigationProperty Name="SheduledEvent" Relationship="Model1.FK_AttemptedCourses_SheduledEvents1" FromRole="AttemptedCours1" ToRole="SheduledEvent1" />
+        </EntityType>
+        <EntityType Name="Cohort1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EnrolledStudents" Relationship="Model1.FK_EnrolledStudents_Cohort1" FromRole="Cohort1" ToRole="EnrolledStudent1" />
+          <NavigationProperty Name="DegreeTracks" Relationship="Model1.FK_DegreeTrack_Cohort1" FromRole="Cohort1" ToRole="DegreeTrack1" />
+        </EntityType>
+        <EntityType Name="CourseCategory1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Label" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CourseCodes" Relationship="Model1.CategoryCodes1" FromRole="CourseCategory1" ToRole="CourseCode1" />
+        </EntityType>
+        <EntityType Name="CourseCode1">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Courses" Relationship="Model1.FK_Courses_CourseCode1" FromRole="CourseCode1" ToRole="Cours" />
+          <NavigationProperty Name="PlannedCourses" Relationship="Model1.FK_PlannedCourses_CourseCode1" FromRole="CourseCode1" ToRole="PlannedCours1" />
+          <NavigationProperty Name="CourseCategories" Relationship="Model1.CategoryCodes1" FromRole="CourseCode1" ToRole="CourseCategory1" />
+          <NavigationProperty Name="CourseCode11" Relationship="Model1.ElectiveCategories1" FromRole="CourseCode1" ToRole="CourseCode11" />
+          <NavigationProperty Name="CourseCodes" Relationship="Model1.ElectiveCategories1" FromRole="CourseCode11" ToRole="CourseCode1" />
+          <NavigationProperty Name="CourseCode111" Relationship="Model1.PreReqs2" FromRole="CourseCode1" ToRole="CourseCode11" />
+          <NavigationProperty Name="CourseCodes1" Relationship="Model1.PreReqs2" FromRole="CourseCode11" ToRole="CourseCode1" />
+          <NavigationProperty Name="DegreeTracks" Relationship="Model1.DegreeTrackCourses1" FromRole="CourseCode1" ToRole="DegreeTrack1" />
+        </EntityType>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Credits" Type="Int16" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CourseCode" Relationship="Model1.FK_Courses_CourseCode1" FromRole="Cours" ToRole="CourseCode1" />
+          <NavigationProperty Name="SheduledEvents" Relationship="Model1.FK_CoursesScheduledCourses" FromRole="Cours" ToRole="SheduledEvent1" />
+        </EntityType>
+        <EntityType Name="PlannedCours1">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="CourseCode" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="CourseCode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Quarter" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CourseCode1" Relationship="Model1.FK_PlannedCourses_CourseCode1" FromRole="PlannedCours1" ToRole="CourseCode1" />
+          <NavigationProperty Name="Quarter1" Relationship="Model1.FK_PlannedCourses_Quarters1" FromRole="PlannedCours1" ToRole="Quarter" />
+        </EntityType>
+        <EntityType Name="Quarter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Label" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Sprint1" Type="Int32" Nullable="false" />
+          <Property Name="Sprint2" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AcademicYears" Relationship="Model1.FK_AcademicYear_Quarters" FromRole="Quarter" ToRole="AcademicYear" />
+          <NavigationProperty Name="AcademicYears1" Relationship="Model1.FK_AcademicYear_Quarters1" FromRole="Quarter" ToRole="AcademicYear" />
+          <NavigationProperty Name="PlannedCourses" Relationship="Model1.FK_PlannedCourses_Quarters1" FromRole="Quarter" ToRole="PlannedCours1" />
+          <NavigationProperty Name="Year1" Relationship="Model1.FK_QuartersYears1" FromRole="Quarter" ToRole="Year" />
+          <NavigationProperty Name="SheduledEvents" Relationship="Model1.FK_SheduledEventQuarters" FromRole="Quarter" ToRole="SheduledEvent1" />
+          <NavigationProperty Name="Sprint" Relationship="Model1.FK_SprintQuarters" FromRole="Quarter" ToRole="Sprint1" />
+          <NavigationProperty Name="Sprint3" Relationship="Model1.FK_SprintQuarters1" FromRole="Quarter" ToRole="Sprint1" />
+        </EntityType>
+        <EntityType Name="RegisteredCours1">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="ScheduledCourse" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="ScheduledCourse" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SheduledEvent" Relationship="Model1.FK_RegisteredCourses_SheduledEvents1" FromRole="RegisteredCours1" ToRole="SheduledEvent1" />
+        </EntityType>
+        <EntityType Name="SheduledEvent1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Monday" Type="Boolean" Nullable="false" />
+          <Property Name="Tuesday" Type="Boolean" Nullable="false" />
+          <Property Name="Wednesday" Type="Boolean" Nullable="false" />
+          <Property Name="Thursday" Type="Boolean" Nullable="false" />
+          <Property Name="Friday" Type="Boolean" Nullable="false" />
+          <Property Name="Section" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quarter" Type="Int32" Nullable="false" />
+          <Property Name="Room" Type="Int32" Nullable="false" />
+          <Property Name="IsRegisterable" Type="Boolean" Nullable="false" />
+          <Property Name="Course_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Room1" Relationship="Model1.FK_SheduledEventRoom" FromRole="SheduledEvent1" ToRole="Room1" />
+          <NavigationProperty Name="AttemptedCourses" Relationship="Model1.FK_AttemptedCourses_SheduledEvents1" FromRole="SheduledEvent1" ToRole="AttemptedCours1" />
+          <NavigationProperty Name="Cours" Relationship="Model1.FK_CoursesScheduledCourses" FromRole="SheduledEvent1" ToRole="Cours" />
+          <NavigationProperty Name="Quarter1" Relationship="Model1.FK_SheduledEventQuarters" FromRole="SheduledEvent1" ToRole="Quarter" />
+          <NavigationProperty Name="RegisteredCourses" Relationship="Model1.FK_RegisteredCourses_SheduledEvents1" FromRole="SheduledEvent1" ToRole="RegisteredCours1" />
+          <NavigationProperty Name="Instructors" Relationship="Model1.ScheduledInstructor1" FromRole="SheduledEvent1" ToRole="Instructor2" />
+          <NavigationProperty Name="TeachingAssistants" Relationship="Model1.SheduledTA" FromRole="SheduledEvent1" ToRole="TeachingAssistant1" />
+        </EntityType>
+        <EntityType Name="Sprint1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Quarters" Relationship="Model1.FK_SprintQuarters" FromRole="Sprint1" ToRole="Quarter" />
+          <NavigationProperty Name="Quarters1" Relationship="Model1.FK_SprintQuarters1" FromRole="Sprint1" ToRole="Quarter" />
+        </EntityType>
+        <EntityType Name="Year">
+          <Key>
+            <PropertyRef Name="Year1" />
+          </Key>
+          <Property Name="Year1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Quarters" Relationship="Model1.FK_QuartersYears1" FromRole="Year" ToRole="Quarter" />
+        </EntityType>
+        <Association Name="FK_Building_Addresses1">
+          <End Type="Model1.Address1" Role="Address1" Multiplicity="1" />
+          <End Type="Model1.Building1" Role="Building1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Building1">
+              <PropertyRef Name="Address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Campus_Addresses1">
+          <End Type="Model1.Address1" Role="Address1" Multiplicity="0..1" />
+          <End Type="Model1.Campu1" Role="Campu1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Campu1">
+              <PropertyRef Name="Address" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Building_Campus1">
+          <End Type="Model1.Campu1" Role="Campu1" Multiplicity="1" />
+          <End Type="Model1.Building1" Role="Building1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campu1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Building1">
+              <PropertyRef Name="CampusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rooms_Building1">
+          <End Type="Model1.Building1" Role="Building1" Multiplicity="0..1" />
+          <End Type="Model1.Room1" Role="Room1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Room1">
+              <PropertyRef Name="BuildingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnrolledStudents_Campus1">
+          <End Type="Model1.Campu1" Role="Campu1" Multiplicity="1" />
+          <End Type="Model1.EnrolledStudent1" Role="EnrolledStudent1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campu1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EnrolledStudent1">
+              <PropertyRef Name="EnrolledCampus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonEmails">
+          <End Type="Model1.Email" Role="Email" Multiplicity="1" />
+          <End Type="Model1.Person1" Role="Person1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Email">
+              <PropertyRef Name="Email1" />
+            </Principal>
+            <Dependent Role="Person1">
+              <PropertyRef Name="PrimaryEmail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnrolledStudents_Cohort1">
+          <End Type="Model1.Cohort1" Role="Cohort1" Multiplicity="0..1" />
+          <End Type="Model1.EnrolledStudent1" Role="EnrolledStudent1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cohort1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EnrolledStudent1">
+              <PropertyRef Name="CohortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnrolledStudents_Students1">
+          <End Type="Model1.Student1" Role="Student1" Multiplicity="1" />
+          <End Type="Model1.EnrolledStudent1" Role="EnrolledStudent1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EnrolledStudent1">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Instructor_inherits_Person1">
+          <End Type="Model1.Person1" Role="Person1" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model1.Instructor2" Role="Instructor2" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Instructor2">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonPhoneNumber1">
+          <End Type="Model1.PhoneNumber1" Role="PhoneNumber1" Multiplicity="1" />
+          <End Type="Model1.Person1" Role="Person1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneNumber1">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="Person1">
+              <PropertyRef Name="PrimaryPhone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_People">
+          <End Type="Model1.Person1" Role="Person1" Multiplicity="1" />
+          <End Type="Model1.Staff" Role="Staff" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_People1">
+          <End Type="Model1.Person1" Role="Person1" Multiplicity="1" />
+          <End Type="Model1.Student1" Role="Student1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SheduledEventRoom">
+          <End Type="Model1.Room1" Role="Room1" Multiplicity="1" />
+          <End Type="Model1.SheduledEvent1" Role="SheduledEvent1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SheduledEvent1">
+              <PropertyRef Name="Room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Rooms">
+          <End Type="Model1.Room1" Role="Room1" Multiplicity="0..1" />
+          <End Type="Model1.Staff" Role="Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="Office" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Staff">
+          <End Type="Model1.Staff" Role="Staff" Multiplicity="0..1" />
+          <End Type="Model1.Student1" Role="Student1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student1">
+              <PropertyRef Name="FinancialAdvisor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Staff1">
+          <End Type="Model1.Staff" Role="Staff" Multiplicity="0..1" />
+          <End Type="Model1.Student1" Role="Student1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Student1">
+              <PropertyRef Name="Advocate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeachingAssistant_Staff">
+          <End Type="Model1.Staff" Role="Staff" Multiplicity="1" />
+          <End Type="Model1.TeachingAssistant1" Role="TeachingAssistant1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeachingAssistant1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttemptedCourses_Students1">
+          <End Type="Model1.Student1" Role="Student1" Multiplicity="1" />
+          <End Type="Model1.AttemptedCours1" Role="AttemptedCours1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AttemptedCours1">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Students1">
+          <End Type="Model1.Student1" Role="Student1" Multiplicity="1" />
+          <End Type="Model1.Transaction1" Role="Transaction1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction1">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DegreeTrack_Degree1">
+          <End Type="Model1.Degree1" Role="Degree1" Multiplicity="0..1" />
+          <End Type="Model1.DegreeTrack1" Role="DegreeTrack1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degree1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DegreeTrack1">
+              <PropertyRef Name="DegreeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DegreeTrack_Cohort1">
+          <End Type="Model1.Cohort1" Role="Cohort1" Multiplicity="0..1" />
+          <End Type="Model1.DegreeTrack1" Role="DegreeTrack1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cohort1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DegreeTrack1">
+              <PropertyRef Name="CohortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicYear_Quarters">
+          <End Type="Model1.Quarter" Role="Quarter" Multiplicity="1" />
+          <End Type="Model1.AcademicYear" Role="AcademicYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quarter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicYear">
+              <PropertyRef Name="StartQuarter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AcademicYear_Quarters1">
+          <End Type="Model1.Quarter" Role="Quarter" Multiplicity="1" />
+          <End Type="Model1.AcademicYear" Role="AcademicYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quarter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AcademicYear">
+              <PropertyRef Name="EndQuarter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AwardLetter_AcademicYear">
+          <End Type="Model1.AcademicYear" Role="AcademicYear" Multiplicity="1" />
+          <End Type="Model1.AwardLetter" Role="AwardLetter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicYear">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AwardLetter">
+              <PropertyRef Name="AcademicYearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AwardLetter_OtherLoanType">
+          <End Type="Model1.OtherLoanType" Role="OtherLoanType" Multiplicity="1" />
+          <End Type="Model1.AwardLetter" Role="AwardLetter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OtherLoanType">
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="AwardLetter">
+              <PropertyRef Name="OtherLoanType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttemptedCourses_SheduledEvents1">
+          <End Type="Model1.SheduledEvent1" Role="SheduledEvent1" Multiplicity="1" />
+          <End Type="Model1.AttemptedCours1" Role="AttemptedCours1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SheduledEvent1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AttemptedCours1">
+              <PropertyRef Name="ScheduledEventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_CourseCode1">
+          <End Type="Model1.CourseCode1" Role="CourseCode1" Multiplicity="1" />
+          <End Type="Model1.Cours" Role="Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseCode1">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Cours">
+              <PropertyRef Name="Code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlannedCourses_CourseCode1">
+          <End Type="Model1.CourseCode1" Role="CourseCode1" Multiplicity="1" />
+          <End Type="Model1.PlannedCours1" Role="PlannedCours1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseCode1">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="PlannedCours1">
+              <PropertyRef Name="CourseCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CoursesScheduledCourses">
+          <End Type="Model1.Cours" Role="Cours" Multiplicity="1" />
+          <End Type="Model1.SheduledEvent1" Role="SheduledEvent1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SheduledEvent1">
+              <PropertyRef Name="Course_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlannedCourses_Quarters1">
+          <End Type="Model1.Quarter" Role="Quarter" Multiplicity="1" />
+          <End Type="Model1.PlannedCours1" Role="PlannedCours1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quarter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlannedCours1">
+              <PropertyRef Name="Quarter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuartersYears1">
+          <End Type="Model1.Year" Role="Year" Multiplicity="1" />
+          <End Type="Model1.Quarter" Role="Quarter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Year">
+              <PropertyRef Name="Year1" />
+            </Principal>
+            <Dependent Role="Quarter">
+              <PropertyRef Name="Year" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SheduledEventQuarters">
+          <End Type="Model1.Quarter" Role="Quarter" Multiplicity="1" />
+          <End Type="Model1.SheduledEvent1" Role="SheduledEvent1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quarter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SheduledEvent1">
+              <PropertyRef Name="Quarter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SprintQuarters">
+          <End Type="Model1.Sprint1" Role="Sprint1" Multiplicity="1" />
+          <End Type="Model1.Quarter" Role="Quarter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprint1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quarter">
+              <PropertyRef Name="Sprint1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SprintQuarters1">
+          <End Type="Model1.Sprint1" Role="Sprint1" Multiplicity="1" />
+          <End Type="Model1.Quarter" Role="Quarter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sprint1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quarter">
+              <PropertyRef Name="Sprint2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegisteredCourses_SheduledEvents1">
+          <End Type="Model1.SheduledEvent1" Role="SheduledEvent1" Multiplicity="1" />
+          <End Type="Model1.RegisteredCours1" Role="RegisteredCours1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SheduledEvent1">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegisteredCours1">
+              <PropertyRef Name="ScheduledCourse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PeoplesEmails1">
+          <End Type="Model1.Email" Role="Email" Multiplicity="*" />
+          <End Type="Model1.Person1" Role="Person1" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonAddress1">
+          <End Type="Model1.Address1" Role="Address1" Multiplicity="*" />
+          <End Type="Model1.Person1" Role="Person1" Multiplicity="*" />
+        </Association>
+        <Association Name="PersonPhoneNumber2">
+          <End Type="Model1.Person1" Role="Person1" Multiplicity="*" />
+          <End Type="Model1.PhoneNumber1" Role="PhoneNumber1" Multiplicity="*" />
+        </Association>
+        <Association Name="CategoryCodes1">
+          <End Type="Model1.CourseCategory1" Role="CourseCategory1" Multiplicity="*" />
+          <End Type="Model1.CourseCode1" Role="CourseCode1" Multiplicity="*" />
+        </Association>
+        <Association Name="ElectiveCategories1">
+          <End Type="Model1.CourseCode1" Role="CourseCode1" Multiplicity="*" />
+          <End Type="Model1.CourseCode1" Role="CourseCode11" Multiplicity="*" />
+        </Association>
+        <Association Name="PreReqs2">
+          <End Type="Model1.CourseCode1" Role="CourseCode1" Multiplicity="*" />
+          <End Type="Model1.CourseCode1" Role="CourseCode11" Multiplicity="*" />
+        </Association>
+        <Association Name="ScheduledInstructor1">
+          <End Type="Model1.Instructor2" Role="Instructor2" Multiplicity="*" />
+          <End Type="Model1.SheduledEvent1" Role="SheduledEvent1" Multiplicity="*" />
+        </Association>
+        <Association Name="SheduledTA">
+          <End Type="Model1.SheduledEvent1" Role="SheduledEvent1" Multiplicity="*" />
+          <End Type="Model1.TeachingAssistant1" Role="TeachingAssistant1" Multiplicity="*" />
+        </Association>
+        <Association Name="EmergencyContact1">
+          <End Type="Model1.Person1" Role="Person1" Multiplicity="*" />
+          <End Type="Model1.Person1" Role="Person11" Multiplicity="*" />
+        </Association>
+        <Association Name="DegreeTrackCourses1">
+          <End Type="Model1.CourseCode1" Role="CourseCode1" Multiplicity="*" />
+          <End Type="Model1.DegreeTrack1" Role="DegreeTrack1" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
-    <EntitySetMapping Name="SheduledEvents">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.SheduledEvent)">
-        <MappingFragment StoreEntitySet="SheduledEvents">
-          <ScalarProperty Name="IsRegisterable" ColumnName="IsRegisterable" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-          <ScalarProperty Name="Monday" ColumnName="Monday" />
-          <ScalarProperty Name="Tuesday" ColumnName="Tuesday" />
-          <ScalarProperty Name="Wednesday" ColumnName="Wednesday" />
-          <ScalarProperty Name="Thursday" ColumnName="Thursday" />
-          <ScalarProperty Name="Friday" ColumnName="Friday" />
-          <ScalarProperty Name="Section" ColumnName="Section" />
-          <ScalarProperty Name="Quarter" ColumnName="Quarter" />
-          <ScalarProperty Name="Room" ColumnName="Room" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Courses">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.Courses)">
-        <MappingFragment StoreEntitySet="Courses">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Credits" ColumnName="Credits" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Quarters">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.Quarters)">
-        <MappingFragment StoreEntitySet="Quarters">
-          <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Label" ColumnName="Label" />
-          <ScalarProperty Name="Sprint1" ColumnName="Sprint1" />
-          <ScalarProperty Name="Sprint2" ColumnName="Sprint2" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Years">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.Years)">
-        <MappingFragment StoreEntitySet="Years">
-          <ScalarProperty Name="Year" ColumnName="Year" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Sprints">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.Sprint)">
-        <MappingFragment StoreEntitySet="Sprints">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Rooms">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.Room)">
-        <MappingFragment StoreEntitySet="Rooms">
-          <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Capacity" ColumnName="Capacity" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="People">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.Person)">
-        <MappingFragment StoreEntitySet="People">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="MiddelName" ColumnName="MiddelName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="PrimaryPhone" ColumnName="PrimaryPhone" />
-          <ScalarProperty Name="PrimaryEmail" ColumnName="PrimaryEmail" />
-          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.TeachingAssistant)">
-        <MappingFragment StoreEntitySet="People_TeachingAssistant">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.EmergencyContact)">
-        <MappingFragment StoreEntitySet="People_EmergencyContact">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="ContactFor" ColumnName="ContactFor" />
-          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PreReqs">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.PreReqs)">
-        <MappingFragment StoreEntitySet="PreReqs">
-          <ScalarProperty Name="Course" ColumnName="Course" />
-          <ScalarProperty Name="RequiredCourse" ColumnName="RequiredCourse" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Addresses">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.Address)">
-        <MappingFragment StoreEntitySet="Addresses">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Street1" ColumnName="Street1" />
-          <ScalarProperty Name="Street2" ColumnName="Street2" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="State" ColumnName="State" />
-          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PhoneNumbers">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.PhoneNumber)">
-        <MappingFragment StoreEntitySet="PhoneNumbers">
-          <ScalarProperty Name="Number" ColumnName="Number" />
-          <ScalarProperty Name="SupportsSMS" ColumnName="SupportsSMS" />
-          <ScalarProperty Name="IsFax" ColumnName="IsFax" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Emails">
-      <EntityTypeMapping TypeName="IsTypeOf(Model1.Emails)">
-        <MappingFragment StoreEntitySet="Emails">
-          <ScalarProperty Name="Email" ColumnName="Email" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="CoursesScheduledCourses" TypeName="Model1.CoursesScheduledCourses" StoreEntitySet="SheduledEvents">
-      <EndProperty Name="Courses">
-        <ScalarProperty Name="Id" ColumnName="Course_Id" />
-      </EndProperty>
-      <EndProperty Name="ScheduledCourses">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="TASheduledEvent" TypeName="Model1.TASheduledEvent" StoreEntitySet="TASheduledEvent">
-      <EndProperty Name="TA">
-        <ScalarProperty Name="Id" ColumnName="TeachingAssistants_Id" />
-      </EndProperty>
-      <EndProperty Name="SheduledEvent">
-        <ScalarProperty Name="Id" ColumnName="SheduledEvents_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="PersonPhoneNumber" TypeName="Model1.PersonPhoneNumber" StoreEntitySet="PersonPhoneNumber">
-      <EndProperty Name="Person">
-        <ScalarProperty Name="Id" ColumnName="People_Id" />
-      </EndProperty>
-      <EndProperty Name="PhoneNumber">
-        <ScalarProperty Name="Number" ColumnName="PhoneNumbers_Number" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="PersonAddress" TypeName="Model1.PersonAddress" StoreEntitySet="PersonAddress">
-      <EndProperty Name="Person">
-        <ScalarProperty Name="Id" ColumnName="People_Id" />
-      </EndProperty>
-      <EndProperty Name="Address">
-        <ScalarProperty Name="Id" ColumnName="Addresses_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-          <EntitySetMapping Name="AttemptedCourses">
-            <EntityTypeMapping TypeName="Model1.AttemptedCours">
-              <MappingFragment StoreEntitySet="AttemptedCourses">
-                <ScalarProperty Name="GradePercent" ColumnName="GradePercent" />
-                <ScalarProperty Name="Passed" ColumnName="Passed" />
-                <ScalarProperty Name="ScheduledEventId" ColumnName="ScheduledEventId" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Buildings">
-            <EntityTypeMapping TypeName="Model1.Building">
-              <MappingFragment StoreEntitySet="Building">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Campus">
-            <EntityTypeMapping TypeName="Model1.Campu">
-              <MappingFragment StoreEntitySet="Campus">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cohorts">
-            <EntityTypeMapping TypeName="Model1.Cohort">
-              <MappingFragment StoreEntitySet="Cohort">
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CourseCategories">
-            <EntityTypeMapping TypeName="Model1.CourseCategory">
-              <MappingFragment StoreEntitySet="CourseCategory">
-                <ScalarProperty Name="Label" ColumnName="Label" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CourseCodes">
-            <EntityTypeMapping TypeName="Model1.CourseCode">
-              <MappingFragment StoreEntitySet="CourseCode">
-                <ScalarProperty Name="Code" ColumnName="Code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Degrees">
-            <EntityTypeMapping TypeName="Model1.Degree">
-              <MappingFragment StoreEntitySet="Degree">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DegreeTracks">
-            <EntityTypeMapping TypeName="Model1.DegreeTrack">
-              <MappingFragment StoreEntitySet="DegreeTrack">
-                <ScalarProperty Name="CohortId" ColumnName="CohortId" />
-                <ScalarProperty Name="DegreeId" ColumnName="DegreeId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EnrolledStudents">
-            <EntityTypeMapping TypeName="Model1.EnrolledStudent">
-              <MappingFragment StoreEntitySet="EnrolledStudents">
-                <ScalarProperty Name="CurrentlyEnrolled" ColumnName="CurrentlyEnrolled" />
-                <ScalarProperty Name="CohortId" ColumnName="CohortId" />
-                <ScalarProperty Name="EnrolledCampus" ColumnName="EnrolledCampus" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Instructor1">
-            <EntityTypeMapping TypeName="Model1.Instructor1">
-              <MappingFragment StoreEntitySet="Instructors">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PlannedCourses">
-            <EntityTypeMapping TypeName="Model1.PlannedCours">
-              <MappingFragment StoreEntitySet="PlannedCourses">
-                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
-                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RegisteredCourses">
-            <EntityTypeMapping TypeName="Model1.RegisteredCours">
-              <MappingFragment StoreEntitySet="RegisteredCourses">
-                <ScalarProperty Name="ScheduledCourse" ColumnName="ScheduledCourse" />
-                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Students">
-            <EntityTypeMapping TypeName="Model1.Student">
-              <MappingFragment StoreEntitySet="Students">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
+    <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="Model1.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="definition" ColumnName="definition" />
@@ -2363,54 +3339,6 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="CategoryCodes" TypeName="Model1.CategoryCodes" StoreEntitySet="CategoryCodes">
-            <EndProperty Name="CourseCode">
-              <ScalarProperty Name="Code" ColumnName="Course" />
-            </EndProperty>
-            <EndProperty Name="CourseCategory">
-              <ScalarProperty Name="Id" ColumnName="Category" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="ElectiveCategories" TypeName="Model1.ElectiveCategories" StoreEntitySet="ElectiveCategories">
-            <EndProperty Name="CourseCode1">
-              <ScalarProperty Name="Code" ColumnName="CourseId" />
-            </EndProperty>
-            <EndProperty Name="CourseCode">
-              <ScalarProperty Name="Code" ColumnName="ElectiveCourseId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="PeoplesEmails" TypeName="Model1.PeoplesEmails" StoreEntitySet="PeoplesEmails">
-            <EndProperty Name="Person">
-              <ScalarProperty Name="Id" ColumnName="Person_Id" />
-            </EndProperty>
-            <EndProperty Name="Emails">
-              <ScalarProperty Name="Email" ColumnName="Emails_Email" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="PreReqs1" TypeName="Model1.PreReqs1" StoreEntitySet="PreReqs">
-            <EndProperty Name="CourseCode1">
-              <ScalarProperty Name="Code" ColumnName="RequiredCourse" />
-            </EndProperty>
-            <EndProperty Name="CourseCode">
-              <ScalarProperty Name="Code" ColumnName="Course" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="ScheduledInstructor" TypeName="Model1.ScheduledInstructor" StoreEntitySet="ScheduledInstructor">
-            <EndProperty Name="SheduledEvent">
-              <ScalarProperty Name="Id" ColumnName="ScheduledCourses_Id" />
-            </EndProperty>
-            <EndProperty Name="Instructor1">
-              <ScalarProperty Name="Id" ColumnName="Instructors_Id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="DegreeTrackCourses" TypeName="Model1.DegreeTrackCourses" StoreEntitySet="DegreeTrackCourses">
-            <EndProperty Name="DegreeTrack">
-              <ScalarProperty Name="Id" ColumnName="DegreeTackId" />
-            </EndProperty>
-            <EndProperty Name="CourseCode">
-              <ScalarProperty Name="Code" ColumnName="CourseCode" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram1" FunctionName="Model1.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram1" FunctionName="Model1.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram1" FunctionName="Model1.Store.sp_dropdiagram" />
@@ -2435,10 +3363,191 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram1" FunctionName="Model1.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams1" FunctionName="Model1.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="Transactions">
-            <EntityTypeMapping TypeName="Model1.Transaction">
+          <EntitySetMapping Name="Address1">
+            <EntityTypeMapping TypeName="Model1.Address1">
+              <MappingFragment StoreEntitySet="Addresses">
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Street2" ColumnName="Street2" />
+                <ScalarProperty Name="Street1" ColumnName="Street1" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Building1">
+            <EntityTypeMapping TypeName="Model1.Building1">
+              <MappingFragment StoreEntitySet="Building">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CampusId" ColumnName="CampusId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Campu1">
+            <EntityTypeMapping TypeName="Model1.Campu1">
+              <MappingFragment StoreEntitySet="Campus">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emails1">
+            <EntityTypeMapping TypeName="Model1.Email">
+              <MappingFragment StoreEntitySet="Emails">
+                <ScalarProperty Name="Email1" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EnrolledStudent1">
+            <EntityTypeMapping TypeName="Model1.EnrolledStudent1">
+              <MappingFragment StoreEntitySet="EnrolledStudents">
+                <ScalarProperty Name="CurrentlyEnrolled" ColumnName="CurrentlyEnrolled" />
+                <ScalarProperty Name="CohortId" ColumnName="CohortId" />
+                <ScalarProperty Name="EnrolledCampus" ColumnName="EnrolledCampus" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instructor2">
+            <EntityTypeMapping TypeName="Model1.Instructor2">
+              <MappingFragment StoreEntitySet="Instructors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Person1">
+            <EntityTypeMapping TypeName="Model1.Person1">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="SocialSecurity" ColumnName="SocialSecurity" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="PrimaryEmail" ColumnName="PrimaryEmail" />
+                <ScalarProperty Name="PrimaryPhone" ColumnName="PrimaryPhone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddelName" ColumnName="MiddelName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhoneNumber1">
+            <EntityTypeMapping TypeName="Model1.PhoneNumber1">
+              <MappingFragment StoreEntitySet="PhoneNumbers">
+                <ScalarProperty Name="IsFax" ColumnName="IsFax" />
+                <ScalarProperty Name="SupportsSMS" ColumnName="SupportsSMS" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Room1">
+            <EntityTypeMapping TypeName="Model1.Room1">
+              <MappingFragment StoreEntitySet="Rooms">
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="BuildingId" ColumnName="BuildingId" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="Model1.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Office" ColumnName="Office" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student1">
+            <EntityTypeMapping TypeName="Model1.Student1">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Advocate" ColumnName="Advocate" />
+                <ScalarProperty Name="FinancialAdvisor" ColumnName="FinancialAdvisor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeachingAssistant1">
+            <EntityTypeMapping TypeName="Model1.TeachingAssistant1">
+              <MappingFragment StoreEntitySet="TeachingAssistant">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Degree1">
+            <EntityTypeMapping TypeName="Model1.Degree1">
+              <MappingFragment StoreEntitySet="Degree">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DegreeTrack1">
+            <EntityTypeMapping TypeName="Model1.DegreeTrack1">
+              <MappingFragment StoreEntitySet="DegreeTrack">
+                <ScalarProperty Name="CohortId" ColumnName="CohortId" />
+                <ScalarProperty Name="DegreeId" ColumnName="DegreeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AcademicYears">
+            <EntityTypeMapping TypeName="Model1.AcademicYear">
+              <MappingFragment StoreEntitySet="AcademicYear">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EndQuarter" ColumnName="EndQuarter" />
+                <ScalarProperty Name="StartQuarter" ColumnName="StartQuarter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AwardLetters">
+            <EntityTypeMapping TypeName="Model1.AwardLetter">
+              <MappingFragment StoreEntitySet="AwardLetter">
+                <ScalarProperty Name="PreviousOtherLoanBalance" ColumnName="PreviousOtherLoanBalance" />
+                <ScalarProperty Name="OtherLoanType" ColumnName="OtherLoanType" />
+                <ScalarProperty Name="OtherLoan" ColumnName="OtherLoan" />
+                <ScalarProperty Name="Federal_PLUS_Loan" ColumnName="Federal_PLUS_Loan" />
+                <ScalarProperty Name="FederalUnsubsidizedLoan" ColumnName="FederalUnsubsidizedLoan" />
+                <ScalarProperty Name="FederalSubsidizedLoan" ColumnName="FederalSubsidizedLoan" />
+                <ScalarProperty Name="PersonalFamilyContributions" ColumnName="PersonalFamilyContributions" />
+                <ScalarProperty Name="OutsideScholarship" ColumnName="OutsideScholarship" />
+                <ScalarProperty Name="ResidentGrant" ColumnName="ResidentGrant" />
+                <ScalarProperty Name="TransferScholarship" ColumnName="TransferScholarship" />
+                <ScalarProperty Name="AccessGrant" ColumnName="AccessGrant" />
+                <ScalarProperty Name="PresidentialScholarship" ColumnName="PresidentialScholarship" />
+                <ScalarProperty Name="VA_YellowRibonMatch" ColumnName="VA_YellowRibonMatch" />
+                <ScalarProperty Name="VA_Benefits" ColumnName="VA_Benefits" />
+                <ScalarProperty Name="SEO_Grant" ColumnName="SEO_Grant" />
+                <ScalarProperty Name="PellGrant" ColumnName="PellGrant" />
+                <ScalarProperty Name="PreviousBalance" ColumnName="PreviousBalance" />
+                <ScalarProperty Name="LivingExpensesQ3" ColumnName="LivingExpensesQ3" />
+                <ScalarProperty Name="LivingExpensesQ2" ColumnName="LivingExpensesQ2" />
+                <ScalarProperty Name="LivingExpensesQ1" ColumnName="LivingExpensesQ1" />
+                <ScalarProperty Name="Housing" ColumnName="Housing" />
+                <ScalarProperty Name="Books_Supplies" ColumnName="Books_Supplies" />
+                <ScalarProperty Name="Tuition_Fees" ColumnName="Tuition_Fees" />
+                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AcademicYearId" ColumnName="AcademicYearId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtherLoanTypes">
+            <EntityTypeMapping TypeName="Model1.OtherLoanType">
+              <MappingFragment StoreEntitySet="OtherLoanType">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transaction1">
+            <EntityTypeMapping TypeName="Model1.Transaction1">
               <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="Scholarship_Grant" ColumnName="Scholarship_Grant" />
+                <ScalarProperty Name="Qualifies1098" ColumnName="Qualifies1098" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="StudentId" ColumnName="StudentId" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -2446,6 +3555,193 @@ warning 6002: The table/view 'Test.dbo.DegreeTrackCourses' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AttemptedCours1">
+            <EntityTypeMapping TypeName="Model1.AttemptedCours1">
+              <MappingFragment StoreEntitySet="AttemptedCourses">
+                <ScalarProperty Name="GradePercent" ColumnName="GradePercent" />
+                <ScalarProperty Name="Passed" ColumnName="Passed" />
+                <ScalarProperty Name="ScheduledEventId" ColumnName="ScheduledEventId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cohort1">
+            <EntityTypeMapping TypeName="Model1.Cohort1">
+              <MappingFragment StoreEntitySet="Cohort">
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseCategory1">
+            <EntityTypeMapping TypeName="Model1.CourseCategory1">
+              <MappingFragment StoreEntitySet="CourseCategory">
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseCode1">
+            <EntityTypeMapping TypeName="Model1.CourseCode1">
+              <MappingFragment StoreEntitySet="CourseCode">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses1">
+            <EntityTypeMapping TypeName="Model1.Cours">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Credits" ColumnName="Credits" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlannedCours1">
+            <EntityTypeMapping TypeName="Model1.PlannedCours1">
+              <MappingFragment StoreEntitySet="PlannedCourses">
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quarters1">
+            <EntityTypeMapping TypeName="Model1.Quarter">
+              <MappingFragment StoreEntitySet="Quarters">
+                <ScalarProperty Name="Sprint2" ColumnName="Sprint2" />
+                <ScalarProperty Name="Sprint1" ColumnName="Sprint1" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegisteredCours1">
+            <EntityTypeMapping TypeName="Model1.RegisteredCours1">
+              <MappingFragment StoreEntitySet="RegisteredCourses">
+                <ScalarProperty Name="ScheduledCourse" ColumnName="ScheduledCourse" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SheduledEvent1">
+            <EntityTypeMapping TypeName="Model1.SheduledEvent1">
+              <MappingFragment StoreEntitySet="SheduledEvents">
+                <ScalarProperty Name="Course_Id" ColumnName="Course_Id" />
+                <ScalarProperty Name="IsRegisterable" ColumnName="IsRegisterable" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="Friday" ColumnName="Friday" />
+                <ScalarProperty Name="Thursday" ColumnName="Thursday" />
+                <ScalarProperty Name="Wednesday" ColumnName="Wednesday" />
+                <ScalarProperty Name="Tuesday" ColumnName="Tuesday" />
+                <ScalarProperty Name="Monday" ColumnName="Monday" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sprint1">
+            <EntityTypeMapping TypeName="Model1.Sprint1">
+              <MappingFragment StoreEntitySet="Sprints">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Years1">
+            <EntityTypeMapping TypeName="Model1.Year">
+              <MappingFragment StoreEntitySet="Years">
+                <ScalarProperty Name="Year1" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PeoplesEmails1" TypeName="Model1.PeoplesEmails1" StoreEntitySet="PeoplesEmails">
+            <EndProperty Name="Person1">
+              <ScalarProperty Name="Id" ColumnName="Person_Id" />
+            </EndProperty>
+            <EndProperty Name="Email">
+              <ScalarProperty Name="Email1" ColumnName="Emails_Email" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PersonAddress1" TypeName="Model1.PersonAddress1" StoreEntitySet="PersonAddress">
+            <EndProperty Name="Person1">
+              <ScalarProperty Name="Id" ColumnName="People_Id" />
+            </EndProperty>
+            <EndProperty Name="Address1">
+              <ScalarProperty Name="Id" ColumnName="Addresses_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PersonPhoneNumber2" TypeName="Model1.PersonPhoneNumber2" StoreEntitySet="PersonPhoneNumber">
+            <EndProperty Name="PhoneNumber1">
+              <ScalarProperty Name="Number" ColumnName="PhoneNumbers_Number" />
+            </EndProperty>
+            <EndProperty Name="Person1">
+              <ScalarProperty Name="Id" ColumnName="People_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="CategoryCodes1" TypeName="Model1.CategoryCodes1" StoreEntitySet="CategoryCodes">
+            <EndProperty Name="CourseCode1">
+              <ScalarProperty Name="Code" ColumnName="Course" />
+            </EndProperty>
+            <EndProperty Name="CourseCategory1">
+              <ScalarProperty Name="Id" ColumnName="Category" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ElectiveCategories1" TypeName="Model1.ElectiveCategories1" StoreEntitySet="ElectiveCategories">
+            <EndProperty Name="CourseCode11">
+              <ScalarProperty Name="Code" ColumnName="CourseId" />
+            </EndProperty>
+            <EndProperty Name="CourseCode1">
+              <ScalarProperty Name="Code" ColumnName="ElectiveCourseId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PreReqs2" TypeName="Model1.PreReqs2" StoreEntitySet="PreReqs">
+            <EndProperty Name="CourseCode11">
+              <ScalarProperty Name="Code" ColumnName="RequiredCourse" />
+            </EndProperty>
+            <EndProperty Name="CourseCode1">
+              <ScalarProperty Name="Code" ColumnName="Course" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ScheduledInstructor1" TypeName="Model1.ScheduledInstructor1" StoreEntitySet="ScheduledInstructor">
+            <EndProperty Name="SheduledEvent1">
+              <ScalarProperty Name="Id" ColumnName="ScheduledCourses_Id" />
+            </EndProperty>
+            <EndProperty Name="Instructor2">
+              <ScalarProperty Name="Id" ColumnName="Instructors_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SheduledTA" TypeName="Model1.SheduledTA" StoreEntitySet="SheduledTA">
+            <EndProperty Name="TeachingAssistant1">
+              <ScalarProperty Name="Id" ColumnName="TeachingAssistants_Id" />
+            </EndProperty>
+            <EndProperty Name="SheduledEvent1">
+              <ScalarProperty Name="Id" ColumnName="SheduledEvents_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="EmergencyContact1" TypeName="Model1.EmergencyContact1" StoreEntitySet="EmergencyContact">
+            <EndProperty Name="Person11">
+              <ScalarProperty Name="Id" ColumnName="PersonId" />
+            </EndProperty>
+            <EndProperty Name="Person1">
+              <ScalarProperty Name="Id" ColumnName="ContactFor" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="DegreeTrackCourses1" TypeName="Model1.DegreeTrackCourses1" StoreEntitySet="DegreeTrackCourses">
+            <EndProperty Name="DegreeTrack1">
+              <ScalarProperty Name="Id" ColumnName="DegreeTackId" />
+            </EndProperty>
+            <EndProperty Name="CourseCode1">
+              <ScalarProperty Name="Code" ColumnName="CourseCode" />
+            </EndProperty>
+          </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
