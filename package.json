@@ -1,0 +1,18 @@
+{
+  "name": "nuportal",
+  "version": "0.0.0",
+  "description": "Neumont new student portal",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/lhirschi/nuPortal.git"
+  },
+  "author": "Adrian, Jordan, Landon, Trevan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.15.1",
+    "express": "4.13.4",
+    "method-override": "2.3.5",
+    "morgan" : "1.7.0"
+  }
+}
