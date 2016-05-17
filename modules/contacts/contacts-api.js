@@ -2,7 +2,7 @@
 var express = require("express");
 var app = module.exports = express();
 var server = require('../../app');
-var sql = server.sql;
+var sql = require("seriate");
 
 app.get('/api/contactInfo', function(req,res){
     var user_id = req.param('id');
