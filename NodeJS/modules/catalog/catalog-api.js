@@ -21,3 +21,20 @@ app.get('/api/catalogcourses', function(req,res){
 	});
 });
 
+app.get('/api/degreereqs', function(req,res){
+	var degree_id = req.param('id');
+	sql.execute({
+		query: "SELECT CourseCode FROM [Degree].[DegreeTrackCourses]"+(degree_id?" WHERE DegreeId=@degreeid":""),
+		params: {
+			degreeid: {
+				type: sql.int,
+				val: degree_id,
+			}
+		}
+	}).then(function(results){
+		res.json({results});
+	}, function(err){
+		console.log("Something bad happened: ",err);
+	});
+});
+
