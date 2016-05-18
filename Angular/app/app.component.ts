@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-
-import { HomeComponent} from './home/home.component'
+import { HTTP_PROVIDERS } from '@angular/http';
+import { ROUTER_PROVIDERS, Routes, ROUTER_DIRECTIVES} from '@angular/router';
+import { HomeComponent} from './home/home.component';
 
 @Component({
     selector: 'nu-app',
-    template: `
-    <div>
-        <h1>{{ pageTitle }}</h1>
-        <img [src]="logoUrl" />
-        <nu-home>Loading Home...</nu-home>
-    </div>
-     `,
-     directives: [HomeComponent]
+    templateUrl: `app/app.component.html`,
+    directives: [ROUTER_DIRECTIVES],
+    providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS]
 })
+@Routes([
+    {path: '/', component: HomeComponent},
+    {path: '/home', component: HomeComponent}
+])
 export class AppComponent {
     pageTitle: string = 'NU Angular Demo';
     logoUrl: string = 'https://www.google.com/images/nav_logo242.png';
