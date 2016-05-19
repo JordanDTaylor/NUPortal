@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
-
-import { FinancialComponent} from './financial/financial.component'
+import { HTTP_PROVIDERS } from '@angular/http';
+import { ROUTER_PROVIDERS, Routes, ROUTER_DIRECTIVES} from '@angular/router';
+import { HomeComponent} from './home/home.component';
 
 @Component({
     selector: 'nu-app',
-    template: `
-    <div>
-        <nu-financial>Loading Financial Page...</nu-financial>
-    </div>
-     `,
-     directives: [FinancialComponent]
+    templateUrl: `app/app.component.html`,
+    directives: [ROUTER_DIRECTIVES],
+    providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS]
 })
+@Routes([
+    {path: '/', component: HomeComponent},
+    {path: '/home', component: HomeComponent}
+])
 export class AppComponent {
-    // pageTitle: string = 'NU Angular Demo';
-    // logoUrl: string = 'https://www.google.com/images/nav_logo242.png';
+    pageTitle: string = 'NU Angular Demo';
+    logoUrl: string = 'https://www.google.com/images/nav_logo242.png';
 }
