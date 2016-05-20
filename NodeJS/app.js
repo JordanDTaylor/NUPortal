@@ -22,11 +22,83 @@ exports.sql = sql;
 var contacts = require('./modules/contacts/contacts-api');
 app.use(contacts);
 
-//Angular route, rest of routes will be handled in angular.
-app.get('*', function(req,res){
-    res.sendfile('./public/index.html');
-});
 
+var tokenkey = 'tokenkey';
+var cookieParser = require('cookie-parser');
+app.use(cookieParser(tokenkey));
+var cookieSession = require('cookie-session');
+app.use(cookieSession({keys:[tokenkey], maxAge:1000 * 60 * 60 * 24}));//maxAge is in miliseconds
+
+var passport = require("passport");
+var passportLocalStrategy = require("passport-local").Strategy;
+passport.use('login', new passportLocalStrategy({passReqToCallback:true}, function(req,unam,pword,done){
+	/*
+	db.User.findOne({username:unam}, function(err,user){
+		if(err){return done(err);}
+		if(!user){return done(null, false, {message: 'Incorrect username/password'});}
+		if(!bcrypt.compareSync(pword, user.password)){return done(null,false,{message: 'Incorrect username/password'});}
+		return done(null,user);
+	});
+	*/
+	if(unam=='tredmon'){
+		if(pword=='redmon'){
+			return done(null,{id:'1', username:unam, password:pword});
+		}
+	}
+	return done(null,false,{message: 'Incorrect username/password'});
+}));
+passport.use('signup', new passportLocalStrategy({passReqToCallback:true}, function(req,unam,pword,done){
+	/*
+	db.User.findOne({username:unam}, function(err,user){
+		if(err){return done(err);}
+		if(user){return done(null, false, {message: 'Username not available'});}
+		var newuser = {username:unam, password:bcrypt.hashSync(pword, bcrypt.genSaltSync(10), null), id:generateID()};
+		db.User.save(newuser);
+		req.login(newuser);
+		return done(null, newuser);
+	});
+	*/
+	return done(null, false, {message: 'Signup is not currently implemented'});
+}));
+passport.serializeUser(function(user,done){
+    done(null, user.id);
+});
+passport.deserializeUser(function(userid,done){
+    /*
+	db.User.findById(userid, function(err,user){
+		done(err, user);
+	});
+	*/
+    done(null,{id:userid, username:'tredmon'});
+});
+app.use(passport.initialize());
+app.use(passport.session());
+var passportReqLoggedIn = function(req,res,next){
+	if(req.isAuthenticated()){return next();}
+	res.redirect('/login');
+}
+var passportErrNotLoggedIn = function(req,res,next){
+	if(req.isAuthenticated()){return next();}
+	res.status(401);
+	res.send('Not Logged In');
+}
+
+
+app.get('/login', function(req,res){
+    res.sendFile('public/login.html', {root:'./'});
+});
+app.post('/login', passport.authenticate('login', {session:true, failureRedirect:'/login', successRedirect:'/loginsuccess'}));
+app.get('/logout', function(req,res){
+	req.logout();
+	res.redirect('/login');
+});
+app.get('/loginsuccess', passportReqLoggedIn, function(req,res){res.sendFile('public/loginsuccess.html',{root:'./'})});
+
+app.get('*', passportErrNotLoggedIn, function(req,res){
+    //req.user contains the authenticated user
+	//TODO: send the actual data
+    res.sendFile('public/loginsuccess.html', {root:'./'});
+});
 //====================================//
 app.listen(8080);
 console.log("App listening on port 8080");
