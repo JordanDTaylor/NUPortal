@@ -1,4 +1,4 @@
-SELECT FirstName,MiddleName,LastName,PhoneNumber,Email,CampusName
+SELECT People.Id, FirstName,MiddleName,LastName,PhoneNumber,Email,CampusName
 FROM Contact.People
 LEFT JOIN Contact.PhoneNumbers
 ON People.PrimaryPhoneId = PhoneNumbers.Id

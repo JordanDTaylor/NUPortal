@@ -1,0 +1,22 @@
+<div>
+    <h1>{{pageTitle}}</h1>
+    <div>
+        <p>Students</p>
+        <div class="container-fluid" *ngIf="students && students.length">
+            <div *ngFor="let student of students">
+                <nu-student [student]='student'></nu-student>
+                <br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div>
+        <p>Staff</p>
+        <div class="container-fluid" *ngIf="allStaff && allStaff.length">
+            <div *ngFor="let staff of allStaff">
+                <nu-staff [staff]='staff'></nu-staff>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
