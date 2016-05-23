@@ -1,6 +1,6 @@
 var sql = require("seriate");
 var config = {
-    "server": "174.27.132.81", //external = 174.27.132.81, internal = 192.168.0.61
+    "server": "174.27.128.80", //external = 174.27.128.80, internal = 192.168.0.61
     "user": "sa",
     "password": "Password1",
     "database": "Test"
@@ -21,7 +21,7 @@ sql.setDefaultConfig(config);
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3002');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
