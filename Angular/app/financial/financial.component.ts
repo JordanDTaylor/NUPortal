@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
     </div>
      `
 })
+
 export class FinancialComponent {
-    pageTitle: string = 'NUPortal Home Demo';
-    logoUrl: string = 'https://media4.giphy.com/media/5D6kjdPsBRYUo/200_s.gif';
+    pageTitle: string = 'Neumont Portal - Financial';
 }
