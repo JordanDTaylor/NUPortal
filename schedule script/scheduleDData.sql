@@ -104,16 +104,16 @@ select * from Schedule.ElectiveCategories;
 delete from Schedule.ElectiveCategories;
 
 insert into Schedule.ElectiveCategories(CategoryId, CourseId)
-values (1, 1);
+values (1, 20);
 
 insert into Schedule.ElectiveCategories(CategoryId, CourseId)
-values (1, 2);
+values (1, 21);
 
 insert into Schedule.ElectiveCategories(CategoryId, CourseId)
-values (2, 3);
+values (2, 22);
 
 insert into Schedule.ElectiveCategories(CategoryId, CourseId)
-values (2, 4);
+values (2, 23);
 
 --///////////////////////////////////////// Planned Courses
 select * from Schedule.PlannedCourses;
