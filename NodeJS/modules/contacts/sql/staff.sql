@@ -1,4 +1,4 @@
-SELECT FirstName, MiddleName, LastName, PhoneNumber, Email, RoomNumber, CampusName, BuildingName
+SELECT PreferedName, FirstName, MiddleName, LastName, PhoneNumber, Email, RoomNumber, CampusName, BuildingName
 FROM Contact.People
 LEFT JOIN Contact.PhoneNumbers
 ON People.PrimaryPhoneId = PhoneNumbers.Id
