@@ -178,11 +178,19 @@ values (2, 8);
 
 --///////////////////////////////////////// Scheduled Instructor
 select * from Schedule.ScheduledInstructor;
-select * from Contact.Instructors;
 delete from Schedule.ScheduledInstructor;
 
---insert into Schedule.ScheduledInstructor(ScheduledCourses_Id, Instructors_Id)
---values (7, 1);
+insert into Schedule.ScheduledInstructor(ScheduledCourses_Id, Instructors_Id)
+values (7, 6);
+
+insert into Schedule.ScheduledInstructor(ScheduledCourses_Id, Instructors_Id)
+values (8, 6);
+
+insert into Schedule.ScheduledInstructor(ScheduledCourses_Id, Instructors_Id)
+values (9, 7);
+
+insert into Schedule.ScheduledInstructor(ScheduledCourses_Id, Instructors_Id)
+values (10, 7);
 
 --///////////////////////////////////////// Scheduled Events
 select * from Schedule.ScheduledEvents;
@@ -202,11 +210,19 @@ values ('02:30', '03:20', 1, 1, 1, 1, 1, 'E', 1, 4, 1, 20);
 
 --///////////////////////////////////////// Scheduled TA
 select * from Schedule.SheduledTA;
-select * from Contact.TeachingAssistant;
 delete from Schedule.SheduledTA;
 
---insert into Schedule.SheduledTA(TeachingAssistants_Id, ScheduledEvents_Id)
---values (1, 1);
+insert into Schedule.SheduledTA(TeachingAssistants_Id, ScheduledEvents_Id)
+values (4, 7);
+
+insert into Schedule.SheduledTA(TeachingAssistants_Id, ScheduledEvents_Id)
+values (4, 11);
+
+insert into Schedule.SheduledTA(TeachingAssistants_Id, ScheduledEvents_Id)
+values (5, 8);
+
+insert into Schedule.SheduledTA(TeachingAssistants_Id, ScheduledEvents_Id)
+values (5, 12);
 
 --///////////////////////////////////////// Sprints
 select * from Schedule.Sprints;
