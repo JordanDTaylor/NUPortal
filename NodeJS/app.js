@@ -1,6 +1,6 @@
 var sql = require("seriate");
 var config = {
-    "server": "174.27.132.81", //external = 174.27.132.81, internal = 192.168.0.61
+    "server": "174.27.128.80", //external = 174.27.132.81, internal = 192.168.0.61
     "user": "sa",
     "password": "Password1",
     "database": "Test"
@@ -18,9 +18,6 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(methodOverride());
 sql.setDefaultConfig(config);
 exports.sql = sql;
-//API modules
-var contacts = require('./modules/contacts/contacts-api');
-app.use(contacts);
 
 
 var tokenkey = 'tokenkey';
@@ -82,6 +79,8 @@ var passportErrNotLoggedIn = function(req,res,next){
 	res.status(401);
 	res.send('Not Logged In');
 }
+exports.passportErrNotLoggedIn = passportErrNotLoggedIn;
+
 
 
 app.get('/login', function(req,res){
@@ -94,11 +93,18 @@ app.get('/logout', function(req,res){
 });
 app.get('/loginsuccess', passportReqLoggedIn, function(req,res){res.sendFile('public/loginsuccess.html',{root:'./'})});
 
+//API modules
+var contacts = require('./modules/contacts/contacts-api');
+app.use(contacts);
+
+
 app.get('*', passportErrNotLoggedIn, function(req,res){
     //req.user contains the authenticated user
 	//TODO: send the actual data
     res.sendFile('public/loginsuccess.html', {root:'./'});
 });
+
+
 //====================================//
 app.listen(8080);
 console.log("App listening on port 8080");
