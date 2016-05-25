@@ -172,13 +172,7 @@ app.get('/loginsuccess', passportReqLoggedIn, function(req,res){res.sendFile('pu
 //API modules
 var contacts = require('./modules/contacts/contacts-api');
 app.use(contacts);
-
-
-app.get('*', passportErrNotLoggedIn, function(req,res){
-    //req.user contains the authenticated user
-	//TODO: send the actual data
-    res.sendFile('public/loginsuccess.html', {root:'./'});
-});
+app.use(require('./modules/catalog/catalog-api'));
 
 
 //====================================//

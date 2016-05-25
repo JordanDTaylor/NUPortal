@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ROUTER_PROVIDERS, Routes, ROUTER_DIRECTIVES} from '@angular/router';
-import { CourseComponent } from './course.component';
 import { CourseListComponent } from './course-list.component';
+import { CourseDetailComponent } from './course-detail.component';
 import { DegreeRequirementsComponent } from './degree-requirements.component';
 
 @Component({
@@ -20,7 +20,7 @@ import { DegreeRequirementsComponent } from './degree-requirements.component';
 })
 @Routes([
     {path:'courses', component:CourseListComponent},
-    {path:'course/:code', component:CourseComponent},
+    {path:'course/:id', component:CourseDetailComponent},
     {path:'degreeReqs', component:DegreeRequirementsComponent}
 ])
 export class CatalogComponent {

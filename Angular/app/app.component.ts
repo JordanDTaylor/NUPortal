@@ -6,13 +6,14 @@ import 'rxjs/Rx';
 import { ContactComponent } from './contacts/contact.component'
 import { ContactService } from './contacts/contact.service'
 import { CatalogComponent} from './catalog/catalog.component';
+import { CatalogService } from './catalog/catalog.service';
 
 @Component({
     selector: 'nu-app',
     templateUrl: `app/app.component.html`,
     styleUrls: ['app/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
-    providers: [ContactService, HTTP_PROVIDERS, ROUTER_PROVIDERS]
+    providers: [ContactService, CatalogService, HTTP_PROVIDERS, ROUTER_PROVIDERS]
 })
 @Routes([
     { path: '/', component: HomeComponent },
