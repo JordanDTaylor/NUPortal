@@ -24,49 +24,107 @@ var tokenkey = 'tokenkey';
 var cookieParser = require('cookie-parser');
 app.use(cookieParser(tokenkey));
 var cookieSession = require('cookie-session');
-app.use(cookieSession({keys:[tokenkey], maxAge:1000 * 60 * 60 * 24}));//maxAge is in miliseconds
+var sessionMaxAge = 1000 * 60 * 60 * 24;
+app.use(cookieSession({keys:[tokenkey], maxAge:sessionMaxAge}));//maxAge is in miliseconds
 
+var uuid = require("node-uuid");
+var bcrypt = require("bcrypt-nodejs");
 var passport = require("passport");
 var passportLocalStrategy = require("passport-local").Strategy;
-passport.use('login', new passportLocalStrategy({passReqToCallback:true}, function(req,unam,pword,done){
-	/*
-	db.User.findOne({username:unam}, function(err,user){
-		if(err){return done(err);}
-		if(!user){return done(null, false, {message: 'Incorrect username/password'});}
-		if(!bcrypt.compareSync(pword, user.password)){return done(null,false,{message: 'Incorrect username/password'});}
-		return done(null,user);
-	});
-	*/
-	if(unam=='tredmon'){
-		if(pword=='redmon'){
-			return done(null,{id:'1', username:unam, password:pword});
+
+function passportLocalSetPassword(userid, pword){
+	var passhash = bcrypt.hashSync(pword, bcrypt.genSaltSync(10), null)	
+	sql.execute({
+		query: "UPDATE Passport.LocalLogins SET password=@hash WHERE PersonId=@id",
+		params: {
+			id:{
+				type: sql.INT,
+				val: userid
+			},
+			hash:{
+				type: sql.NVARCHAR,
+				val: passhash
+			}
 		}
-	}
-	return done(null,false,{message: 'Incorrect username/password'});
+	}).then(function(sqlres){
+		return;
+	}, function(err){
+		console.log(JSON.stringify(err));
+		return err;
+	});
+}
+passport.use('login', new passportLocalStrategy({passReqToCallback:true}, function(req,unam,pword,done){
+	sql.execute({
+		query: "SELECT username, password, PersonId as id FROM Passport.LocalLogins WHERE username=@usernam",
+		params: {
+			usernam:{
+				type: sql.NVARCHAR,
+				val: unam
+			}
+		}
+	}).then(function(sqlres){
+		if(sqlres.length>0 && bcrypt.compareSync(pword, sqlres[0].password)){
+			return done(null, {id:sqlres[0].id, username:sqlres[0].username});
+		}
+		else{
+			return done(null,false,{message:'Incorrect username/password'});
+		}
+	}, function(err){
+		return done(err);
+	});
 }));
 passport.use('signup', new passportLocalStrategy({passReqToCallback:true}, function(req,unam,pword,done){
-	/*
-	db.User.findOne({username:unam}, function(err,user){
-		if(err){return done(err);}
-		if(user){return done(null, false, {message: 'Username not available'});}
-		var newuser = {username:unam, password:bcrypt.hashSync(pword, bcrypt.genSaltSync(10), null), id:generateID()};
-		db.User.save(newuser);
-		req.login(newuser);
-		return done(null, newuser);
-	});
-	*/
 	return done(null, false, {message: 'Signup is not currently implemented'});
 }));
 passport.serializeUser(function(user,done){
-    done(null, user.id);
-});
-passport.deserializeUser(function(userid,done){
-    /*
-	db.User.findById(userid, function(err,user){
-		done(err, user);
+	var token = uuid.v4();
+	sql.execute({
+		query: "INSERT INTO Passport.LocalTokens VALUES(@token, @username, @expires)",
+		params: {
+			token:{
+				type: sql.VARCHAR,
+				val: token
+			},
+			username:{
+				type: sql.NVARCHAR,
+				val: user.username
+			},
+			expires:{
+				type: sql.DATETIME,
+				val: new Date(new Date().getTime()+sessionMaxAge)
+			}
+		}
+	}).then(function(sqlres){
+		return done(null, token);
+	}, function(err){
+		console.log(JSON.stringify(err));
+		return done(err);
 	});
-	*/
-    done(null,{id:userid, username:'tredmon'});
+});
+passport.deserializeUser(function(token,done){
+	sql.execute({
+		query: "SELECT tok.username, PersonId as id, expiry FROM Passport.LocalTokens as tok JOIN Passport.LocalLogins as log ON tok.username=log.username WHERE token=@token",
+		params: {
+			token:{
+				type: sql.VARCHAR,
+				val: token
+			}
+		}
+	}).then(function(sqlres){
+		if(sqlres.length>0){
+			if(new Date(sqlres[0].expiry).getTime() > new Date().getTime()){
+				return done(null, {id:sqlres[0].id, username:sqlres[0].username});
+			}
+			else{
+				return done(null,false,{message:'Token Expired'});
+			}
+		}
+		else{
+			return done(null,false,{message:'Invalid User'});
+		}
+	}, function(err){
+		return done(err);
+	});
 });
 app.use(passport.initialize());
 app.use(passport.session());
