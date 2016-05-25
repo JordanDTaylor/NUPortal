@@ -9,15 +9,16 @@ import { ContactService } from './contacts/contact.service'
 @Component({
     selector: 'nu-app',
     templateUrl: `app/app.component.html`,
+    styleUrls: ['app/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
-    providers: [ ContactService, HTTP_PROVIDERS, ROUTER_PROVIDERS]
+    providers: [ContactService, HTTP_PROVIDERS, ROUTER_PROVIDERS]
 })
 @Routes([
-    {path: '/', component: HomeComponent},
-    {path: '/home', component: HomeComponent},
-    {path: '/contact', component: ContactComponent}
+    { path: '/', component: HomeComponent },
+    { path: '/home', component: HomeComponent },
+    { path: '/contact', component: ContactComponent }
 ])
 export class AppComponent {
-    pageTitle: string = 'NU Angular Demo';
-    logoUrl: string = 'https://www.google.com/images/nav_logo242.png';
+    pageTitle: string = 'Neumont University';
+    logoUrl: string = 'assets/images/logo.png';
 }
