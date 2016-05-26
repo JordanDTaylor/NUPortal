@@ -23,10 +23,22 @@ export class CatalogService{
 //			.do(data=> console.log('Course: ' + JSON.stringify(data) ))
 			.catch(this.handleError);
 	}
+	getCourseFromCode(code:string): Observable<any>{
+		return this._http.get(this.apiURL+'/course?code='+code)
+			.map((resp: Response) => <any> resp.json().results[0])
+//			.do(data=> console.log('Course: ' + JSON.stringify(data) ))
+			.catch(this.handleError);
+	}
 	getCoursePreReqs(code:string): Observable<any>{
 		return this._http.get(this.apiURL+'/coursePreReqs?code='+code)
-			.map((resp: Response) => <[]> resp.json().results)
-			.do(data=> console.log('Pre-Reqs: ' + JSON.stringify(data)))
+			.map((resp: Response) => {
+				var prereqs=resp.json().results;
+				for(var i:int=0; i<prereqs.length; ++i){
+					prereqs[i] = prereqs[i].RequiredCourse;
+				}
+				return <[]> prereqs;
+			})
+//			.do(data=> console.log('Pre-Reqs: ' + JSON.stringify(data)))
 			.catch(this.handleError);
 	}
 	

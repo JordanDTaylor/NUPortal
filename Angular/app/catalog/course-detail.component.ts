@@ -9,13 +9,19 @@ import { CatalogService } from './catalog.service';
     <div>
         <h3 *ngIf='course==undefined'>Unable to find Course</h3>
         <div *ngIf='course!=undefined'>
-            <h2>Course ID:{{ course.Id }}</h2>
+            <h2>Course ID:{{ course.Id }} - {{course.Credits}} Credits</h2>
             <nu-course [course]='course'></nu-course>
             <span>{{course.Description}}</span>
+            <h3>Pre-Requisites</h3>
+            <div *ngFor='let req of reqs'>
+                <a [routerLink]="['/catalog', 'course', req.Id]">
+                    <nu-course [course]='req'></nu-course>
+                </a>
+            </div>
         </div>
     </div>
     `,
-    directives:[ CourseComponent ]
+    directives:[ CourseComponent, ROUTER_DIRECTIVES ]
 })
 export class CourseDetailComponent {
 	course: any = undefined;
@@ -30,7 +36,12 @@ export class CourseDetailComponent {
 	}
 	getRequirements(){
 		if(this.course!=undefined){
-			this._catalogService.getCoursePreReqs(this.course.Id).subscribe(reqs=>this.reqs=reqs, err=>{this.reqs=undefined; console.log(err);});
+			this._catalogService.getCoursePreReqs(this.course.Code).subscribe(reqs=>{
+				this.reqs = [];
+				for(var i:int=0; i<reqs.length; ++i){
+					this._catalogService.getCourseFromCode(reqs[i]).subscribe(c=>this.reqs.push(c), err=>console.log(err));
+				}
+			}, err=>{this.reqs=undefined; console.log(err);});
 		}
 	}
 }
