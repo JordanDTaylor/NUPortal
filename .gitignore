@@ -247,14 +247,14 @@ ModelManifest.xml
 # Node and Angular
 
 .idea
-typings/**
-node_modules
-jspm_packages
-link-checker-results.txt
+**/typings/**
+**/node_modules
+**/jspm_packages
+**/link-checker-results.txt
 **/*npm-debug.log.*
 *.js.map
-_test-output
-_temp
+**/_test-output
+**/_temp
 Angular/**/*.js
 
 
@@ -266,3 +266,4 @@ Angular/**/*.js
 !typings/typings.d.ts
 !wallaby.js
 
+/Angular/typings

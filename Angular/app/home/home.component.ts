@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CanActivate } from 'angular2/router';
 
 @Component({
     selector: 'nu-home',
