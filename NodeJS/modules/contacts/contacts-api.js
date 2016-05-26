@@ -15,18 +15,16 @@ app.get('/api/contactInfo', function(req,res){
             }
         }
     }).then(function (results){
-        res.json({results});
+        res.json(results);
     }, function(err){
         console.log("Something bad happened: ",err);
     });
 });
 
 app.get('/api/allContactInfo', function(req,res){
-    sql.execute({
-        query: "SELECT Firstname, LastName FROM Contact.People"
-    }).then(function (results){
-        res.json({results});
-    }, function(err){
-        console.log("Something bad happened: ",err);
+    sql.execute({query: "SELECT Firstname, LastName FROM Contact.People"})
+        .then(
+            function (results){res.json(results);},
+            function(err){console.log("Something bad happened: ",err);
     });
 });

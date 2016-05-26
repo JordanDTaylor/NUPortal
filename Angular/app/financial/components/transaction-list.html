@@ -1,0 +1,22 @@
+<div >
+    <table class="table-bordered table-striped">
+        <thead class="bg-info" >
+            <tr>
+                <td>Date</td>
+                <td>Description</td>
+                <td>Reference</td>
+                <td>Amount</td>
+                <td>Balance</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tran of transactions" >
+                <td>{{tran.Date | dateString:'shortDate'}}</td>
+                <td>{{tran.Description}}</td>
+                <td>{{tran.Reference}}</td>
+                <td class="currency-text">{{tran.Amount | currency: 'USD': true:'.2'}}</td>
+                <td class="currency-text">{{tran.Balance | currency: 'USD': true:'.2'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
