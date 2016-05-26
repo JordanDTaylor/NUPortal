@@ -1,16 +1,34 @@
-<div>
-    <nav class="nunav">
-        <div>
-            <!--<a [routerLink]="['/home']"><img class="logo" [src]="logoUrl"/></a>-->
-            <h1>{{pageTitle}}</h1>
-            <ul class="nav navbar-nav">
-                <li><a [routerLink]="['/home']">Home</a></li>
-                <li><a [routerLink]="['/contact']">Contact</a></li>
-                                                
-            </ul>
+<!--<div>
+    <nav class="top-nav">
+        <div class="container">
+            <div class="nav-wrapper yellow">
+                <a [routerLink]="['/']" class="brand-logo">{{pageTitle}}</a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            </div>
         </div>
     </nav>
+
+    <ul id="slide-out" class="side-nav fixed" id="mobile-demo">
+        <li><a [routerLink]="['/home']">Home</a></li>
+        <li><a [routerLink]="['/contact']">Contact</a></li>
+
+    </ul>
     <div class="container">
         <router-outlet></router-outlet>
     </div>
+</div>-->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Material Design</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Home</a>
+            <a class="mdl-navigation__link" href="">Features</a>
+            <a class="mdl-navigation__link" href="">About Us</a>
+            <a class="mdl-navigation__link" href="">Log Out</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content" style="padding-left:100px;">Hello World!</div>
+    </main>
 </div>
