@@ -265,5 +265,6 @@ Angular/**/*.js
 !systemjs.config.js
 !typings/typings.d.ts
 !wallaby.js
+!Angular/angular-cli-build.js
 
 /Angular/typings

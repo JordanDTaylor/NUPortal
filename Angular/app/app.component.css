@@ -6,6 +6,10 @@ div.panel-heading {
    font-size: x-large; 
 }
 
+.container{
+    margin: 10px;
+}
+
 .brand{
     color: white;
 }
