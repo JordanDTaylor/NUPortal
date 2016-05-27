@@ -1,7 +1,6 @@
 import {Component} from "@angular/core";
 
 import {ScheduleService} from "../schedule.service";
-import {CurrentComponent} from "./schedule-current.component";
 import {ICurrentSchedule} from "./schedule-current";
 
 
