@@ -4,12 +4,13 @@ import { ROUTER_PROVIDERS, Routes, ROUTER_DIRECTIVES} from '@angular/router';
 
 import { HomeComponent} from './home/home.component';
 import { ScheduleComponent} from './schedule/schedule.component';
+import { ScheduleService} from './schedule/schedule.service';
 
 @Component({
     selector: 'nu-app',
     templateUrl: `app/app.component.html`,
     directives: [ROUTER_DIRECTIVES],
-    providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS]
+    providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, ScheduleService]
 })
 @Routes([
     {path: '/', component: HomeComponent},

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
-import { CurrentComponent } from './schedule-current.component';
-import { HistoryComponent } from './schedule-history.component';
-import { DegOutlineComponent } from './schedule-degOutline.component';
-import { PlannedComponent } from './schedule-planned.component';
+import { CurrentComponent } from './current-schedule/schedule-current.component';
+import { HistoryComponent } from './schedule-history/schedule-history.component';
+import { DegOutlineComponent } from './degree-outline/schedule-degOutline.component';
+import { PlannedComponent } from './planned-schedule/schedule-planned.component';
+import { ScheduleService} from './schedule.service';
 
 import { ROUTER_PROVIDERS, Routes, ROUTER_DIRECTIVES} from '@angular/router';
 
@@ -21,7 +22,8 @@ import { ROUTER_PROVIDERS, Routes, ROUTER_DIRECTIVES} from '@angular/router';
         <router-outlet></router-outlet>
     </div>
      `,
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    providers: [ScheduleService]
 })
 @Routes([
     {path: 'current', component: CurrentComponent},
