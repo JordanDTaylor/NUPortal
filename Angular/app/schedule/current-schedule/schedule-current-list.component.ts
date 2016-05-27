@@ -4,11 +4,9 @@ import {ScheduleService} from "../schedule.service";
 import {CurrentComponent} from "./schedule-current.component";
 import {ICurrentSchedule} from "./schedule-current";
 
-import {CurrencyPipe} from "@angular/common";
 
 @Component({
   selector: 'schedule-currentList',
-  directives: [CurrentComponent],
   template:
   `
   <div >
@@ -51,16 +49,13 @@ export class CurrentScheduleListComponent {
     currentClasses: ICurrentSchedule[] = [];
     errorMessage: string = "";
     studentId: number = 2;
-    constructor(public schedService:ScheduleService) { 
-        
-        //this.currentClasses
-    }
+    constructor(public schedService:ScheduleService) { }
 
-    /*ngOnInit():void {
-        this.schedService.getCurrentlyEnrolledStudentSchedule(studentId)
+    ngOnInit():void {
+        this.schedService.getCurrentlyEnrolledStudentSchedule()
             .subscribe(
                 currentClasses => this.currentClasses = currentClasses,
                 error => this.errorMessage = <any>error
             );
-    }*/
+    }
 }

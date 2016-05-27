@@ -15,21 +15,21 @@ export class ScheduleService{
 	constructor(private _http: Http){}
 	apiURL: string = 'http://localhost:8080/api';
 	
-	getStudentScheduleHistory(id:number): Observable<IScheduleHistory[]>{
-		return this._http.get(this.apiURL+'/studentScheduleHistory?id='+id)
-			.map((resp: Response) => <IScheduleHistory[]> resp.json().results[0])
+	getStudentScheduleHistory(): Observable<IScheduleHistory[]>{
+		return this._http.get(this.apiURL+'/studentScheduleHistory')
+			.map((resp: Response) => <IScheduleHistory[]> resp.json().results)
 //			.do(data=> console.log('studentScheduleHistory: ' + JSON.stringify(data) ))
 			.catch(this.handleError);
 	}
-	getCurrentlyEnrolledStudentSchedule(id:number): Observable<ICurrentSchedule[]>{
-		return this._http.get(this.apiURL+'/currentlyEnrolledStudentSchedule?id='+id)
-			.map((resp: Response) => <ICurrentSchedule[]> resp.json().results[0])
+	getCurrentlyEnrolledStudentSchedule(): Observable<ICurrentSchedule[]>{
+		return this._http.get(this.apiURL+'/currentlyEnrolledStudentSchedule')
+			.map((resp: Response) => <ICurrentSchedule[]> resp.json().results)
 //			.do(data=> console.log('currentlyEnrolledStudentSchedule: ' + JSON.stringify(data) ))
 			.catch(this.handleError);
 	}
-    getCurrentlyPlannedStudentSchedule(id:number): Observable<IPlannedSchedule[]>{
-		return this._http.get(this.apiURL+'/currentlyPlannedStudentSchedule?id='+id)
-			.map((resp: Response) => <IPlannedSchedule[]> resp.json().results[0])
+    getCurrentlyPlannedStudentSchedule(): Observable<IPlannedSchedule[]>{
+		return this._http.get(this.apiURL+'/currentlyPlannedStudentSchedule')
+			.map((resp: Response) => <IPlannedSchedule[]> resp.json().results)
 //			.do(data=> console.log('currentlyPlannedStudentSchedule: ' + JSON.stringify(data) ))
 			.catch(this.handleError);
 	}
