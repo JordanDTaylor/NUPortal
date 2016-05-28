@@ -13,7 +13,7 @@ import { DegreeRequirementsListComponent } from './degree-requirements.component
         <h1>{{ pageTitle }}</h1>
         <div>
             <a [routerLink]="['courses']">Course List</a>
-            <a [routerLink]="['degree']">Degree Requirements</a>
+            <a [routerLink]="['degrees']">Degree Requirements</a>
         </div>
         <router-outlet></router-outlet>
     </div>
@@ -23,7 +23,7 @@ import { DegreeRequirementsListComponent } from './degree-requirements.component
 @Routes([
     {path:'courses', component:CourseListComponent},
     {path:'course/:id', component:CourseDetailComponent},
-    {path:'degree', component:DegreeRequirementsComponent},
+    {path:'degrees', component:DegreeRequirementsComponent},
     {path:'degree/:degree', component:DegreeRequirementsListComponent}
 ])
 export class CatalogComponent {

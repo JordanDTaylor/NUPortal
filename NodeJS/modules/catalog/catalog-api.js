@@ -78,13 +78,45 @@ app.get('/api/coursePreReqs', function(req,res){
 	});
 });
 
-app.get('/api/degreereqs', function(req,res){
+
+
+app.get('/api/allDegrees', function(req,res){
+	sql.execute({
+		query: "SELECT Name, Id FROM [Degree].[Degree]",
+		params: {}
+	}).then(function (results){
+		res.json({results});
+	}, function(err){
+		console.log("Something bad happened: ",err);
+		res.status(503);
+		res.json(err);
+	});
+});
+app.get('/api/degree', function(req,res){
+	var degree_id = req.param('id');
+	sql.execute({
+		query: "SELECT Name, Id FROM [Degree].[Degree]"+(degree_id?" WHERE Id = @degreeid":""),
+		params: {
+			degreeid: {
+				type: sql.NVARCHAR,
+				val: degree_id,
+			}
+		}
+	}).then(function(results){
+		res.json({results});
+	}, function(err){
+		console.log("Something bad happened: ",err);
+		res.status(503);
+		res.json(err);
+	});
+});
+app.get('/api/degreeReqs', function(req,res){
 	var degree_id = req.param('id');
 	sql.execute({
 		query: "SELECT CourseCode FROM [Degree].[DegreeTrackCourses]"+(degree_id?" WHERE DegreeId=@degreeid":""),
 		params: {
 			degreeid: {
-				type: sql.int,
+				type: sql.NVARCHAR,
 				val: degree_id,
 			}
 		}

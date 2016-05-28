@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { ROUTER_PROVIDERS, ROUTER_DIRECTIVES, Routes } from '@angular/router';
+import { CatalogService } from './catalog.service';
 import { DegreeRequirementsListComponent } from './degree-requirements-list.component';
 
 @Component({
@@ -7,14 +8,19 @@ import { DegreeRequirementsListComponent } from './degree-requirements-list.comp
     template: `
     <div>
         <h1>{{ pageTitle }}</h1>
-        <div *ngFor="let degree of degs">
-            <a [routerLink]="['/catalog', 'degree', degree]">{{degree}}</a>
+        <div *ngFor="let degree of degrees">
+            <a [routerLink]="['/catalog', 'degree', degree.Id]">{{degree.Name}}</a>
         </div>
     </div>
      `,
-    directives: [DegreeRequirementsListComponent, ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES]
 })
 export class DegreeRequirementsComponent {
 	pageTitle: string = 'Degree Requirements';
-	degs: [] = ['CS', 'WEB', 'GD', 'TM', 'IS'];
+	degrees: [] = [];
+	
+	constructor(private _catalogService: CatalogService){}
+	ngOnInit(){
+		this._catalogService.getDegrees().subscribe(degs=>this.degrees=degs, err=>console.log(err));
+	}
 }

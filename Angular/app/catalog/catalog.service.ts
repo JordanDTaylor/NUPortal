@@ -42,6 +42,27 @@ export class CatalogService{
 			.catch(this.handleError);
 	}
 	
+	
+	getDegrees(): Observable<any>{
+		return this._http.get(this.apiURL+'/allDegrees')
+			.map((resp: Response) => <any> resp.json().results)
+//			.do(data=> console.log('Degrees: '+JSON.stringify(data)))
+			.catch(this.handleError);
+	}
+	getDegree(id:string){
+		return this._http.get(this.apiURL+'/degree?id='+id)
+			.map((resp:Response)=> <any> resp.json().results[0])
+			.do(data=> console.log('Degree: '+JSON.stringify(data)))
+			.catch(this.handleError);
+	}
+	getDegreeReqs(id:string){
+		return this._http.get(this.apiURL+'/degreeReqs?id='+id)
+			.map((resp:Response)=> <any> resp.json().results)
+			.do(data=> console.log('DegreeReqs: '+JSON.stringify(data)))
+			.catch(this.handleError);
+	}
+	
+	
 	private handleError(error: Response) {
 		console.error(error);
 		return Observable.throw(error.json().error || 'Server error');

@@ -18,12 +18,10 @@ import { CatalogService } from './catalog/catalog.service';
 @Routes([
     { path: '/', component: HomeComponent },
     { path: '/home', component: HomeComponent },
-    { path: '/contact', component: ContactComponent }
+    { path: '/contact', component: ContactComponent },
     { path: '/catalog', component: CatalogComponent }
 ])
 export class AppComponent {
     pageTitle: string = 'NuPortal';
     logoUrl: string = 'assets/images/logo.png';
-    pageTitle: string = 'NuPortal';
-    logoUrl: string = 'https://www.google.com/images/nav_logo242.png';
 }

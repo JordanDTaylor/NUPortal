@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { ROUTER_PROVIDERS, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
+import { CourseComponent } from './course.component';
 
 @Component({
     selector: 'nu-degree-requirements-list',
@@ -8,15 +10,24 @@ import { Component, Input } from '@angular/core';
         <div *ngIf='degree==undefined'>
             Unable to find Degree Requirements
         </div>
-        <div *ngIf='degree!=undefined'>
-            <div *ngFor="let req">
-                req
-            </div>
-        </div>
+        <div *ngFor="let req of reqs">
+            <nu-course [course]='req'></nu-course>
     </div>
-     `
+    `,
+    directives:[ROUTER_DIRECTIVES, CourseComponent]
 })
 export class DegreeRequirementsListComponent {
-    pageTitle: string = 'Degree Requirements';
-    @Input() degree: string = undefined;
+	pageTitle: string = 'Degree Requirements';
+	reqs: [] = [];
+	degree: string = undefined;
+	
+	
+	constructor(private _catalogService: CatalogService){}
+	routerOnActivate(seg:RouteSegment):void{
+		this.switchDegree(seg.getParam('degree'));
+	}
+	switchDegree(deg:string){
+		this.degree = deg;
+		this._catalogService.getDegreeReqs(this.degree).subscribe(reqs=>this.reqs=reqs, err=>console.log(err));
+	}
 }
