@@ -5,6 +5,14 @@ var config = {
     "password": "Password1",
     "database": "Test"
 };
+/*
+var config = {
+    "server": "10.10.14.13",
+    "user": "TRedmon",
+    "password": "class",
+    "database": "TRedmondb",
+};
+*/
 var express = require('express');
 var app = express();
 var morgan = require('morgan');
