@@ -9,7 +9,6 @@ import { ContactService } from './contacts/contact.service'
 @Component({
     selector: 'nu-app',
     templateUrl: `app/app.component.html`,
-    styleUrls: ['app/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
     providers: [ContactService, HTTP_PROVIDERS, ROUTER_PROVIDERS]
 })

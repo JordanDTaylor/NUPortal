@@ -3,12 +3,7 @@ import { CanActivate } from 'angular2/router';
 
 @Component({
     selector: 'nu-home',
-    template: `
-    <div>
-        <h1>{{ pageTitle }}</h1>
-        <img [src]="logoUrl" />
-    </div>
-     `
+    templateUrl: `app/home/home.component.html`
 })
 export class HomeComponent {
     pageTitle: string = 'NU Home Demo';
