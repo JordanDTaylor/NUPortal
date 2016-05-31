@@ -1,0 +1,12 @@
+td {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.currency-text{
+    text-align: right;
+}
+div.panel-heading {
+    font-size: x-large;
+}
