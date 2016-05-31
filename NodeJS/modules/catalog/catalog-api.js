@@ -113,7 +113,7 @@ app.get('/api/degree', function(req,res){
 app.get('/api/degreeReqs', function(req,res){
 	var degree_id = req.param('id');
 	sql.execute({
-		query: "SELECT CourseCode FROM [Degree].[DegreeTrack] JOIN [Degree].[DegreeTrackCourses] ON Id=DegreeTrackId"+(degree_id?" WHERE DegreeId=@degreeid":""),
+		query: "SELECT CourseCode as Code FROM [Degree].[DegreeTrack] JOIN [Degree].[DegreeTrackCourses] ON Id=DegreeTrackId"+(degree_id?" WHERE DegreeId=@degreeid":""),
 		params: {
 			degreeid: {
 				type: sql.NVARCHAR,

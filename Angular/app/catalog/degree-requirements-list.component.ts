@@ -12,7 +12,7 @@ import { CatalogService } from './catalog.service';
             Unable to find Degree Requirements
         </div>
         <div *ngFor="let req of reqs">
-            <nu-course [course]='req'></nu-course>
+            {{req.Code}}
         </div>
     </div>
     `,
