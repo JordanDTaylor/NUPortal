@@ -157,8 +157,6 @@ var passportErrNotLoggedIn = function(req,res,next){
 }
 exports.passportErrNotLoggedIn = passportErrNotLoggedIn;
 
-
-
 app.get('/login', function(req,res){
     res.sendFile('public/login.html', {root:'./'});
 });
@@ -170,11 +168,18 @@ app.get('/logout', function(req,res){
 app.get('/loginsuccess', passportReqLoggedIn, function(req,res){res.sendFile('public/loginsuccess.html',{root:'./'})});
 
 //API modules
-var contacts = require('./modules/contacts/contacts-api');
-app.use(contacts);
+app.use(require('./modules/contacts/contacts-api'));
 app.use(require('./modules/catalog/catalog-api'));
+app.use(require('./modules/financial/transactions-api'));
 
+app.get('*', passportErrNotLoggedIn, function(req,res){
+    //req.user contains the authenticated user
+	//TODO: send the actual data
+    res.sendFile('public/loginsuccess.html', {root:'./'});
+});
 
-//====================================//
+//Use this for local
 app.listen(8080);
-console.log("App listening on port 8080");
+
+// Use this on the server
+//app.listen(process.env.PORT);
