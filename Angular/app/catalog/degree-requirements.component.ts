@@ -12,7 +12,7 @@ import { DegreeRequirementsListComponent } from './degree-requirements-list.comp
             <a [routerLink]="['/catalog', 'degree', degree.Id]">{{degree.Name}}</a>
         </div>
     </div>
-     `,
+    `,
     directives: [ROUTER_DIRECTIVES]
 })
 export class DegreeRequirementsComponent {

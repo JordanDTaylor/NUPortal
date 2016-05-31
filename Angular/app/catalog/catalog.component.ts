@@ -3,7 +3,7 @@ import { ROUTER_PROVIDERS, Routes, ROUTER_DIRECTIVES} from '@angular/router';
 import { CourseListComponent } from './course-list.component';
 import { CourseDetailComponent } from './course-detail.component';
 import { DegreeRequirementsComponent } from './degree-requirements.component';
-import { DegreeRequirementsListComponent } from './degree-requirements.component';
+import { DegreeRequirementsListComponent } from './degree-requirements-list.component';
 
 
 @Component({
@@ -24,7 +24,7 @@ import { DegreeRequirementsListComponent } from './degree-requirements.component
     {path:'courses', component:CourseListComponent},
     {path:'course/:id', component:CourseDetailComponent},
     {path:'degrees', component:DegreeRequirementsComponent},
-    {path:'degree/:degree', component:DegreeRequirementsListComponent}
+    {path:'degree/:id', component:DegreeRequirementsListComponent}
 ])
 export class CatalogComponent {
     pageTitle: string = 'Course Catalog';

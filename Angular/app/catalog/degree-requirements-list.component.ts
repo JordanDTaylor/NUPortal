@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ROUTER_PROVIDERS, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
 import { CourseComponent } from './course.component';
+import { CatalogService } from './catalog.service';
 
 @Component({
     selector: 'nu-degree-requirements-list',
@@ -12,6 +13,7 @@ import { CourseComponent } from './course.component';
         </div>
         <div *ngFor="let req of reqs">
             <nu-course [course]='req'></nu-course>
+        </div>
     </div>
     `,
     directives:[ROUTER_DIRECTIVES, CourseComponent]
@@ -24,7 +26,7 @@ export class DegreeRequirementsListComponent {
 	
 	constructor(private _catalogService: CatalogService){}
 	routerOnActivate(seg:RouteSegment):void{
-		this.switchDegree(seg.getParam('degree'));
+		this.switchDegree(seg.getParam('id'));
 	}
 	switchDegree(deg:string){
 		this.degree = deg;
