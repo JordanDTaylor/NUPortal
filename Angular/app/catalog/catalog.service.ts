@@ -52,13 +52,13 @@ export class CatalogService{
 	getDegree(id:string){
 		return this._http.get(this.apiURL+'/degree?id='+id)
 			.map((resp:Response)=> <any> resp.json().results[0])
-			.do(data=> console.log('Degree: '+JSON.stringify(data)))
+//			.do(data=> console.log('Degree: '+JSON.stringify(data)))
 			.catch(this.handleError);
 	}
 	getDegreeReqs(id:string){
 		return this._http.get(this.apiURL+'/degreeReqs?id='+id)
 			.map((resp:Response)=> <any> resp.json().results)
-			.do(data=> console.log('DegreeReqs: '+JSON.stringify(data)))
+//			.do(data=> console.log('DegreeReqs: '+JSON.stringify(data)))
 			.catch(this.handleError);
 	}
 	
