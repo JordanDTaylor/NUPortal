@@ -18,9 +18,9 @@ import { CatalogService } from './catalog/catalog.service';
     providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, ScheduleService, ContactService, CatalogService]
 })
 @Routes([
-    {path: '/', component: HomeComponent},
-    {path: '/home', component: HomeComponent},
-    {path: '/schedule', component: ScheduleComponent}
+    { path: '/', component: HomeComponent },
+    { path: '/home', component: HomeComponent },
+    { path: '/schedule', component: ScheduleComponent },
     { path: '/contact', component: ContactComponent },
     { path: '/catalog', component: CatalogComponent }
 ])

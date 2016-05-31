@@ -1,6 +1,6 @@
 /// <reference path="../../js/project.js" />
 
-import { Component, AfterViewChecked } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { IStudent } from './people/student';
@@ -18,7 +18,7 @@ import { ContactService } from './contact.service';
     templateUrl: 'app/contacts/contact.component.html',
     directives: [StudentComponent, StaffComponent, ROUTER_DIRECTIVES]
 })
-export class ContactComponent implements AfterViewChecked {
+export class ContactComponent implements AfterViewInit {
     pageTitle: string = "Contacts"
     searchText: string;
     onKey(event: any) {
@@ -33,7 +33,6 @@ export class ContactComponent implements AfterViewChecked {
     constructor(private _contactService: ContactService) {}
 
     ngOnInit(): void {
-        GoPicker()
         this._contactService.getStudents()
             .subscribe(
             student => this.students = student,
@@ -46,8 +45,8 @@ export class ContactComponent implements AfterViewChecked {
             )
     }
 
-    ngAfterViewChecked() {
-        window['GoPicker'].call()
+    ngAfterViewInit() {
+        GoPicker()
     }
 }
 
