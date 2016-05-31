@@ -158,6 +158,7 @@ var passportReqLoggedIn = function(req,res,next){
 	if(req.isAuthenticated()){return next();}
 	res.redirect('/login');
 }
+exports.passportReqLoggedIn = passportReqLoggedIn;
 var passportErrNotLoggedIn = function(req,res,next){
 	if(req.isAuthenticated()){return next();}
 	res.status(401);
@@ -179,6 +180,7 @@ app.get('/loginsuccess', passportReqLoggedIn, function(req,res){res.sendFile('pu
 app.use(require('./modules/contacts/contacts-api'));
 app.use(require('./modules/catalog/catalog-api'));
 app.use(require('./modules/financial/transactions-api'));
+app.use(require('./modules/schedule/schedule-api'));
 
 app.get('*', passportErrNotLoggedIn, function(req,res){
     //req.user contains the authenticated user
