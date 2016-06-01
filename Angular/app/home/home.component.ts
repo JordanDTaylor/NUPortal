@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { CanActivate } from 'angular2/router';
+import { TransactionListComponent } from "../financial/components/transaction-list";
 
 @Component({
     selector: 'nu-home',
+    directives: [TransactionListComponent],
     templateUrl: `app/home/home.component.html`
 })
 export class HomeComponent {

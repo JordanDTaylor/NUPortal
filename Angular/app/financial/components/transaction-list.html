@@ -1,4 +1,4 @@
-<div >
+<!--<div >
     <table class="table-bordered table-striped">
         <thead class="bg-info" >
             <tr>
@@ -19,4 +19,50 @@
             </tr>
         </tbody>
     </table>
+</div>-->
+
+<div class="container">
+    <div class="row">
+        <div>
+            <section class="content-inner margin-top-no">
+                <div class="card">
+                    <div class="card-main">
+                        <div class="card-inner margin-bottom-no">
+                            <p class="card-heading">Your account</p>
+                            <div class="card-table">
+                                <div class="table-responsive">
+                                    <table class="table" title="A table within a card">
+                                        <thead>
+                                            <tr>
+                                                <td>Date</td>
+                                                <td>Description</td>
+                                                <td>Reference</td>
+                                                <td>Amount</td>
+                                                <td>Balance</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let tran of transactions">
+                                                <td>{{tran.Date | dateString:'shortDate'}}</td>
+                                                <td>{{tran.Description}}</td>
+                                                <td>{{tran.Reference}}</td>
+                                                <td class="currency-text">{{tran.Amount | currency: 'USD': true:'.2'}}</td>
+                                                <td class="currency-text">{{tran.Balance | currency: 'USD': true:'.2'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <div class="card-action-btn pull-right">
+                                <a (click)="onLeft($event)" class="btn btn-flat waves-attach" href="javascript:void(0)"><span class="icon">chevron_left</span></a>
+                                <a (click)="onRight($event)" class="btn btn-flat waves-attach" href="javascript:void(0)"><span class="icon">chevron_right</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
 </div>
