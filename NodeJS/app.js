@@ -161,15 +161,15 @@ var passportErrNotLoggedIn = function(req,res,next){
 }
 exports.passportErrNotLoggedIn = passportErrNotLoggedIn;
 
-app.get('/login', function(req,res){
+app.get('/api/login', function(req,res){
     res.sendFile('public/login.html', {root:'./'});
 });
-app.post('/login', passport.authenticate('login', {session:true}), function(req,res){
+app.post('/api/login', passport.authenticate('login', {session:true}), function(req,res){
 	//if this function is called, login succeeded.
 	//otherwise, a 401 error is returned
 	res.send('Logged In');
 });
-app.get('/logout', function(req,res){
+app.get('/api/logout', function(req,res){
 	req.logout();
 	res.send('Logged Out');
 });
