@@ -1,18 +1,5 @@
 var sql = require("seriate");
-var config = {
-    "server": "174.27.128.80", //external = 174.27.128.80, internal = 192.168.0.61
-    "user": "sa",
-    "password": "Password1",
-    "database": "Test"
-};
-/*
-var config = {
-    "server": "10.10.14.13",
-    "user": "TRedmon",
-    "password": "class",
-    "database": "TRedmondb",
-};
-*/
+var config = require("./appconfig");
 var express = require('express');
 var app = express();
 var morgan = require('morgan');
@@ -24,7 +11,7 @@ app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 app.use(methodOverride());
-sql.setDefaultConfig(config);
+sql.setDefaultConfig(config.dbconnectionstring);
 
 app.use(function (req, res, next) {
 
@@ -189,8 +176,4 @@ app.get('*', passportErrNotLoggedIn, function(req,res){
 });
 */
 
-//Use this for local
-app.listen(8080);
-
-// Use this on the server
-//app.listen(process.env.PORT);
+app.listen(config.listenport);
