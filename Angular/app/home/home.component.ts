@@ -6,6 +6,6 @@ import { CanActivate } from 'angular2/router';
     templateUrl: `app/home/home.component.html`
 })
 export class HomeComponent {
-    pageTitle: string = 'NU Home Demo';
+    pageTitle: string = 'Dashboard';
     logoUrl: string = 'https://media4.giphy.com/media/5D6kjdPsBRYUo/200_s.gif';
 }

@@ -12,7 +12,7 @@ body {
   padding-bottom: 58px;
 }
 .page-brand .ui-content-header {
-  background-image: url(./images/bg/brand.jpg);
+  background-image: url(./images/bg/amber.jpg);
 }
 
 .ui-footer {
@@ -199,13 +199,13 @@ body {
   border-color: #ff4081 !important;
 }
 
-.ui-selectable-helper {
+/*.ui-selectable-helper {
   background-color: rgba(0, 0, 0, 0.12);
   border: 1px solid #dadada;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: absolute;
   z-index: 100;
-}
+}*/
 
 .ui-card-pre {
   -webkit-box-align: center;

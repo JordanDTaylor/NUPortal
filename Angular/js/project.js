@@ -7,26 +7,26 @@ function GoPicker() {
 		pickerMarker;
 
 
-	function initPickerMap() {
-		pickerMap = new google.maps.Map(document.getElementById('ui_picker_map_wrap'), {
-			center: {
-				lat: 0,
-				lng: 0
-			},
-			disableDefaultUI: true,
-			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			zoom: 15
-		});
+	// function initPickerMap() {
+		// pickerMap = new google.maps.Map(document.getElementById('ui_picker_map_wrap'), {
+		// 	center: {
+		// 		lat: 0,
+		// 		lng: 0
+		// 	},
+		// 	disableDefaultUI: true,
+		// 	mapTypeId: google.maps.MapTypeId.ROADMAP,
+		// 	zoom: 15
+		// });
 
-		pickerMarker = new google.maps.Marker({
-			map: pickerMap,
-			position: { lat: 0, lng: 0 }
-		});
-	};
+		// pickerMarker = new google.maps.Marker({
+		// 	map: pickerMap,
+		// 	position: { lat: 0, lng: 0 }
+		// });
+	// };
 
-	if ((typeof google != 'undefined') && $('.ui-picker-map-wrap').length) {
-		initPickerMap();
-	};
+	// if ((typeof google != 'undefined') && $('.ui-picker-map-wrap').length) {
+	// 	initPickerMap();
+	// };
 
 	if (typeof jQuery.ui != 'undefined') {
 		// draggable
@@ -80,9 +80,9 @@ function GoPicker() {
 
 				var pickerMapLatLng = new google.maps.LatLng($selectingParent.find('.ui-picker-map-lat').html(), $selectingParent.find('.ui-picker-map-lng').html());
 
-				pickerMap.setCenter(pickerMapLatLng);
-				pickerMarker.setMap(pickerMap);
-				pickerMarker.setPosition(pickerMapLatLng);
+				// pickerMap.setCenter(pickerMapLatLng);
+				// pickerMarker.setMap(pickerMap);
+				// pickerMarker.setPosition(pickerMapLatLng);
 			},
 			unselecting: function (event, ui) {
 				var $unselectingParent = $(ui.unselecting).parent();
@@ -93,7 +93,7 @@ function GoPicker() {
 					$('.ui-picker-info').addClass('ui-picker-info-null');
 					$('.ui-picker-info-desc-wrap').html('');
 					$('.ui-picker-info-title-wrap').html('');
-					pickerMarker.setMap(null);
+					// pickerMarker.setMap(null);
 				} else {
 					var $first = $($('.ui-picker-selected')[0]);
 
@@ -102,9 +102,9 @@ function GoPicker() {
 
 					var firstLatLng = new google.maps.LatLng($first.find('.ui-picker-map-lat').html(), $first.find('.ui-picker-map-lng').html());
 
-					pickerMap.setCenter(firstLatLng);
-					pickerMarker.setMap(pickerMap);
-					pickerMarker.setPosition(firstLatLng);
+					// pickerMap.setCenter(firstLatLng);
+					// pickerMarker.setMap(pickerMap);
+					// pickerMarker.setPosition(firstLatLng);
 				};
 			}
 		});
@@ -226,23 +226,23 @@ function GoPicker() {
 		$($(this).attr('data-target')).addClass('el-loading-done');
 	});
 
-	$('#ui_el_loading_example_wrap .tile-active-show').each(function (index) {
-		var $this = $(this),
-			timer;
+	// $('#ui_el_loading_example_wrap .tile-active-show').each(function (index) {
+	// 	var $this = $(this),
+	// 		timer;
 
-		$this.on('hide.bs.tile', function (e) {
-			clearTimeout(timer);
-		});
+	// 	$this.on('hide.bs.tile', function (e) {
+	// 		clearTimeout(timer);
+	// 	});
 
-		$this.on('show.bs.tile', function (e) {
-			if (!$('.el-loading', $this).hasClass('el-loading-done')) {
-				timer = setTimeout(function () {
-					$('.el-loading', $this).addClass('el-loading-done');
-					$this.prepend('<div class="tile-sub"><p>Additional information<br><small>Aliquam in pharetra leo. In congue, massa sed elementum dictum, justo quam efficitur risus, in posuere mi orci ultrices diam.</small></p></div>');
-				}, 6000);
-			};
-		});
-	});
+	// 	$this.on('show.bs.tile', function (e) {
+	// 		if (!$('.el-loading', $this).hasClass('el-loading-done')) {
+	// 			timer = setTimeout(function () {
+	// 				$('.el-loading', $this).addClass('el-loading-done');
+	// 				$this.prepend('<div class="tile-sub"><p>Additional information<br><small>Aliquam in pharetra leo. In congue, massa sed elementum dictum, justo quam efficitur risus, in posuere mi orci ultrices diam.</small></p></div>');
+	// 			}, 6000);
+	// 		};
+	// 	});
+	// });
 
 	// ui-snackbar.html
 	var snackbarText = 1;
