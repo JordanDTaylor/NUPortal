@@ -4,12 +4,7 @@ import {TransactionListComponent} from "./transaction-list";
 @Component({
     selector: 'nu-financial',
     directives: [TransactionListComponent],
-    template: `
-    <div>
-        <h1>{{ pageTitle }}</h1>
-        <fin-transactionList>loading tran...</fin-transactionList>
-    </div>
-     `
+    templateUrl: './app/financial/components/financial.component.html'
 })
 
 export class FinancialComponent {

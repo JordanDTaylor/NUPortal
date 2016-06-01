@@ -55,6 +55,10 @@
                     </div>
                 </div>
                 <div class="menu-content">
+                    <div class="form-group">
+                        <label for="search">Search for Username</label>
+                        <input (keyup)="onKey($event)" type="text" class="form-control" [(ngModel)]="searchText" required style="padding:5px">
+                    </div>
                     <hr>
                 </div>
             </div>
@@ -85,7 +89,7 @@
                                 </div>
                                 <div class="access-hide">
                                     <div class="ui-picker-info-desc">
-                                        <p>Place Holder</p>
+                                        <nu-student [student]=student></nu-student>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +116,7 @@
                                 </div>
                                 <div class="access-hide">
                                     <div class="ui-picker-info-desc">
-                                        <p>Place Holder</p>
+                                        <p><nu-staff [staff]=staff></nu-staff></p>
                                     </div>
                                 </div>
                             </div>
