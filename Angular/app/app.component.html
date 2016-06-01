@@ -1,18 +1,59 @@
-<div>
-    <nav class="nunav">
-        <div>
-            <!--<a [routerLink]="['/home']"><img class="logo" [src]="logoUrl"/></a>-->
-            <h1>{{pageTitle}}</h1>
-            <ul class="nav navbar-nav">
-                <li><a [routerLink]="['/home']">Home</a></li>
-				<li><a [routerLink]="['/catalog']">Catalog</a></li>
-                <li><a [routerLink]="['/schedule']">Schedule</a></li>
-                <li><a [routerLink]="['/contact']">Contact</a></li>
-                <li><a [routerLink]="['/account']">Account</a></li>
+<header class="header header-transparent header-waterfall ui-header">
+    <ul class="nav nav-list pull-left">
+        <li>
+            <a data-toggle="menu" href="#ui_menu">
+                <span class="icon icon-lg">menu</span>
+            </a>
+        </li>
+    </ul>
+    <a class="header-logo margin-left-no" [routerLink]="['/home']">Neumont Student Portal</a>
+    <ul class="nav nav-list pull-right">
+        <li class="dropdown margin-right">
+            <a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
+                <span class="access-hide">John Smith</span>
+                <span class="avatar avatar-sm"><img alt="alt text for John Smith avatar" src="../images/users/avatar-001.jpg"></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                    <a class="padding-right-lg waves-attach" href="javascript:void(0)"><span class="icon icon-lg margin-right">account_box</span>Profile Settings</a>
+                </li>
+                <li>
+                    <a class="padding-right-lg waves-attach" href="javascript:void(0)"><span class="icon icon-lg margin-right">add_to_photos</span>Upload Photo</a>
+                </li>
+                <li>
+                    <a class="padding-right-lg waves-attach" href="page-login.html"><span class="icon icon-lg margin-right">exit_to_app</span>Logout</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</header>
+<nav aria-hidden="true" class="menu" id="ui_menu" tabindex="-1">
+    <div class="menu-scroll">
+        <div class="menu-content">
+            <a class="menu-logo" href="index.html">NU Portal</a>
+            <ul class="nav">
+                <li>
+                    <a class="collapsed waves-attach" data-toggle="collapse" href="#ui_menu_components">Site Map</a>
+                    <ul class="menu-collapse collapse" id="ui_menu_components">
+                        <li>
+                            <a class="waves-attach" [routerLink]="['/home']">Home</a>
+                        </li>
+                        <li>
+                            <a class="waves-attach" [routerLink]="['/schedule']">Schedule</a>
+                        </li>
+                        <li>
+                            <a class="waves-attach" [routerLink]="['/catalog']">Catalog</a>
+                        </li>
+                        <li>
+                            <a class="waves-attach" [routerLink]="['/contact']">Contact</a>
+                        </li>
+                        <li>
+                            <a class="waves-attach" [routerLink]="['/account']">Account</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
-    </nav>
-    <div class="container">
-        <router-outlet></router-outlet>
     </div>
-</div>
+</nav>
+<router-outlet></router-outlet>

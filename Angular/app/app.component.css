@@ -6,10 +6,12 @@ div.panel-heading {
    font-size: x-large; 
 }
 
-.logo{
-    max-height: 50px;
-    display: block;
-    margin: 0 auto;
+.container{
+    margin: 10px;
+}
+
+.brand{
+    color: white;
 }
 
 .nunav{
