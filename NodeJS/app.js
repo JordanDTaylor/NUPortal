@@ -154,11 +154,6 @@ passport.deserializeUser(function(token,done){
 });
 app.use(passport.initialize());
 app.use(passport.session());
-var passportReqLoggedIn = function(req,res,next){
-	if(req.isAuthenticated()){return next();}
-	res.redirect('/login');
-}
-exports.passportReqLoggedIn = passportReqLoggedIn;
 var passportErrNotLoggedIn = function(req,res,next){
 	if(req.isAuthenticated()){return next();}
 	res.status(401);
@@ -166,15 +161,19 @@ var passportErrNotLoggedIn = function(req,res,next){
 }
 exports.passportErrNotLoggedIn = passportErrNotLoggedIn;
 
-app.get('/login', function(req,res){
+app.get('/api/login', function(req,res){
     res.sendFile('public/login.html', {root:'./'});
 });
-app.post('/login', passport.authenticate('login', {session:true, failureRedirect:'/login', successRedirect:'/loginsuccess'}));
-app.get('/logout', function(req,res){
-	req.logout();
-	res.redirect('/login');
+app.post('/api/login', passport.authenticate('login', {session:true}), function(req,res){
+	//if this function is called, login succeeded.
+	//otherwise, a 401 error is returned
+	res.send('Logged In');
 });
-app.get('/loginsuccess', passportReqLoggedIn, function(req,res){res.sendFile('public/loginsuccess.html',{root:'./'})});
+app.get('/api/logout', function(req,res){
+	req.logout();
+	res.send('Logged Out');
+});
+//app.get('/loginsuccess', passportReqLoggedIn, function(req,res){res.sendFile('public/loginsuccess.html',{root:'./'})});
 
 //API modules
 app.use(require('./modules/contacts/contacts-api'));
@@ -182,11 +181,13 @@ app.use(require('./modules/catalog/catalog-api'));
 app.use(require('./modules/financial/transactions-api'));
 app.use(require('./modules/schedule/schedule-api'));
 
+/*
 app.get('*', passportErrNotLoggedIn, function(req,res){
     //req.user contains the authenticated user
 	//TODO: send the actual data
     res.sendFile('public/loginsuccess.html', {root:'./'});
 });
+*/
 
 //Use this for local
 app.listen(8080);

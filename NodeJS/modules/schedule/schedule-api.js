@@ -4,7 +4,7 @@ var app = module.exports = express();
 var server = require('../../app');
 var sql = require("seriate");
 
-app.get('/api/studentScheduleHistory', server.passportReqLoggedIn, function(req,res){
+app.get('/api/studentScheduleHistory', server.passportErrNotLoggedIn, function(req,res){
     var student_id = req.user.id;
     sql.execute({
         query: "SELECT c.Code, c.Name, c.Credits, ac.Passed, ac.GradePercent FROM Schedule.AttemptedCourses ac LEFT JOIN Schedule.ScheduledEvents se ON ac.ScheduledEventId = se.Id LEFT JOIN Schedule.Courses c ON se.Course_Id = c.Id WHERE ac.StudentId = @studentId",
@@ -23,7 +23,7 @@ app.get('/api/studentScheduleHistory', server.passportReqLoggedIn, function(req,
     });
 });
 
-app.get('/api/currentlyEnrolledStudentSchedule', server.passportReqLoggedIn, function(req,res){
+app.get('/api/currentlyEnrolledStudentSchedule', server.passportErrNotLoggedIn, function(req,res){
    var student_id = req.user.id;
     sql.execute({
         query: "SELECT  c.Code, c.Name, c.Credits, se.StartTime, se.EndTime, se.Monday, se.Tuesday, se.Wednesday, se.Thursday, se.Friday, se.Room FROM (Schedule.RegisteredCourses rc LEFT JOIN Schedule.ScheduledEvents se ON rc.ScheduledCourse = se.Id) Left Join Schedule.Courses c on se.Course_Id = c.Id WHERE rc.StudentId = @studentId",
