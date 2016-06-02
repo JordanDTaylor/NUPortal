@@ -231,8 +231,13 @@ if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires j
 				if (transition) {
 					that.$element[0].offsetWidth;
 				};
-
-				that.$element.addClass('in');
+					
+				if(that.$element.hasClass('nav-drawer')){
+					that.$element.removeClass('nav-drawer');
+				}
+				else{
+					that.$element.addClass('nav-drawer');
+				}
 
 				that.enforceFocus();
 

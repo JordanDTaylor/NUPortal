@@ -6197,7 +6197,7 @@ html.no-touchevents .tile-action-show {
   padding-left: 16px;
 }
 
-.menu-backdrop {
+/*.menu-backdrop {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   background-color: #000000;
@@ -6213,7 +6213,7 @@ html.no-touchevents .tile-action-show {
 }
 .menu-backdrop.in {
   opacity: 0.5;
-}
+}*/
 
 .menu-logo {
   -webkit-box-align: center;

@@ -1,3 +1,32 @@
+<nav aria-hidden="true" class="menu menu-left nav-drawer-md" id="ui_menu" tabindex="-1">
+    <div class="menu-scroll">
+        <div class="menu-content">
+            <a class="menu-logo" href="index.html">NU Portal</a>
+            <ul class="nav">
+                <li>
+                    <a class="collapsed waves-attach" data-toggle="collapse" href="#ui_menu_components">Site Map</a>
+                    <ul class="menu-collapse collapse" id="ui_menu_components">
+                        <li>
+                            <a class="waves-attach" [routerLink]="['/home']">Home</a>
+                        </li>
+                        <li>
+                            <a class="waves-attach" [routerLink]="['/schedule']">Schedule</a>
+                        </li>
+                        <li>
+                            <a class="waves-attach" [routerLink]="['/catalog']">Catalog</a>
+                        </li>
+                        <li>
+                            <a class="waves-attach" [routerLink]="['/contact']">Contact</a>
+                        </li>
+                        <li>
+                            <a class="waves-attach" [routerLink]="['/account']">Account</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <header class="header header-transparent header-waterfall ui-header">
     <ul class="nav nav-list pull-left">
         <li>
@@ -27,33 +56,5 @@
         </li>
     </ul>
 </header>
-<nav aria-hidden="true" class="menu" id="ui_menu" tabindex="-1">
-    <div class="menu-scroll">
-        <div class="menu-content">
-            <a class="menu-logo" href="index.html">NU Portal</a>
-            <ul class="nav">
-                <li>
-                    <a class="collapsed waves-attach" data-toggle="collapse" href="#ui_menu_components">Site Map</a>
-                    <ul class="menu-collapse collapse" id="ui_menu_components">
-                        <li>
-                            <a class="waves-attach" [routerLink]="['/home']">Home</a>
-                        </li>
-                        <li>
-                            <a class="waves-attach" [routerLink]="['/schedule']">Schedule</a>
-                        </li>
-                        <li>
-                            <a class="waves-attach" [routerLink]="['/catalog']">Catalog</a>
-                        </li>
-                        <li>
-                            <a class="waves-attach" [routerLink]="['/contact']">Contact</a>
-                        </li>
-                        <li>
-                            <a class="waves-attach" [routerLink]="['/account']">Account</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+
 <router-outlet></router-outlet>
