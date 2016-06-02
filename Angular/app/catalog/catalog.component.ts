@@ -8,16 +8,7 @@ import { DegreeRequirementsListComponent } from './degree-requirements-list.comp
 
 @Component({
     selector: 'nu-catalog',
-    template: `
-    <div>
-        <h1>{{ pageTitle }}</h1>
-        <div>
-            <a [routerLink]="['courses']">Course List</a>
-            <a [routerLink]="['degrees']">Degree Requirements</a>
-        </div>
-        <router-outlet></router-outlet>
-    </div>
-     `,
+    templateUrl: './app/catalog/catalog.component.html',
     directives: [ROUTER_DIRECTIVES],
 })
 @Routes([

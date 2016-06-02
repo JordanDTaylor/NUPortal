@@ -1,5 +1,5 @@
 <body class="ui-picker-page">
-    <header class="header header-red header-standard ui-header">
+    <header class="header header-orange header-standard ui-header">
         <ul class="nav nav-list pull-left">
             <li>
                 <a data-toggle="menu" href="#ui_menu">
@@ -16,18 +16,30 @@
             </li>
         </ul>
     </header>
-    <div class="ui-picker-wrap">
-        <div class="ui-picker-divider"></div>
-        <div class="ui-picker-main">
-            <div class="ui-picker-inner">
-                <div class="tile-wrap margin-bottom-no margin-top-no ui-picker-lib">
-
-                    <fin-transactionList [itemsPerPage]=10>loading tran...</fin-transactionList>
-
+    <div class="container">
+        <div class="row">
+            <section class="content-inner margin-top-no">
+                <div class="card">
+                    <div class="card-main">
+                        <div class="card-inner margin-bottom">
+                            <div>
+                                <p class="card-heading">{{ pageTitle }}</p>
+                                <div id="nav" style="float:right">
+                                    <a [routerLink]="['current']">Current Schedule</a><br/>
+                                    <!--'/schedule'-->
+                                    <a [routerLink]="['history']">Student History</a><br/>
+                                    <a [routerLink]="['degree']">Degree Outline</a><br/>
+                                    <a [routerLink]="['planned']">Planned Courses</a><br/>
+                                </div>
+                                <router-outlet></router-outlet>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
+
     <div aria-hidden="true" class="modal modal-va-middle fade" id="ui_picker_alert" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-xs">
             <div class="modal-content">
