@@ -1,0 +1,62 @@
+<body class="ui-picker-page">
+    <header class="header header-orange header-standard ui-header">
+        <ul class="nav nav-list pull-left">
+            <li>
+                <a data-toggle="menu" href="#ui_menu">
+                    <span class="icon icon-lg">menu</span>
+                </a>
+            </li>
+        </ul>
+        <a class="header-logo margin-left-no" style="color:white;" href="/">{{ pageTitle }}</a>
+        <ul class="nav nav-list pull-right">
+            <li>
+                <a data-toggle="modal" href="#ui_picker_alert">
+                    <span class="icon icon-lg">help_outline</span>
+                </a>
+            </li>
+        </ul>
+    </header>
+    <div class="container">
+        <div class="row">
+            <section class="content-inner margin-top-no">
+                <div class="card">
+                    <div class="card-main">
+                        <div class="card-inner margin-bottom">
+                            <p class="card-heading">{{ pageTitle }}</p>
+                            <div>
+                                <a [routerLink]="['courses']">Course List</a>
+                                <a [routerLink]="['degrees']">Degree Requirements</a>
+                            </div>
+                            <router-outlet></router-outlet>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div aria-hidden="true" class="modal modal-va-middle fade" id="ui_picker_alert" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-xs">
+            <div class="modal-content">
+                <div class="modal-heading">
+                    <p class="modal-title">About Picker UI</p>
+                </div>
+                <div class="modal-inner">
+                    <ul class="padding-left text-black-hint">
+                        <li>Picker UI is not responsive and only works in desktop,</li>
+                        <li>Click items in the middle column to view additional information about that item,</li>
+                        <li>Draw a box with cursor to select multiple items,</li>
+                        <li>Hold down <kbd>Cmd</kbd> or <kbd>Ctrl</kbd> to make multiple non-adjacent selections,</li>
+                        <li>Click on the selected items' gripper icon and drag them anywhere within the viewport,</li>
+                        <li>Click on the selected items' gripper icon and drop them on the navigaation links in the left hand
+                            column.
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-right"><a class="btn btn-flat btn-brand-accent waves-attach" data-dismiss="modal">OK</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

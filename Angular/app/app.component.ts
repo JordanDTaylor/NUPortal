@@ -17,6 +17,8 @@ import { CatalogService } from './catalog/catalog.service';
 import { FinancialComponent} from './financial/components/financial.component';
 import {AccountService} from "./financial/services/account.service";
 
+import { LoginPage } from "./login/login.component";
+
 @Component({
     selector: 'nu-app',
     templateUrl: `app/app.component.html`,
@@ -25,12 +27,13 @@ import {AccountService} from "./financial/services/account.service";
 })
 
 @Routes([
-    { path: '/', component: HomeComponent},
-    { path: '/home', component: HomeComponent},
-    { path: '/schedule', component: ScheduleComponent},
+    { path: '/', component: HomeComponent },
+    { path: '/home', component: HomeComponent },
+    { path: '/schedule', component: ScheduleComponent },
     { path: '/contact', component: ContactComponent },
     { path: '/catalog', component: CatalogComponent },
-    { path: '/account', component: FinancialComponent}
+    { path: '/account', component: FinancialComponent },
+    { path: '/login', component: LoginPage}
 ])
 
 export class AppComponent {
