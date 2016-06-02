@@ -9,7 +9,7 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class CatalogService{
 	constructor(private _http: Http){}
-	apiURL: string = 'http://localhost:8080/api';
+	apiURL: string = 'http://10.10.14.12/api';
 	
 	getAllCourses(): Observable<[]> {
 		return this._http.get(this.apiURL+'/allCourses')
