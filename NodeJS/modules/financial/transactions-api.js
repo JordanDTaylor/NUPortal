@@ -3,7 +3,7 @@ var app = module.exports = express();
 var server = require('../../app');
 var sql = require("seriate");
 
-app.get('/api/transactions', function(httpRequest,httpResponse){
+app.get('/api/transactions', function(req,httpResponse){
     var student_id = req.user.id;
     sql.execute({
         query: "Financial.getStudentTransactions @studentId",
@@ -19,7 +19,7 @@ app.get('/api/transactions', function(httpRequest,httpResponse){
     );
 });
 
-app.get('/api/awardLetters', function(httpRequest,httpResponse){
+app.get('/api/awardLetters', function(req,httpResponse){
 
     var student_id = req.user.id;
     
