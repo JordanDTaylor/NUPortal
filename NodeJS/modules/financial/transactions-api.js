@@ -3,23 +3,6 @@ var app = module.exports = express();
 var server = require('../../app');
 var sql = require("seriate");
 
-// app.get('/api/transactions', function(req,res){
-//     var user_id = req.param('id');
-//     sql.execute({
-//         query: "SELECT StudentId, [Date], Description, Reference, Amount, Balance = SUM(Amount) OVER (ORDER BY [Date], Id)FROM Financial.Transactions WHERE StudentId = @userId",
-//         params: {
-//             userId: {
-//                 type: sql.int,
-//                 val: user_id,
-//             }
-//         }
-//     }).then(function (results){
-//         res.json({results});
-//     }, function(err){
-//         console.log("Something bad happened: ",err);
-//     });
-// });
-
 app.get('/api/transactions', function(httpRequest,httpResponse){
 
     var student_id = httpRequest.param('id');
