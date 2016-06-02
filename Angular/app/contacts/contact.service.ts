@@ -7,9 +7,11 @@ import { IStaff } from './people/staff';
 
 @Injectable()
 export class ContactService{
-    private _studentUrl = 'http://localhost:8080/api/allStudents';
-    private _staffUrl = 'http://localhost:8080/api/allStaff';
-    
+    private _apiUrl = 'http://10.10.14.12/api';
+    private _studentUrl = _apiUrl+'/allStudents';
+    private _staffUrl = _apiUrl+'/allStaff';
+
+
     constructor(private _http: Http){}
     
     getStudents(): Observable<IStudent[]>{
