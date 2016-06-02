@@ -4,8 +4,7 @@ var server = require('../../app');
 var sql = require("seriate");
 
 app.get('/api/transactions', function(httpRequest,httpResponse){
-
-    var student_id = httpRequest.param('id');
+    var student_id = req.user.id;
     sql.execute({
         query: "Financial.getStudentTransactions @studentId",
         params: {studentId: {type: sql.int, val: student_id } }
@@ -22,8 +21,8 @@ app.get('/api/transactions', function(httpRequest,httpResponse){
 
 app.get('/api/awardLetters', function(httpRequest,httpResponse){
 
-    var student_id = httpRequest.param('id');
-
+    var student_id = req.user.id;
+    
     sql.execute({
         query: "SELECT *  FROM Financial.AwardLetter Where StudentId = @studentId",
         params: {studentId: {type: sql.int, val: student_id } }
