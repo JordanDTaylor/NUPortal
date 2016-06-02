@@ -13,7 +13,7 @@ import { IPlannedSchedule } from './planned-schedule/planned-schedule';
 @Injectable()
 export class ScheduleService{
 	constructor(private _http: Http){}
-	apiURL: string = 'http://localhost:8080/api';
+	apiURL: string = 'http://10.10.14.12/api';
 	
 	getStudentScheduleHistory(): Observable<IScheduleHistory[]>{
 		return this._http.get(this.apiURL+'/studentScheduleHistory')

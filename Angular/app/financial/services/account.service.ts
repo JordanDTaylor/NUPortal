@@ -6,7 +6,7 @@ import {ITransaction} from "./Transaction";
 
 @Injectable()
 export class AccountService{
-    private dataSource: string = '/app/financial/services/transaction_test_data.json';
+    private dataSource: string = 'http://10.10.14.12/api/transactions';
 
     constructor(private _http:Http) {
     }
