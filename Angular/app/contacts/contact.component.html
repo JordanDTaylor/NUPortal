@@ -1,4 +1,4 @@
-<div>
+<!--<div>
     <h1>{{pageTitle}}</h1>
     <div>
         <p>Students</p>
@@ -20,3 +20,165 @@
         </div>
     </div>
 </div>
+-->
+
+<body class="ui-picker-page">
+    <header class="header header-green header-standard ui-header">
+        <ul class="nav nav-list pull-left">
+            <li>
+                <a data-toggle="menu" href="#ui_menu">
+                    <span class="icon icon-lg">menu</span>
+                </a>
+            </li>
+        </ul>
+        <a class="header-logo margin-left-no" style="color:white;" href="/">Contacts</a>
+        <ul class="nav nav-list pull-right">
+            <li>
+                <a data-toggle="modal" href="#ui_picker_alert">
+                    <span class="icon icon-lg">help_outline</span>
+                </a>
+            </li>
+        </ul>
+    </header>
+    <div class="ui-picker-wrap">
+        <div class="ui-picker-nav">
+            <div class="ui-picker-inner">
+                <div class="menu-top">
+                    <div class="menu-top-img">
+                        <img alt="John Smith" src="../images/samples/landscape.jpg">
+                    </div>
+                    <div class="menu-top-info">
+                        <span class="menu-top-user">Contact Information</span>
+                    </div>
+                    <div class="menu-top-info-sub">
+                        <small>Click a person to see their contact information</small>
+                    </div>
+                </div>
+                <div class="menu-content">
+                    <div class="form-group">
+                        <label for="search">Search for Username</label>
+                        <input (keyup)="onKey($event)" type="text" class="form-control" [(ngModel)]="searchText" required style="padding:5px">
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="ui-picker-divider"></div>
+        <div class="ui-picker-main">
+            <div class="ui-picker-inner">
+                <div class="tile-wrap margin-bottom-no margin-top-no ui-picker-lib">
+                    <p class="padding-left padding-right text-black-hint"><strong>Students</strong></p>
+
+                    <div *ngFor="let student of students">
+                        <!--<nu-student [student]='student'></nu-student>-->
+                        <div class="tile ui-picker-item">
+                            <div class="ui-picker-selectable-handler"></div>
+                            <div class="tile-side pull-left">
+                                <div class="avatar avatar-sm ui-picker-draggable-avatar">
+                                    <strong>{{student.FirstName | slice:"0":"1"}}</strong>
+                                </div>
+                            </div>
+                            <div class="tile-inner">
+                                <div class="media">
+                                    <div class="media-object pull-right">
+                                        <small>{{student.Email}}</small>
+                                    </div>
+                                    <div class="media-inner text-overflow">
+                                        <span class="ui-picker-info-title">{{student.FirstName}} {{student.LastName}}</span>
+                                    </div>
+                                </div>
+                                <div class="access-hide">
+                                    <div class="ui-picker-info-desc">
+                                        <nu-student [student]=student></nu-student>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="padding-left padding-right text-black-hint"><strong>Staff</strong></p>
+                    <div *ngFor="let staff of allStaff">
+                        <!--<nu-student [student]='student'></nu-student>-->
+                        <div class="tile ui-picker-item">
+                            <div class="ui-picker-selectable-handler"></div>
+                            <div class="tile-side pull-left">
+                                <div class="avatar avatar-sm ui-picker-draggable-avatar">
+                                    <strong>{{staff.FirstName | slice:"0":"1"}}</strong>
+                                </div>
+                            </div>
+                            <div class="tile-inner">
+                                <div class="media">
+                                    <div class="media-object pull-right">
+                                        <small>{{staff.Email}}</small>
+                                    </div>
+                                    <div class="media-inner text-overflow">
+                                        <span class="ui-picker-info-title">{{staff.FirstName}} {{staff.LastName}}</span>
+                                    </div>
+                                </div>
+                                <div class="access-hide">
+                                    <div class="ui-picker-info-desc">
+                                        <p><nu-staff [staff]=staff></nu-staff></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-picker-divider"></div>
+        <div class="ui-picker-info ui-picker-info-null">
+            <div class="ui-picker-inner">
+                <div class="ui-picker-map-wrap" id="ui_picker_map_wrap"></div>
+                <div class="container">
+                    <div class="media">
+                        <div class="media-object pull-right">
+                            <a class="btn btn-flat margin-bottom-xs margin-top-xs waves-attach ui-picker-info-close"><span class="icon">close</span></a>
+                        </div>
+                        <div class="media-inner">
+                            <p class="h4 margin-bottom-sm margin-top-sm ui-picker-info-title-wrap"></p>
+                        </div>
+                    </div>
+                </div>
+                <hr class="margin-bottom-no margin-top-no">
+                <div class="container">
+                    <div class="ui-picker-info-desc-wrap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div aria-hidden="true" class="modal modal-va-middle fade" id="ui_picker_alert" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-xs">
+            <div class="modal-content">
+                <div class="modal-heading">
+                    <p class="modal-title">About Picker UI</p>
+                </div>
+                <div class="modal-inner">
+                    <ul class="padding-left text-black-hint">
+                        <li>Picker UI is not responsive and only works in desktop,</li>
+                        <li>Click items in the middle column to view additional information about that item,</li>
+                        <li>Draw a box with cursor to select multiple items,</li>
+                        <li>Hold down <kbd>Cmd</kbd> or <kbd>Ctrl</kbd> to make multiple non-adjacent selections,</li>
+                        <li>Click on the selected items' gripper icon and drag them anywhere within the viewport,</li>
+                        <li>Click on the selected items' gripper icon and drop them on the navigaation links in the left hand
+                            column.
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-right"><a class="btn btn-flat btn-brand-accent waves-attach" data-dismiss="modal">OK</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--js -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+	<script src="../js/base.min.js"></script>
+	<script src="../../js/project.min.js"></script>-->
+    <script>
+        System.import('../../js/project.js')
+    </script>
+
+</body>

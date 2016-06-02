@@ -2,6 +2,8 @@
     "name": "nu-portal",
     "version": "1.0.0",
     "description": "A Neumont Portal re-imagined",
+    "main": "app.js",
+    "author": "Adrian, Jordan, Landon, Trevan",
     "scripts": {
         "start": "concurrently \"npm run tsc:w\" \"npm run lite\" ",
         "tsc": "tsc",
@@ -28,7 +30,19 @@
         "rxjs": "5.0.0-beta.6",
         "zone.js": "^0.6.12",
 
-        "bootstrap": "^3.3.6"
+        "bootstrap": "^3.3.6",
+        
+        "bcrypt-nodejs": "0.0.3",
+        "body-parser": "1.15.1",
+        "cookie-parser": "^1.4.1",
+        "cookie-session": "^2.0.0-alpha.1",
+        "express": "4.13.4",
+        "method-override": "2.3.5",
+        "morgan": "1.7.0",
+        "node-uuid": "^1.4.7",
+        "passport": "0.3.2",
+        "passport-local": "1.0.0",
+        "seriate": "0.7.0"
     },
     "devDependencies": {
         "concurrently": "^2.0.0",
@@ -37,5 +51,8 @@
         "typescript": "^1.8.10",
         "typings": "latest"
     },
-    "repository": {}
+    "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/lhirschi/nuPortal.git"
+  }
 }

@@ -1,16 +1,12 @@
 import { Component } from '@angular/core';
-import { CanActivate } from 'angular2/router';
+import { TransactionListComponent } from "../financial/components/transaction-list";
 
 @Component({
     selector: 'nu-home',
-    template: `
-    <div>
-        <h1>{{ pageTitle }}</h1>
-        <img [src]="logoUrl" />
-    </div>
-     `
+    directives: [TransactionListComponent],
+    templateUrl: `app/home/home.component.html`
 })
 export class HomeComponent {
-    pageTitle: string = 'NU Home Demo';
+    pageTitle: string = 'Dashboard';
     logoUrl: string = 'https://media4.giphy.com/media/5D6kjdPsBRYUo/200_s.gif';
 }

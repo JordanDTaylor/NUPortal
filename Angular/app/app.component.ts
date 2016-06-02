@@ -20,7 +20,6 @@ import {AccountService} from "./financial/services/account.service";
 @Component({
     selector: 'nu-app',
     templateUrl: `app/app.component.html`,
-    styleUrls: ['app/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
     providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, ScheduleService, ContactService, CatalogService, AccountService]
 })

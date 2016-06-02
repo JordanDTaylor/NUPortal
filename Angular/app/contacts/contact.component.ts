@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+/// <reference path="../../js/project.js" />
+
+import { Component, AfterViewInit } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { IStudent } from './people/student';
@@ -9,12 +11,14 @@ import { StaffComponent } from './people/staff.component';
 
 import { ContactService } from './contact.service';
 
+// import goPick = require('./project');
+
 @Component({
     selector: 'nu-contact',
     templateUrl: 'app/contacts/contact.component.html',
     directives: [StudentComponent, StaffComponent, ROUTER_DIRECTIVES]
 })
-export class ContactComponent {
+export class ContactComponent implements AfterViewInit {
     pageTitle: string = "Contacts"
     searchText: string;
     onKey(event: any) {
@@ -25,7 +29,8 @@ export class ContactComponent {
     students: IStudent[];
     allStaff: IStaff[];
 
-    constructor(private _contactService: ContactService) { }
+
+    constructor(private _contactService: ContactService) {}
 
     ngOnInit(): void {
         this._contactService.getStudents()
@@ -40,4 +45,8 @@ export class ContactComponent {
             )
     }
 
+    ngAfterViewInit() {
+        GoPicker()
+    }
 }
+
