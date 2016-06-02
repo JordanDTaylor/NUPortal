@@ -3,7 +3,7 @@ var app = module.exports = express();
 var server = require('../../app');
 var sql = require("seriate");
 
-app.get('/api/transactions', function(req,httpResponse){
+app.get('/api/transactions', server.passportErrNotLoggedIn, function(req,httpResponse){
     var student_id = req.user.id;
     sql.execute({
         query: "Financial.getStudentTransactions @studentId",
@@ -19,7 +19,7 @@ app.get('/api/transactions', function(req,httpResponse){
     );
 });
 
-app.get('/api/awardLetters', function(req,httpResponse){
+app.get('/api/awardLetters', server.passportErrNotLoggedIn, function(req,httpResponse){
 
     var student_id = req.user.id;
     
@@ -37,7 +37,7 @@ app.get('/api/awardLetters', function(req,httpResponse){
     );
 });
 
-app.get('/api/allTransactions', function(req,res){
+app.get('/api/allTransactions', server.passportErrNotLoggedIn, function(req,res){
     sql.execute({
         query: "SELECT StudentId, [Date], Description, Reference, Amount, Balance = SUM(Amount) OVER (ORDER BY [Date], Id)FROM Financial.Transactions"
     }).then(function (results){
